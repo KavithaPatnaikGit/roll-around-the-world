@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -8,6 +9,7 @@ import { Accessibility, Star, MapPin, Search, Plane, Heart } from 'lucide-react'
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRating, setSelectedRating] = useState('all');
+  const navigate = useNavigate();
 
   const countries = [
     {
@@ -98,6 +100,10 @@ const Index = () => {
         className={`w-4 h-4 ${i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
       />
     ));
+  };
+
+  const handleLearnMore = (countryId) => {
+    navigate(`/country/${countryId}`);
   };
 
   return (
@@ -239,7 +245,10 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
+                <Button 
+                  className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+                  onClick={() => handleLearnMore(country.id)}
+                >
                   Learn More
                 </Button>
               </CardContent>
