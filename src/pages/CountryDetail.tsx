@@ -69,11 +69,26 @@ const CountryDetail = () => {
       description: 'Exceptional wheelchair accessibility with flat terrain, accessible public transport, and world-class facilities.',
       highlights: ['100% accessible trams', 'Flat cycling paths', 'Accessible museums', 'Wheelchair-friendly hotels'],
       quickTips: [
-        'Download the GVB app for real-time accessible transport info',
-        'Book museum tickets online to skip lines and ensure wheelchair access',
-        'Most canals have accessible viewing points at bridge crossings',
-        'Rent an accessible bike or wheelchair-friendly cargo bike',
-        'Many restaurants have step-free terraces - ask when booking'
+        { 
+          text: 'Download the GVB app for real-time accessible transport info',
+          link: 'https://gvb.nl/en/travel-information/gvb-app'
+        },
+        { 
+          text: 'Book museum tickets online to skip lines and ensure wheelchair access',
+          link: 'https://www.amsterdam.nl/en/tourism/what-to-do/museums-attractions/'
+        },
+        { 
+          text: 'Most canals have accessible viewing points at bridge crossings',
+          link: 'https://www.amsterdam.nl/en/accessibility/'
+        },
+        { 
+          text: 'Rent an accessible bike or wheelchair-friendly cargo bike',
+          link: 'https://www.amsterdam.nl/en/traffic-transport/cycling/bicycle-rental/'
+        },
+        { 
+          text: 'Many restaurants have step-free terraces - ask when booking',
+          link: 'https://www.amsterdam.nl/en/accessibility/restaurants/'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'Van Gogh Museum', url: 'https://www.vangoghmuseum.nl/en/plan-your-visit/accessibility' },
@@ -105,11 +120,26 @@ const CountryDetail = () => {
       description: 'Modern infrastructure with excellent accessibility features, tactile guidance systems, and accessible public transport.',
       highlights: ['Accessible JR trains', 'Tactile paving', 'Universal design', 'Accessible temples'],
       quickTips: [
-        'Learn basic Japanese phrases for assistance: "Tasukete kudasai" (please help)',
-        'Station staff are very helpful - look for the blue vest uniforms',
-        'Download Google Translate with camera feature for reading signs',
-        'Many stations have elevator maps - study them before traveling',
-        'Traditional restaurants may require floor seating - call ahead'
+        { 
+          text: 'Learn basic Japanese phrases for assistance: "Tasukete kudasai" (please help)',
+          link: 'https://www.japan.travel/en/plan/accessibility-travel/'
+        },
+        { 
+          text: 'Station staff are very helpful - look for the blue vest uniforms',
+          link: 'https://www.jreast.co.jp/e/customer_support/barrier_free/'
+        },
+        { 
+          text: 'Download Google Translate with camera feature for reading signs',
+          link: 'https://translate.google.com/'
+        },
+        { 
+          text: 'Many stations have elevator maps - study them before traveling',
+          link: 'https://www.jreast.co.jp/e/stations/'
+        },
+        { 
+          text: 'Traditional restaurants may require floor seating - call ahead',
+          link: 'https://www.japan.travel/en/plan/accessibility-travel/dining/'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'Tokyo Skytree', url: 'https://www.tokyo-skytree.jp/en/enjoy/barrier-free/' },
@@ -141,11 +171,26 @@ const CountryDetail = () => {
       description: 'Strong disability rights with accessible beaches, transport, and attractions throughout the country.',
       highlights: ['Beach wheelchairs', 'Accessible ferries', 'Disability-friendly venues', 'Clear accessibility info'],
       quickTips: [
-        'Book beach wheelchairs in advance during summer season',
-        'Use the Opal card for easy accessible transport payments',
-        'Many venues offer companion card discounts for carers',
-        'Download the Journey Planner app for accessible route planning',
-        'Beaches have accessible pathways - check council websites for details'
+        { 
+          text: 'Book beach wheelchairs in advance during summer season',
+          link: 'https://www.waverley.nsw.gov.au/recreation/beaches/beach-wheelchair-hire'
+        },
+        { 
+          text: 'Use the Opal card for easy accessible transport payments',
+          link: 'https://www.opal.com.au/en/about-opal/opal_accessibility/'
+        },
+        { 
+          text: 'Many venues offer companion card discounts for carers',
+          link: 'https://www.companioncard.org.au/'
+        },
+        { 
+          text: 'Download the Journey Planner app for accessible route planning',
+          link: 'https://transportnsw.info/travel-info/accessibility'
+        },
+        { 
+          text: 'Beaches have accessible pathways - check council websites for details',
+          link: 'https://www.sydney.com/destinations/sydney/sydney-city/accessibility'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'Sydney Opera House', url: 'https://www.sydneyoperahouse.com/visit-us/accessibility' },
@@ -177,11 +222,26 @@ const CountryDetail = () => {
       description: 'Good accessibility standards with step-free access to many attractions and improving public transport.',
       highlights: ['Step-free tube stations', 'Accessible black cabs', 'Historic sites with ramps', 'Clear signage'],
       quickTips: [
-        'Download Citymapper app for step-free route planning',
-        'Book accessible taxis through Apps like Gett or Free Now',
-        'Many historic sites offer virtual tours if physical access is limited',
-        'Oyster card works on all accessible transport modes',
-        'Theatre accessibility varies - book accessible seating well in advance'
+        { 
+          text: 'Download Citymapper app for step-free route planning',
+          link: 'https://citymapper.com/london/accessibility'
+        },
+        { 
+          text: 'Book accessible taxis through Apps like Gett or Free Now',
+          link: 'https://tfl.gov.uk/modes/taxis-and-minicabs/accessibility'
+        },
+        { 
+          text: 'Many historic sites offer virtual tours if physical access is limited',
+          link: 'https://www.visitlondon.com/things-to-do/accessibility'
+        },
+        { 
+          text: 'Oyster card works on all accessible transport modes',
+          link: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/oyster'
+        },
+        { 
+          text: 'Theatre accessibility varies - book accessible seating well in advance',
+          link: 'https://www.officiallondontheatre.com/accessibility/'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'British Museum', url: 'https://www.britishmuseum.org/visit/accessibility' },
@@ -213,11 +273,26 @@ const CountryDetail = () => {
       description: 'Excellent public transport accessibility and well-maintained infrastructure for wheelchair users.',
       highlights: ['Low-floor buses', 'Accessible U-Bahn', 'Ramped entrances', 'Audio announcements'],
       quickTips: [
-        'Get the BVG app for real-time accessible transport updates',
-        'Many museums offer free admission on first Sunday of the month',
-        'Learn "Rollstuhlgerecht" (wheelchair accessible) in German',
-        'Christmas markets have accessible routes - check event websites',
-        'Most restaurants accept card payments, reducing need for cash handling'
+        { 
+          text: 'Get the BVG app for real-time accessible transport updates',
+          link: 'https://www.bvg.de/en/tickets-tariffs/all-apps'
+        },
+        { 
+          text: 'Many museums offer free admission on first Sunday of the month',
+          link: 'https://www.berlin.de/en/museums-and-art/museums/free-admission/'
+        },
+        { 
+          text: 'Learn "Rollstuhlgerecht" (wheelchair accessible) in German',
+          link: 'https://www.berlin.de/en/tourism/travel-information/accessible-berlin/'
+        },
+        { 
+          text: 'Christmas markets have accessible routes - check event websites',
+          link: 'https://www.visitberlin.de/en/christmas-markets-berlin'
+        },
+        { 
+          text: 'Most restaurants accept card payments, reducing need for cash handling',
+          link: 'https://www.berlin.de/en/restaurants-and-bars/'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'Brandenburg Gate', url: 'https://www.berlin.de/en/attractions-and-sights/3560266-3104052-brandenburg-gate.en.html' },
@@ -229,7 +304,7 @@ const CountryDetail = () => {
       accessibleHotels: [
         { name: 'Hotel Adlon Kempinski', rating: 5, reservationUrl: 'https://www.kempinski.com/en/hotel-adlon-berlin', features: ['Luxury accessible rooms', 'Roll-in shower', 'Central location'] },
         { name: 'Steigenberger Hotel Am Kanzleramt', rating: 4, reservationUrl: 'https://www.steigenberger.com/en/hotels/all-hotels/germany/berlin/steigenberger-hotel-am-kanzleramt', features: ['Accessible rooms', 'Near accessible transport', 'Wide doorways'] },
-        { name: 'Scandic Berlin Potsdamer Platz', rating: 4, reservationUrl: 'https://www.scandichotels.com/hotels/germany/berlin/scandic-berlin-potsdamer-platz', features: ['Universal design', 'Accessible facilities', 'Hearing loops'] },
+        { name: 'Scandic Berlin Potsdamer Platz', rating: 4, reservationUrl: 'https://www.scandichotels.com/hotels/germany/berlin/scandic-continental', features: ['Universal design', 'Accessible facilities', 'Hearing loops'] },
         { name: 'Holiday Inn Express Berlin City Centre', rating: 3, reservationUrl: 'https://www.ihg.com/holidayinnexpress/hotels/us/en/berlin/bercc/hoteldetail', features: ['Accessible rooms', 'Basic facilities', 'Budget option'] },
         { name: 'Motel One Berlin-Hauptbahnhof', rating: 3, reservationUrl: 'https://www.motel-one.com/en/hotels/berlin/hotel-berlin-hauptbahnhof/', features: ['Accessible rooms', 'Basic adaptations', 'Near main station'] }
       ] as AccessibleHotel[],
@@ -249,11 +324,26 @@ const CountryDetail = () => {
       description: 'Beautiful accessible nature experiences with well-designed urban infrastructure.',
       highlights: ['Accessible trails', 'SkyTrain accessibility', 'Inclusive attractions', 'Disability services'],
       quickTips: [
-        'Download the TransLink app for accessible route planning',
-        'Many parks rent out beach wheelchairs and all-terrain wheelchairs',
-        'Compass card works on all accessible transit modes',
-        'Weather can change quickly - pack waterproof covers for equipment',
-        'Most coffee shops have step-free access and accessible washrooms'
+        { 
+          text: 'Download the TransLink app for accessible route planning',
+          link: 'https://www.translink.ca/about-us/customer-service/accessibility'
+        },
+        { 
+          text: 'Many parks rent out beach wheelchairs and all-terrain wheelchairs',
+          link: 'https://vancouver.ca/parks-recreation-culture/accessibility-in-parks.aspx'
+        },
+        { 
+          text: 'Compass card works on all accessible transit modes',
+          link: 'https://www.compasscard.ca/'
+        },
+        { 
+          text: 'Weather can change quickly - pack waterproof covers for equipment',
+          link: 'https://www.tourismvancouver.com/plan-your-trip/accessibility/'
+        },
+        { 
+          text: 'Most coffee shops have step-free access and accessible washrooms',
+          link: 'https://vancouver.ca/people-programs/accessibility.aspx'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'Stanley Park', url: 'https://vancouver.ca/parks-recreation-culture/accessibility-in-parks.aspx' },
@@ -285,11 +375,26 @@ const CountryDetail = () => {
       description: 'Ultra-modern city-state with universal design principles and exceptional accessibility.',
       highlights: ['Barrier-free MRT', 'Accessible hawker centers', 'Universal design', 'Clear wayfinding'],
       quickTips: [
-        'Get an EZ-Link card for seamless accessible transport payments',
-        'Many hawker centers have accessible tables and pathways',
-        'Download the MyTransport app for real-time accessibility info',
-        'Most malls have accessible parking and facilities on every level',
-        'Air conditioning is strong - bring a light jacket for indoor spaces'
+        { 
+          text: 'Get an EZ-Link card for seamless accessible transport payments',
+          link: 'https://www.ezlink.com.sg/'
+        },
+        { 
+          text: 'Many hawker centers have accessible tables and pathways',
+          link: 'https://www.visitsingapore.com/dining/local-dishes/accessible-hawker-centres/'
+        },
+        { 
+          text: 'Download the MyTransport app for real-time accessibility info',
+          link: 'https://www.mytransport.sg/'
+        },
+        { 
+          text: 'Most malls have accessible parking and facilities on every level',
+          link: 'https://www.accessibleplaces.sg/'
+        },
+        { 
+          text: 'Air conditioning is strong - bring a light jacket for indoor spaces',
+          link: 'https://www.visitsingapore.com/travel-guide-tips/accessibility/'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'Gardens by the Bay', url: 'https://www.gardensbythebay.com.sg/en/visit/accessibility.html' },
@@ -321,11 +426,26 @@ const CountryDetail = () => {
       description: 'Progressive accessibility standards with beautiful accessible architecture and nature access.',
       highlights: ['Accessible archipelago', 'Modern public transport', 'Inclusive design', 'Accessible museums'],
       quickTips: [
-        'Download the SL app for accessible public transport planning',
-        'Many ferries to archipelago islands are wheelchair accessible',
-        'Museums often have free audio guides and tactile exhibits',
-        'Cashless society - ensure cards work for accessibility payments',
-        'Summer has long daylight hours - plan for extended sightseeing'
+        { 
+          text: 'Download the SL app for accessible public transport planning',
+          link: 'https://sl.se/en/info/accessibility/'
+        },
+        { 
+          text: 'Many ferries to archipelago islands are wheelchair accessible',
+          link: 'https://www.visitstockholm.com/accessibility/'
+        },
+        { 
+          text: 'Museums often have free audio guides and tactile exhibits',
+          link: 'https://www.visitstockholm.com/see-do/attractions/museums/'
+        },
+        { 
+          text: 'Cashless society - ensure cards work for accessibility payments',
+          link: 'https://www.visitsweden.com/what-to-do/sustainable-and-conscious-travel/accessible-travel/'
+        },
+        { 
+          text: 'Summer has long daylight hours - plan for extended sightseeing',
+          link: 'https://www.visitstockholm.com/guides/accessibility-guide/'
+        }
       ],
       wheelchairAccessibleAttractions: [
         { name: 'Vasa Museum', url: 'https://www.vasamuseet.se/en/visit/accessibility' },
@@ -450,7 +570,17 @@ const CountryDetail = () => {
                 {country.quickTips.map((tip, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
-                    <span className="text-gray-700">{tip}</span>
+                    <span className="text-gray-700">
+                      {tip.text}{' '}
+                      <a 
+                        href={tip.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 underline transition-colors"
+                      >
+                        Learn more
+                      </a>
+                    </span>
                   </li>
                 ))}
               </ul>
