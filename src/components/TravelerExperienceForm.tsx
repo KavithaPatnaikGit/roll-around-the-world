@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast';
-import { User, Mail, Camera, Send } from 'lucide-react';
+import { User, Mail, Camera, Send, Type } from 'lucide-react';
 
 interface TravelerExperience {
   id: string;
@@ -16,6 +16,7 @@ interface TravelerExperience {
   email: string;
   shareContactPublic: boolean;
   experience: string;
+  blogPosts: string;
   photos: File[];
   countryId: number;
   submittedAt: string;
@@ -36,6 +37,7 @@ const TravelerExperienceForm = ({ countryId, onSubmit }: TravelerExperienceFormP
       email: '',
       shareContactPublic: false,
       experience: '',
+      blogPosts: '',
     }
   });
 
@@ -52,6 +54,7 @@ const TravelerExperienceForm = ({ countryId, onSubmit }: TravelerExperienceFormP
       email: data.email,
       shareContactPublic: data.shareContactPublic,
       experience: data.experience,
+      blogPosts: data.blogPosts,
       photos: photos,
       countryId: countryId,
       submittedAt: new Date().toISOString(),
@@ -148,6 +151,24 @@ const TravelerExperienceForm = ({ countryId, onSubmit }: TravelerExperienceFormP
                     <Textarea
                       placeholder="Share details about your accessible travel experience in this destination..."
                       className="min-h-[120px]"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="blogPosts"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Blog Posts (Optional)</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Share links to your blog posts or write about your travel blog..."
+                      className="min-h-[100px]"
                       {...field}
                     />
                   </FormControl>

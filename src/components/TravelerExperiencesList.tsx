@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { User, Mail, Calendar, Image } from 'lucide-react';
+import { User, Mail, Calendar, Image, Type } from 'lucide-react';
 
 interface TravelerExperience {
   id: string;
@@ -10,6 +10,7 @@ interface TravelerExperience {
   email: string;
   shareContactPublic: boolean;
   experience: string;
+  blogPosts: string;
   photos: File[];
   countryId: number;
   submittedAt: string;
@@ -76,23 +77,36 @@ const TravelerExperiencesList = ({ experiences, countryName }: TravelerExperienc
               </div>
 
               <div className="prose prose-sm max-w-none">
+                <h4 className="font-semibold text-gray-900 mb-2">Travel Experience</h4>
                 <p className="text-gray-700 leading-relaxed">{experience.experience}</p>
               </div>
 
-              {experience.photos.length > 0 && (
-                <div className="flex items-center gap-2">
-                  <Image className="w-4 h-4" />
-                  <Badge variant="secondary">
-                    {experience.photos.length} photo{experience.photos.length !== 1 ? 's' : ''} attached
-                  </Badge>
+              {experience.blogPosts && (
+                <div className="prose prose-sm max-w-none">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Type className="w-4 h-4" />
+                    <h4 className="font-semibold text-gray-900">Blog Posts</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">{experience.blogPosts}</p>
                 </div>
               )}
 
-              {experience.shareContactPublic && (
-                <Badge variant="outline" className="text-green-600">
-                  Contact available
-                </Badge>
-              )}
+              <div className="flex flex-wrap gap-2">
+                {experience.photos.length > 0 && (
+                  <div className="flex items-center gap-2">
+                    <Image className="w-4 h-4" />
+                    <Badge variant="secondary">
+                      {experience.photos.length} photo{experience.photos.length !== 1 ? 's' : ''} attached
+                    </Badge>
+                  </div>
+                )}
+
+                {experience.shareContactPublic && (
+                  <Badge variant="outline" className="text-green-600">
+                    Contact available
+                  </Badge>
+                )}
+              </div>
             </div>
           ))}
         </div>
