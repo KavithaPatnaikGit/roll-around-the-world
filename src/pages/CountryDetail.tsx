@@ -1,13 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Accessibility, Star, MapPin, ArrowLeft, Train, Building, Utensils, MapPin as LocationIcon, ExternalLink } from 'lucide-react';
+import TravelerExperienceForm from '@/components/TravelerExperienceForm';
+import TravelerExperiencesList from '@/components/TravelerExperiencesList';
+
+interface TravelerExperience {
+  id: string;
+  name: string;
+  email: string;
+  shareContactPublic: boolean;
+  experience: string;
+  photos: File[];
+  countryId: number;
+  submittedAt: string;
+}
 
 const CountryDetail = () => {
   const { countryId } = useParams();
   const navigate = useNavigate();
+  const [experiences, setExperiences] = useState<TravelerExperience[]>([]);
+
+  // Load experiences from localStorage on component mount
+  useEffect(() => {
+    const storedExperiences = localStorage.getItem('travelerExperiences');
+    if (storedExperiences) {
+      const allExperiences = JSON.parse(storedExperiences);
+      const countryExperiences = allExperiences.filter(
+        (exp: TravelerExperience) => exp.countryId === parseInt(countryId || '0')
+      );
+      setExperiences(countryExperiences);
+    }
+  }, [countryId]);
+
+  const handleExperienceSubmit = (experience: TravelerExperience) => {
+    // Get existing experiences from localStorage
+    const storedExperiences = localStorage.getItem('travelerExperiences');
+    const allExperiences = storedExperiences ? JSON.parse(storedExperiences) : [];
+    
+    // Add new experience
+    const updatedExperiences = [...allExperiences, experience];
+    localStorage.setItem('travelerExperiences', JSON.stringify(updatedExperiences));
+    
+    // Update state to show new experience
+    const countryExperiences = updatedExperiences.filter(
+      (exp: TravelerExperience) => exp.countryId === parseInt(countryId || '0')
+    );
+    setExperiences(countryExperiences);
+  };
 
   const countries = [
     {
@@ -340,7 +382,7 @@ const CountryDetail = () => {
           </Card>
 
           {/* Detailed Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -376,6 +418,19 @@ const CountryDetail = () => {
                 <p className="text-gray-700">{country.detailedInfo.dining}</p>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Traveler Experiences Section */}
+          <div className="space-y-8">
+            <TravelerExperienceForm 
+              countryId={country.id} 
+              onSubmit={handleExperienceSubmit}
+            />
+            
+            <TravelerExperiencesList 
+              experiences={experiences}
+              countryName={country.name}
+            />
           </div>
         </div>
       </div>
