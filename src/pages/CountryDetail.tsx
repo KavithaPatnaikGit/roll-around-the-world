@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -273,6 +272,29 @@ const CountryDetail = () => {
             </CardContent>
           </Card>
 
+          {/* Transportation Link */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="text-2xl flex items-center gap-2">
+                <Train className="w-6 h-6" />
+                Transportation
+              </CardTitle>
+              <CardDescription>
+                Detailed information about wheelchair accessible transportation options in {country.city}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-700 mb-4">{country.detailedInfo.transport}</p>
+              <Button
+                onClick={() => navigate('/transportation')}
+                className="flex items-center gap-2"
+              >
+                <Train className="w-4 h-4" />
+                View detailed transportation guide & ticketing information
+              </Button>
+            </CardContent>
+          </Card>
+
           {/* Wheelchair Accessible Attractions */}
           <Card className="mb-8">
             <CardHeader>
@@ -319,18 +341,6 @@ const CountryDetail = () => {
 
           {/* Detailed Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Train className="w-5 h-5" />
-                  Transportation
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">{country.detailedInfo.transport}</p>
-              </CardContent>
-            </Card>
-
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
