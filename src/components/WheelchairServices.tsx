@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -122,7 +121,7 @@ const WheelchairServices = ({ services, cityName }: WheelchairServicesProps) => 
           className="flex items-center gap-2"
         >
           <Wrench className="w-4 h-4" />
-          View all wheelchair services worldwide
+          View wheelchair services worldwide
         </Button>
       </CardContent>
     </Card>
