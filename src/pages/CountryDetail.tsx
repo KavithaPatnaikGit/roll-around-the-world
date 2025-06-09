@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,6 +14,7 @@ interface TravelerExperience {
   email: string;
   shareContactPublic: boolean;
   experience: string;
+  blogPosts: string;
   photos: File[];
   countryId: number;
   submittedAt: string;
