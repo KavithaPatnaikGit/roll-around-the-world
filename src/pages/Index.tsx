@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Accessibility, Star, MapPin, Search, Plane, Heart } from 'lucide-react';
+import { Accessibility, Star, MapPin, Search, Plane, Heart, Train } from 'lucide-react';
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -179,6 +179,18 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Quick Access Links */}
+      <div className="flex justify-center gap-4 mb-12">
+        <Button
+          variant="outline"
+          onClick={() => navigate('/transportation')}
+          className="flex items-center gap-2"
+        >
+          <Train className="w-4 h-4" />
+          Transportation Guide
+        </Button>
       </div>
 
       {/* Countries Grid */}
