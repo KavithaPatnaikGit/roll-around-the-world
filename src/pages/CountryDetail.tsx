@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +19,13 @@ interface TravelerExperience {
   photos: File[];
   countryId: number;
   submittedAt: string;
+}
+
+interface AccessibleHotel {
+  name: string;
+  rating: 3 | 4 | 5;
+  reservationUrl: string;
+  features: string[];
 }
 
 const CountryDetail = () => {
@@ -69,6 +77,13 @@ const CountryDetail = () => {
         { name: 'Vondelpark', url: 'https://www.amsterdam.nl/en/parks-water/vondelpark/' },
         { name: 'Royal Palace of Amsterdam', url: 'https://www.paleisamsterdam.nl/en/practical-info/accessibility' }
       ],
+      accessibleHotels: [
+        { name: 'Waldorf Astoria Amsterdam', rating: 5, reservationUrl: 'https://www.hilton.com/en/hotels/amswa-waldorf-astoria-amsterdam/', features: ['Roll-in shower', 'Lowered fixtures', 'Elevator access'] },
+        { name: 'The Hoxton, Amsterdam', rating: 4, reservationUrl: 'https://thehoxton.com/amsterdam/', features: ['Accessible rooms', 'Wide doorways', 'Accessible bathroom'] },
+        { name: 'Hotel V Nesplein', rating: 4, reservationUrl: 'https://www.hotelv.nl/nesplein/', features: ['Wheelchair accessible', 'Adapted bathroom', 'Ground floor access'] },
+        { name: 'NH Collection Amsterdam Doelen', rating: 4, reservationUrl: 'https://www.nh-hotels.com/hotel/nh-collection-amsterdam-doelen', features: ['Accessible facilities', 'Roll-in shower', 'Accessible parking'] },
+        { name: 'Hotel Casa Amsterdam', rating: 3, reservationUrl: 'https://www.casaamsterdam.com/', features: ['Basic accessibility', 'Accessible room available', 'Near accessible transport'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'All trams and buses are wheelchair accessible with ramps and designated spaces. The train system connects major cities with step-free access.',
         accommodation: 'Wide selection of accessible hotels with roll-in showers, lowered amenities, and elevator access to all floors.',
@@ -91,6 +106,13 @@ const CountryDetail = () => {
         { name: 'Meiji Shrine', url: 'https://www.meijijingu.or.jp/en/visit/barrier-free/' },
         { name: 'Tokyo Station', url: 'https://www.tokyostationcity.com/en/access/barrier-free/' }
       ],
+      accessibleHotels: [
+        { name: 'The Ritz-Carlton Tokyo', rating: 5, reservationUrl: 'https://www.ritzcarlton.com/en/hotels/tokyo', features: ['Universal design rooms', 'Roll-in shower', 'Accessible facilities'] },
+        { name: 'Grand Hyatt Tokyo', rating: 5, reservationUrl: 'https://www.hyatt.com/en-US/hotel/japan/grand-hyatt-tokyo/tyogh', features: ['Barrier-free rooms', 'Accessible bathroom', 'Emergency notification'] },
+        { name: 'Hotel New Otani Tokyo', rating: 4, reservationUrl: 'https://www.newotani.co.jp/en/tokyo/', features: ['Accessible rooms', 'Wide corridors', 'Accessible parking'] },
+        { name: 'Shinjuku Washington Hotel', rating: 3, reservationUrl: 'https://www.washington-hotels.jp/shinjuku/', features: ['Basic accessibility', 'Accessible room', 'Near accessible station'] },
+        { name: 'Hotel Gracery Shinjuku', rating: 3, reservationUrl: 'https://www.gracery.com/shinjuku/', features: ['Accessible facilities', 'Universal design elements', 'Accessible location'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'JR trains and subway systems feature elevators, tactile guidance, and priority seating. Station staff provide assistance.',
         accommodation: 'Hotels offer barrier-free rooms with accessible bathrooms and emergency notification systems for hearing impaired guests.',
@@ -113,6 +135,13 @@ const CountryDetail = () => {
         { name: 'Royal Botanic Gardens', url: 'https://www.rbgsyd.nsw.gov.au/visit/accessibility' },
         { name: 'Bondi Beach', url: 'https://www.waverley.nsw.gov.au/recreation/beaches/accessibility' }
       ],
+      accessibleHotels: [
+        { name: 'Park Hyatt Sydney', rating: 5, reservationUrl: 'https://www.hyatt.com/en-US/hotel/australia/park-hyatt-sydney/sydph', features: ['Accessible harbourview rooms', 'Roll-in shower', 'Accessible facilities'] },
+        { name: 'Four Seasons Hotel Sydney', rating: 5, reservationUrl: 'https://www.fourseasons.com/sydney/', features: ['Accessible rooms', 'Adapted bathroom', 'Concierge assistance'] },
+        { name: 'The Langham Sydney', rating: 4, reservationUrl: 'https://www.langhamhotels.com/en/the-langham/sydney/', features: ['Accessible guest rooms', 'Wide doorways', 'Accessible parking'] },
+        { name: 'Novotel Sydney Central', rating: 4, reservationUrl: 'https://www.accor.com/gb/hotel-1576-novotel-sydney-central/index.shtml', features: ['Accessible facilities', 'Adapted rooms', 'Near accessible transport'] },
+        { name: 'YHA Sydney Central', rating: 3, reservationUrl: 'https://www.yha.com.au/hostels/nsw/sydney-surrounds/sydney-central/', features: ['Budget accessible rooms', 'Basic facilities', 'Central location'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'Trains, buses, and ferries are wheelchair accessible. The airport link provides step-free access throughout.',
         accommodation: 'Extensive range of accessible accommodations with compliant bathrooms and accessible parking.',
@@ -135,6 +164,13 @@ const CountryDetail = () => {
         { name: 'Tate Modern', url: 'https://www.tate.org.uk/visit/tate-modern/accessibility' },
         { name: 'Westminster Abbey', url: 'https://www.westminster-abbey.org/visit-us/access' }
       ],
+      accessibleHotels: [
+        { name: 'The Savoy London', rating: 5, reservationUrl: 'https://www.thesavoylondon.com/', features: ['Accessible suites', 'Roll-in shower', 'Concierge services'] },
+        { name: 'The May Fair Hotel', rating: 5, reservationUrl: 'https://www.themayfairhotel.co.uk/', features: ['Fully accessible rooms', 'Adapted bathroom', 'Central location'] },
+        { name: 'Park Plaza Westminster Bridge', rating: 4, reservationUrl: 'https://www.parkplazawestminsterbridge.com/', features: ['Accessible rooms', 'Hearing loops', 'Visual alarms'] },
+        { name: 'Premier Inn London City', rating: 3, reservationUrl: 'https://www.premierinn.com/gb/en/hotels/england/greater-london/london/london-city-aldgate.html', features: ['Budget accessible rooms', 'Basic adaptations', 'Near transport'] },
+        { name: 'Travelodge London Central City Road', rating: 3, reservationUrl: 'https://www.travelodge.co.uk/hotels/340/London-Central-City-Road-hotel', features: ['Accessible rooms', 'Basic facilities', 'Budget option'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'Increasing number of step-free tube stations, all buses are wheelchair accessible, and black cabs accommodate wheelchairs.',
         accommodation: 'Wide range of accessible hotels, particularly newer establishments, with adapted rooms and facilities.',
@@ -157,6 +193,13 @@ const CountryDetail = () => {
         { name: 'Reichstag Building', url: 'https://www.bundestag.de/en/visitthebundestag/accessibility' },
         { name: 'East Side Gallery', url: 'https://www.eastsidegallery-berlin.de/accessibility.html' }
       ],
+      accessibleHotels: [
+        { name: 'Hotel Adlon Kempinski', rating: 5, reservationUrl: 'https://www.kempinski.com/en/hotel-adlon-berlin', features: ['Luxury accessible rooms', 'Roll-in shower', 'Central location'] },
+        { name: 'Steigenberger Hotel Am Kanzleramt', rating: 4, reservationUrl: 'https://www.steigenberger.com/en/hotels/all-hotels/germany/berlin/steigenberger-hotel-am-kanzleramt', features: ['Accessible rooms', 'Near accessible transport', 'Wide doorways'] },
+        { name: 'Scandic Berlin Potsdamer Platz', rating: 4, reservationUrl: 'https://www.scandichotels.com/hotels/germany/berlin/scandic-berlin-potsdamer-platz', features: ['Universal design', 'Accessible facilities', 'Hearing loops'] },
+        { name: 'Holiday Inn Express Berlin City Centre', rating: 3, reservationUrl: 'https://www.ihg.com/holidayinnexpress/hotels/us/en/berlin/bercc/hoteldetail', features: ['Accessible rooms', 'Basic facilities', 'Budget option'] },
+        { name: 'Motel One Berlin-Hauptbahnhof', rating: 3, reservationUrl: 'https://www.motel-one.com/en/hotels/berlin/hotel-berlin-hauptbahnhof/', features: ['Accessible rooms', 'Basic adaptations', 'Near main station'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'Modern public transport with elevators, audio announcements, and designated wheelchair spaces in vehicles.',
         accommodation: 'Hotels offer accessible rooms with roll-in showers and lowered fixtures, particularly in newer establishments.',
@@ -179,6 +222,13 @@ const CountryDetail = () => {
         { name: 'Granville Island', url: 'https://granvilleisland.com/accessibility' },
         { name: 'VanDusen Botanical Garden', url: 'https://vandusengarden.org/visit/accessibility/' }
       ],
+      accessibleHotels: [
+        { name: 'Fairmont Pacific Rim', rating: 5, reservationUrl: 'https://www.fairmont.com/pacific-rim-vancouver/', features: ['Accessible luxury rooms', 'Roll-in shower', 'Accessible facilities'] },
+        { name: 'Pan Pacific Vancouver', rating: 4, reservationUrl: 'https://www.panpacific.com/en/hotels-and-resorts/pp-vancouver.html', features: ['Accessible waterfront rooms', 'Adapted bathroom', 'Near accessible areas'] },
+        { name: 'Coast Coal Harbour Vancouver Hotel', rating: 4, reservationUrl: 'https://www.coasthotels.com/coast-coal-harbour-vancouver-hotel-by-apa/', features: ['Accessible rooms', 'Visual alarms', 'Accessible entrance'] },
+        { name: 'Best Western Plus Sands', rating: 3, reservationUrl: 'https://www.bestwestern.com/en_US/book/hotel-rooms.62009.html', features: ['Basic accessible rooms', 'Near English Bay', 'Accessible areas'] },
+        { name: 'Days Inn by Wyndham Vancouver', rating: 3, reservationUrl: 'https://www.wyndhamhotels.com/days-inn/vancouver-canada/days-inn-vancouver-downtown/overview', features: ['Budget accessible options', 'Basic features', 'Central location'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'SkyTrain system is fully accessible with elevators and audio announcements. HandyDART provides door-to-door service.',
         accommodation: 'Hotels comply with accessibility standards, offering adapted rooms and accessible common areas.',
@@ -201,6 +251,13 @@ const CountryDetail = () => {
         { name: 'Singapore Zoo', url: 'https://www.wrs.com.sg/en/singapore-zoo/visit/accessibility.html' },
         { name: 'ArtScience Museum', url: 'https://www.marinabaysands.com/museum/accessibility.html' }
       ],
+      accessibleHotels: [
+        { name: 'Marina Bay Sands', rating: 5, reservationUrl: 'https://www.marinabaysands.com/', features: ['Luxury accessible rooms', 'Universal design', 'Complete facilities'] },
+        { name: 'Fullerton Hotel Singapore', rating: 5, reservationUrl: 'https://www.fullertonhotels.com/fullerton-hotel-singapore/', features: ['Accessible heritage rooms', 'Adapted bathrooms', 'Central location'] },
+        { name: 'PARKROYAL COLLECTION Marina Bay', rating: 4, reservationUrl: 'https://www.panpacific.com/en/hotels-and-resorts/pr-marina-bay.html', features: ['Accessible rooms', 'Accessible facilities', 'Garden views'] },
+        { name: 'Hotel Jen Tanglin', rating: 4, reservationUrl: 'https://www.shangri-la.com/en/singapore/hoteljenorchardsgateway/', features: ['Accessible modern rooms', 'Near amenities', 'Accessible features'] },
+        { name: 'Ibis Singapore on Bencoolen', rating: 3, reservationUrl: 'https://all.accor.com/hotel/6657/index.en.shtml', features: ['Budget accessible rooms', 'Central location', 'Near MRT'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'MRT system is completely barrier-free with platform screen doors, elevators, and tactile guidance systems.',
         accommodation: 'Hotels feature accessible design as standard, with barrier-free rooms and comprehensive accessibility features.',
@@ -223,6 +280,13 @@ const CountryDetail = () => {
         { name: 'Gamla Stan', url: 'https://www.visitstockholm.com/accessibility/' },
         { name: 'Skansen', url: 'https://www.skansen.se/en/visit/accessibility' }
       ],
+      accessibleHotels: [
+        { name: 'Grand Hôtel Stockholm', rating: 5, reservationUrl: 'https://www.grandhotel.se/en/', features: ['Luxury accessible suite', 'Roll-in shower', 'Historic building with modern access'] },
+        { name: 'Hotel At Six', rating: 4, reservationUrl: 'https://hotelatsix.com/', features: ['Modern accessible rooms', 'Central location', 'Accessible design elements'] },
+        { name: 'Scandic Continental', rating: 4, reservationUrl: 'https://www.scandichotels.com/hotels/sweden/stockholm/scandic-continental', features: ['Universal design standard', 'Accessibility expertise', 'Central location'] },
+        { name: 'Motel L Hammarby Sjöstad', rating: 3, reservationUrl: 'https://motel-l.com/hammarby-sjostad/', features: ['Budget accessible rooms', 'Modern design', 'Accessible areas'] },
+        { name: 'Generator Stockholm', rating: 3, reservationUrl: 'https://staygenerator.com/hostels/stockholm', features: ['Budget option', 'Basic accessibility', 'Youth-oriented'] }
+      ] as AccessibleHotel[],
       detailedInfo: {
         transport: 'Modern buses and trains with step-free access, and ferry services to the archipelago include accessibility features.',
         accommodation: 'Scandinavian design principles include accessibility, with hotels offering well-designed accessible rooms.',
@@ -393,7 +457,40 @@ const CountryDetail = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700">{country.detailedInfo.accommodation}</p>
+                <p className="text-gray-700 mb-4">{country.detailedInfo.accommodation}</p>
+                
+                {country.accessibleHotels && (
+                  <div className="mt-4">
+                    <h4 className="font-medium text-gray-800 mb-3">Wheelchair Accessible Hotels</h4>
+                    <div className="space-y-3">
+                      {country.accessibleHotels.map((hotel, index) => (
+                        <div key={index} className="border rounded-lg p-3 hover:shadow-md transition-shadow">
+                          <div className="flex items-center justify-between mb-2">
+                            <a
+                              href={hotel.reservationUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-medium text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
+                            >
+                              {hotel.name}
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                            <div className="flex">
+                              {renderStars(hotel.rating)}
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {hotel.features.map((feature, i) => (
+                              <Badge key={i} variant="outline" className="text-xs">
+                                {feature}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
