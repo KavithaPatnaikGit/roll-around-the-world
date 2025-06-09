@@ -2,8 +2,8 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, ExternalLink, Star, Gift, CreditCard } from 'lucide-react';
-import { AccessibleAttraction } from '@/data/countryData';
+import { MapPin, ExternalLink, Star, Gift, CreditCard, Tag, Clock } from 'lucide-react';
+import { AccessibleAttraction, DiscountOffer } from '@/data/countryData';
 
 interface AttractionsListingProps {
   attractions: AccessibleAttraction[];
@@ -14,6 +14,67 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
   // Separate attractions into free and paid
   const freeAttractions = attractions.filter(attraction => !attraction.bookingUrl);
   const paidAttractions = attractions.filter(attraction => attraction.bookingUrl);
+
+  const renderDiscountOffers = (discounts: DiscountOffer[]) => {
+    if (!discounts || discounts.length === 0) return null;
+
+    // Sort by discount percentage (highest first)
+    const sortedDiscounts = [...discounts].sort((a, b) => b.discountPercentage - a.discountPercentage);
+    const topDiscount = sortedDiscounts[0];
+
+    return (
+      <div className="mt-3 space-y-2">
+        <div className="flex items-center gap-2 text-sm font-medium text-green-600">
+          <Tag className="w-4 h-4" />
+          Top Discount: {topDiscount.discountPercentage}% off
+        </div>
+        
+        <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-medium text-green-800">{topDiscount.provider}</span>
+            {topDiscount.validUntil && (
+              <div className="flex items-center gap-1 text-xs text-green-600">
+                <Clock className="w-3 h-3" />
+                Until {new Date(topDiscount.validUntil).toLocaleDateString()}
+              </div>
+            )}
+          </div>
+          
+          <p className="text-sm text-green-700 mb-2">{topDiscount.description}</p>
+          
+          {topDiscount.originalPrice && topDiscount.discountedPrice && (
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-sm line-through text-gray-500">€{topDiscount.originalPrice}</span>
+              <span className="text-lg font-bold text-green-600">€{topDiscount.discountedPrice}</span>
+            </div>
+          )}
+          
+          <Button
+            asChild
+            size="sm"
+            className="bg-green-600 hover:bg-green-700 text-white"
+          >
+            <a
+              href={topDiscount.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Tag className="w-4 h-4 mr-2" />
+              Get {topDiscount.discountPercentage}% Discount
+            </a>
+          </Button>
+          
+          {sortedDiscounts.length > 1 && (
+            <div className="mt-2 pt-2 border-t border-green-300">
+              <p className="text-xs text-green-600">
+                +{sortedDiscounts.length - 1} more discount{sortedDiscounts.length > 2 ? 's' : ''} available
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
 
   const renderAttractionCard = (attraction: AccessibleAttraction, index: number) => (
     <Card key={index} className="p-4 hover:shadow-md transition-shadow">
@@ -41,7 +102,10 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
         </div>
       </div>
       
-      <div className="flex flex-col sm:flex-row gap-2">
+      {/* Show discount offers for paid attractions */}
+      {attraction.bookingUrl && attraction.discounts && renderDiscountOffers(attraction.discounts)}
+      
+      <div className="flex flex-col sm:flex-row gap-2 mt-4">
         <Button
           asChild
           variant="outline"

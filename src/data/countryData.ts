@@ -18,12 +18,23 @@ export interface WheelchairService {
   description: string;
 }
 
+export interface DiscountOffer {
+  provider: string;
+  discountPercentage: number;
+  originalPrice?: number;
+  discountedPrice?: number;
+  description: string;
+  url: string;
+  validUntil?: string;
+}
+
 export interface AccessibleAttraction {
   name: string;
   url: string;
   rating?: number;
   description?: string;
   bookingUrl?: string;
+  discounts?: DiscountOffer[];
 }
 
 export interface AccessibleHotel {
@@ -105,21 +116,56 @@ export const countries: Country[] = [
         url: "https://www.rijksmuseum.nl/en/visit/accessibility",
         rating: 5,
         description: "World-renowned art museum with masterpieces from Dutch Golden Age",
-        bookingUrl: "https://www.rijksmuseum.nl/en/tickets"
+        bookingUrl: "https://www.rijksmuseum.nl/en/tickets",
+        discounts: [
+          {
+            provider: "GetYourGuide",
+            discountPercentage: 15,
+            originalPrice: 22,
+            discountedPrice: 18.70,
+            description: "Skip-the-line ticket with audio guide",
+            url: "https://www.getyourguide.com/rijksmuseum-discount",
+            validUntil: "2025-07-01"
+          },
+          {
+            provider: "Viator",
+            discountPercentage: 10,
+            description: "Group booking discount available",
+            url: "https://www.viator.com/rijksmuseum-tours"
+          }
+        ]
       },
       { 
         name: "Van Gogh Museum", 
         url: "https://www.vangoghmuseum.nl/en/visit/accessibility",
         rating: 5,
         description: "Largest collection of Van Gogh artworks in the world",
-        bookingUrl: "https://www.vangoghmuseum.nl/en/tickets"
+        bookingUrl: "https://www.vangoghmuseum.nl/en/tickets",
+        discounts: [
+          {
+            provider: "Tiqets",
+            discountPercentage: 20,
+            originalPrice: 19,
+            discountedPrice: 15.20,
+            description: "Combo ticket with audio guide",
+            url: "https://www.tiqets.com/vangogh-museum-discount"
+          }
+        ]
       },
       { 
         name: "Anne Frank House", 
         url: "https://www.annefrank.org/en/museum/accessibility/",
         rating: 4,
         description: "Historic house and biographical museum dedicated to Anne Frank",
-        bookingUrl: "https://www.annefrank.org/en/museum/tickets/"
+        bookingUrl: "https://www.annefrank.org/en/museum/tickets/",
+        discounts: [
+          {
+            provider: "Amsterdam Museum Pass",
+            discountPercentage: 25,
+            description: "Included in city museum pass",
+            url: "https://www.amsterdam.com/museum-pass"
+          }
+        ]
       },
       { 
         name: "Vondelpark", 
@@ -132,7 +178,18 @@ export const countries: Country[] = [
         url: "https://keukenhof.nl/en/practical-information/accessibility/",
         rating: 5,
         description: "World's largest flower garden with millions of tulips (seasonal)",
-        bookingUrl: "https://keukenhof.nl/en/tickets/"
+        bookingUrl: "https://keukenhof.nl/en/tickets/",
+        discounts: [
+          {
+            provider: "Early Bird Special",
+            discountPercentage: 30,
+            originalPrice: 20,
+            discountedPrice: 14,
+            description: "Pre-season early booking discount",
+            url: "https://keukenhof.nl/early-bird",
+            validUntil: "2025-03-15"
+          }
+        ]
       }
     ],
     accessibleHotels: [
@@ -205,7 +262,17 @@ export const countries: Country[] = [
         url: "https://www.tokyo-skytree.jp/en/enjoy/barrier-free/",
         rating: 5,
         description: "Tokyo's tallest tower with panoramic city views",
-        bookingUrl: "https://www.tokyo-skytree.jp/en/ticket/"
+        bookingUrl: "https://www.tokyo-skytree.jp/en/ticket/",
+        discounts: [
+          {
+            provider: "Klook",
+            discountPercentage: 12,
+            originalPrice: 25,
+            discountedPrice: 22,
+            description: "Fast Track entry with discount",
+            url: "https://www.klook.com/tokyo-skytree-discount"
+          }
+        ]
       },
       { 
         name: "Senso-ji Temple", 
@@ -218,7 +285,15 @@ export const countries: Country[] = [
         url: "https://www.tnm.jp/modules/r_free_page/index.php?id=113",
         rating: 4,
         description: "Japan's largest collection of cultural artifacts",
-        bookingUrl: "https://www.tnm.jp/modules/r_free_page/index.php?id=1869"
+        bookingUrl: "https://www.tnm.jp/modules/r_free_page/index.php?id=1869",
+        discounts: [
+          {
+            provider: "Japan Rail Pass",
+            discountPercentage: 20,
+            description: "Free entry with valid JR Pass",
+            url: "https://www.jrpass.com/museum-benefits"
+          }
+        ]
       },
       { 
         name: "Ueno Park", 
@@ -231,7 +306,17 @@ export const countries: Country[] = [
         url: "https://borderless.teamlab.art/accessibility/",
         rating: 5,
         description: "Digital art museum with immersive installations",
-        bookingUrl: "https://borderless.teamlab.art/ticket/"
+        bookingUrl: "https://borderless.teamlab.art/ticket/",
+        discounts: [
+          {
+            provider: "Advance Booking",
+            discountPercentage: 15,
+            originalPrice: 32,
+            discountedPrice: 27.20,
+            description: "Early bird discount for advance bookings",
+            url: "https://borderless.teamlab.art/early-bird"
+          }
+        ]
       }
     ],
     accessibleHotels: [
@@ -549,7 +634,7 @@ export const countries: Country[] = [
       transport: "Berlin's public transport is highly accessible with most stations having elevators. The BVG website provides detailed accessibility information for each station.",
       accommodation: "German accessibility standards are high. Many hotels offer specialized accessible rooms with roll-in showers and other features.",
       dining: "Most restaurants comply with accessibility standards. Beer gardens and outdoor seating areas are typically accessible.",
-      healthcare: "Excellent healthcare system with accessible facilities. Many doctors speak English and hospitals are well-equipped for international patients.",
+      healthcare: "Excellent healthcare system with many English-speaking doctors. Many doctors speak English and hospitals are well-equipped for international patients.",
       attractions: "Berlin's historical sites have been thoughtfully adapted for accessibility while preserving their significance. Modern attractions are designed with universal access principles."
     }
   },
@@ -568,7 +653,7 @@ export const countries: Country[] = [
       "Strong disability rights framework"
     ],
     emergencyNumbers: [
-      { service: "Emergency Services", number: "911", description: "Police, Fire, Medical emergencies" },
+      { service: "Emergency Services", number: "911", description: "Police emergencies" },
       { service: "Non-Emergency Police", number: "604 717 3321", description: "Vancouver Police non-urgent" },
       { service: "Tourism Vancouver", number: "+1 604 683 2000", description: "Tourist information and assistance" },
       { service: "HandyDART", number: "+1 604 575 6600", description: "Accessible transit service" }
@@ -648,7 +733,7 @@ export const countries: Country[] = [
       transport: "Vancouver's SkyTrain system is fully accessible. Buses have wheelchair lifts and priority seating. HandyDART provides specialized door-to-door service.",
       accommodation: "Canadian accessibility standards ensure most hotels have accessible rooms. Many offer scenic accessible rooms with mountain or ocean views.",
       dining: "Restaurants must comply with accessibility codes. The diverse food scene includes many accessible establishments with outdoor seating.",
-      healthcare: "Universal healthcare system with accessible facilities. Walk-in clinics and hospitals provide excellent care for visitors.",
+      healthcare: "Universal healthcare system with excellent accessibility. Walk-in clinics and hospitals provide excellent care for visitors.",
       attractions: "Vancouver combines urban accessibility with nature access. From the fully accessible Stanley Park Seawall to mountain viewpoints, the city offers barrier-free experiences in stunning natural settings."
     }
   },
