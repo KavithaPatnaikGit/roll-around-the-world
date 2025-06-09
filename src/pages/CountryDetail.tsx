@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { countries } from '@/data/countryData';
@@ -12,6 +11,7 @@ import AccessibleAttractions from '@/components/AccessibleAttractions';
 import DetailedInfo from '@/components/DetailedInfo';
 import TravelerExperienceForm from '@/components/TravelerExperienceForm';
 import TravelerExperiencesList from '@/components/TravelerExperiencesList';
+import AttractionsListing from '@/components/AttractionsListing';
 
 interface TravelerExperience {
   id: string;
@@ -80,6 +80,7 @@ const CountryDetail = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <CountryOverview country={country} />
+          <AttractionsListing attractions={country.wheelchairAccessibleAttractions} cityName={country.city} />
           <EmergencyNumbers emergencyNumbers={country.emergencyNumbers} cityName={country.city} />
           <QuickTips quickTips={country.quickTips} cityName={country.city} />
           <WheelchairServices services={country.wheelchairServices} cityName={country.city} />

@@ -21,6 +21,9 @@ export interface WheelchairService {
 export interface AccessibleAttraction {
   name: string;
   url: string;
+  rating?: number;
+  description?: string;
+  bookingUrl?: string;
 }
 
 export interface AccessibleHotel {
@@ -97,11 +100,40 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "Rijksmuseum", url: "https://www.rijksmuseum.nl/en/visit/accessibility" },
-      { name: "Van Gogh Museum", url: "https://www.vangoghmuseum.nl/en/visit/accessibility" },
-      { name: "Anne Frank House", url: "https://www.annefrank.org/en/museum/accessibility/" },
-      { name: "Vondelpark", url: "https://www.amsterdam.nl/toerisme-vrije-tijd/parken/vondelpark/" },
-      { name: "Keukenhof Gardens", url: "https://keukenhof.nl/en/practical-information/accessibility/" }
+      { 
+        name: "Rijksmuseum", 
+        url: "https://www.rijksmuseum.nl/en/visit/accessibility",
+        rating: 5,
+        description: "World-renowned art museum with masterpieces from Dutch Golden Age",
+        bookingUrl: "https://www.rijksmuseum.nl/en/tickets"
+      },
+      { 
+        name: "Van Gogh Museum", 
+        url: "https://www.vangoghmuseum.nl/en/visit/accessibility",
+        rating: 5,
+        description: "Largest collection of Van Gogh artworks in the world",
+        bookingUrl: "https://www.vangoghmuseum.nl/en/tickets"
+      },
+      { 
+        name: "Anne Frank House", 
+        url: "https://www.annefrank.org/en/museum/accessibility/",
+        rating: 4,
+        description: "Historic house and biographical museum dedicated to Anne Frank",
+        bookingUrl: "https://www.annefrank.org/en/museum/tickets/"
+      },
+      { 
+        name: "Vondelpark", 
+        url: "https://www.amsterdam.nl/toerisme-vrije-tijd/parken/vondelpark/",
+        rating: 4,
+        description: "Amsterdam's most popular park with accessible paths and facilities"
+      },
+      { 
+        name: "Keukenhof Gardens", 
+        url: "https://keukenhof.nl/en/practical-information/accessibility/",
+        rating: 5,
+        description: "World's largest flower garden with millions of tulips (seasonal)",
+        bookingUrl: "https://keukenhof.nl/en/tickets/"
+      }
     ],
     accessibleHotels: [
       {
@@ -168,11 +200,39 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "Tokyo Skytree", url: "https://www.tokyo-skytree.jp/en/enjoy/barrier-free/" },
-      { name: "Senso-ji Temple", url: "https://www.senso-ji.jp/english/" },
-      { name: "Tokyo National Museum", url: "https://www.tnm.jp/modules/r_free_page/index.php?id=113" },
-      { name: "Ueno Park", url: "https://www.kensetsu.metro.tokyo.lg.jp/jimusho/toubuk/ueno/index_top.html" },
-      { name: "TeamLab Borderless", url: "https://borderless.teamlab.art/accessibility/" }
+      { 
+        name: "Tokyo Skytree", 
+        url: "https://www.tokyo-skytree.jp/en/enjoy/barrier-free/",
+        rating: 5,
+        description: "Tokyo's tallest tower with panoramic city views",
+        bookingUrl: "https://www.tokyo-skytree.jp/en/ticket/"
+      },
+      { 
+        name: "Senso-ji Temple", 
+        url: "https://www.senso-ji.jp/english/",
+        rating: 4,
+        description: "Tokyo's oldest temple with accessible entrance routes"
+      },
+      { 
+        name: "Tokyo National Museum", 
+        url: "https://www.tnm.jp/modules/r_free_page/index.php?id=113",
+        rating: 4,
+        description: "Japan's largest collection of cultural artifacts",
+        bookingUrl: "https://www.tnm.jp/modules/r_free_page/index.php?id=1869"
+      },
+      { 
+        name: "Ueno Park", 
+        url: "https://www.kensetsu.metro.tokyo.lg.jp/jimusho/toubuk/ueno/index_top.html",
+        rating: 4,
+        description: "Large public park with museums and cherry blossoms"
+      },
+      { 
+        name: "TeamLab Borderless", 
+        url: "https://borderless.teamlab.art/accessibility/",
+        rating: 5,
+        description: "Digital art museum with immersive installations",
+        bookingUrl: "https://borderless.teamlab.art/ticket/"
+      }
     ],
     accessibleHotels: [
       {
@@ -239,11 +299,39 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "Sydney Opera House", url: "https://www.sydneyoperahouse.com/visit-us/accessibility" },
-      { name: "Sydney Harbour Bridge", url: "https://www.bridgeclimb.com/accessibility/" },
-      { name: "Bondi Beach", url: "https://www.waverley.nsw.gov.au/recreation/beaches/accessibility" },
-      { name: "Royal Botanic Gardens", url: "https://www.botanicgardens.org.au/sydney/visit/accessibility" },
-      { name: "Australian Museum", url: "https://australian.museum/visit/accessibility/" }
+      { 
+        name: "Sydney Opera House", 
+        url: "https://www.sydneyoperahouse.com/visit-us/accessibility",
+        rating: 5,
+        description: "Iconic performing arts venue with world-class shows",
+        bookingUrl: "https://www.sydneyoperahouse.com/events.html"
+      },
+      { 
+        name: "Sydney Harbour Bridge", 
+        url: "https://www.bridgeclimb.com/accessibility/",
+        rating: 4,
+        description: "Iconic bridge with accessible viewing areas and climb options",
+        bookingUrl: "https://www.bridgeclimb.com/book-now/"
+      },
+      { 
+        name: "Bondi Beach", 
+        url: "https://www.waverley.nsw.gov.au/recreation/beaches/accessibility",
+        rating: 5,
+        description: "Famous beach with accessible facilities and beach wheelchairs"
+      },
+      { 
+        name: "Royal Botanic Gardens", 
+        url: "https://www.botanicgardens.org.au/sydney/visit/accessibility",
+        rating: 4,
+        description: "Beautiful harbourside gardens with accessible paths"
+      },
+      { 
+        name: "Australian Museum", 
+        url: "https://australian.museum/visit/accessibility/",
+        rating: 4,
+        description: "Natural history and cultural museum",
+        bookingUrl: "https://australian.museum/visit/tickets/"
+      }
     ],
     accessibleHotels: [
       {
@@ -310,11 +398,40 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "British Museum", url: "https://www.britishmuseum.org/visit/accessibility" },
-      { name: "London Eye", url: "https://www.londoneye.com/plan-your-visit/accessibility/" },
-      { name: "Tower of London", url: "https://www.hrp.org.uk/tower-of-london/visit/accessibility/" },
-      { name: "Tate Modern", url: "https://www.tate.org.uk/visit/tate-modern/accessibility" },
-      { name: "Hyde Park", url: "https://www.royalparks.org.uk/parks/hyde-park/visitor-information/accessibility" }
+      { 
+        name: "British Museum", 
+        url: "https://www.britishmuseum.org/visit/accessibility",
+        rating: 5,
+        description: "World-famous museum with ancient artifacts and art",
+        bookingUrl: "https://www.britishmuseum.org/visit"
+      },
+      { 
+        name: "London Eye", 
+        url: "https://www.londoneye.com/plan-your-visit/accessibility/",
+        rating: 4,
+        description: "Giant observation wheel with panoramic city views",
+        bookingUrl: "https://www.londoneye.com/tickets/"
+      },
+      { 
+        name: "Tower of London", 
+        url: "https://www.hrp.org.uk/tower-of-london/visit/accessibility/",
+        rating: 4,
+        description: "Historic castle and home to the Crown Jewels",
+        bookingUrl: "https://www.hrp.org.uk/tower-of-london/whats-on/tower-of-london-tickets/"
+      },
+      { 
+        name: "Tate Modern", 
+        url: "https://www.tate.org.uk/visit/tate-modern/accessibility",
+        rating: 5,
+        description: "Modern and contemporary art gallery",
+        bookingUrl: "https://www.tate.org.uk/visit/tate-modern"
+      },
+      { 
+        name: "Hyde Park", 
+        url: "https://www.royalparks.org.uk/parks/hyde-park/visitor-information/accessibility",
+        rating: 4,
+        description: "Large royal park with accessible paths and Speaker's Corner"
+      }
     ],
     accessibleHotels: [
       {
@@ -381,11 +498,38 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "Brandenburg Gate", url: "https://www.berlin.de/en/attractions-and-sights/3560266-3104052-brandenburg-gate.en.html" },
-      { name: "Berlin Wall Memorial", url: "https://www.berliner-mauer-gedenkstaette.de/en/barrier-free-628.html" },
-      { name: "Museum Island", url: "https://www.smb.museum/en/museums-institutions/museumsinsel/" },
-      { name: "Reichstag Building", url: "https://www.bundestag.de/en/visitthebundestag" },
-      { name: "Tiergarten", url: "https://www.berlin.de/en/parks-and-gardens/" }
+      { 
+        name: "Brandenburg Gate", 
+        url: "https://www.berlin.de/en/attractions-and-sights/3560266-3104052-brandenburg-gate.en.html",
+        rating: 4,
+        description: "Iconic neoclassical monument and symbol of German unity"
+      },
+      { 
+        name: "Berlin Wall Memorial", 
+        url: "https://www.berliner-mauer-gedenkstaette.de/en/barrier-free-628.html",
+        rating: 4,
+        description: "Memorial site documenting the division of Berlin"
+      },
+      { 
+        name: "Museum Island", 
+        url: "https://www.smb.museum/en/museums-institutions/museumsinsel/",
+        rating: 5,
+        description: "UNESCO World Heritage site with five world-renowned museums",
+        bookingUrl: "https://www.smb.museum/en/tickets/"
+      },
+      { 
+        name: "Reichstag Building", 
+        url: "https://www.bundestag.de/en/visitthebundestag",
+        rating: 4,
+        description: "Historic parliament building with accessible glass dome",
+        bookingUrl: "https://www.bundestag.de/en/visitthebundestag/dome/registration-245686"
+      },
+      { 
+        name: "Tiergarten", 
+        url: "https://www.berlin.de/en/parks-and-gardens/",
+        rating: 4,
+        description: "Large central park with accessible paths and memorials"
+      }
     ],
     accessibleHotels: [
       {
@@ -452,11 +596,39 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "Stanley Park Seawall", url: "https://vancouver.ca/parks-recreation-culture/seawall.aspx" },
-      { name: "Capilano Suspension Bridge", url: "https://www.capbridge.com/plan-your-visit/accessibility/" },
-      { name: "Science World", url: "https://www.scienceworld.ca/visit/accessibility/" },
-      { name: "Vancouver Aquarium", url: "https://www.vanaqua.org/visit/accessibility" },
-      { name: "Queen Elizabeth Park", url: "https://vancouver.ca/parks-recreation-culture/queen-elizabeth-park.aspx" }
+      { 
+        name: "Stanley Park Seawall", 
+        url: "https://vancouver.ca/parks-recreation-culture/seawall.aspx",
+        rating: 5,
+        description: "World-famous accessible seawall with stunning ocean and mountain views"
+      },
+      { 
+        name: "Capilano Suspension Bridge", 
+        url: "https://www.capbridge.com/plan-your-visit/accessibility/",
+        rating: 4,
+        description: "Accessible suspension bridge experience through rainforest canopy",
+        bookingUrl: "https://www.capbridge.com/admission/"
+      },
+      { 
+        name: "Science World", 
+        url: "https://www.scienceworld.ca/visit/accessibility/",
+        rating: 4,
+        description: "Interactive science museum with hands-on exhibits",
+        bookingUrl: "https://www.scienceworld.ca/visit/tickets/"
+      },
+      { 
+        name: "Vancouver Aquarium", 
+        url: "https://www.vanaqua.org/visit/accessibility",
+        rating: 4,
+        description: "Marine science center with accessible viewing areas",
+        bookingUrl: "https://www.vanaqua.org/visit/admission"
+      },
+      { 
+        name: "Queen Elizabeth Park", 
+        url: "https://vancouver.ca/parks-recreation-culture/queen-elizabeth-park.aspx",
+        rating: 4,
+        description: "Elevated park with accessible gardens and city views"
+      }
     ],
     accessibleHotels: [
       {
@@ -523,11 +695,40 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "Gardens by the Bay", url: "https://www.gardensbythebay.com.sg/en/visit/visitor-info/accessibility.html" },
-      { name: "Marina Bay Sands SkyPark", url: "https://www.marinabaysands.com/sands-skypark/accessibility.html" },
-      { name: "Singapore Zoo", url: "https://www.wrs.com.sg/en/singapore-zoo/visitor-info/accessibility.html" },
-      { name: "Universal Studios Singapore", url: "https://www.rwsentosa.com/en/attractions/universal-studios-singapore/accessibility" },
-      { name: "Merlion Park", url: "https://www.stb.gov.sg/content/stb/en/travel-guide-tips/accessibility.html" }
+      { 
+        name: "Gardens by the Bay", 
+        url: "https://www.gardensbythebay.com.sg/en/visit/visitor-info/accessibility.html",
+        rating: 5,
+        description: "Futuristic gardens with iconic Supertree Grove",
+        bookingUrl: "https://www.gardensbythebay.com.sg/en/ticketing.html"
+      },
+      { 
+        name: "Marina Bay Sands SkyPark", 
+        url: "https://www.marinabaysands.com/sands-skypark/accessibility.html",
+        rating: 5,
+        description: "Rooftop observation deck with infinity pool views",
+        bookingUrl: "https://www.marinabaysands.com/sands-skypark.html"
+      },
+      { 
+        name: "Singapore Zoo", 
+        url: "https://www.wrs.com.sg/en/singapore-zoo/visitor-info/accessibility.html",
+        rating: 4,
+        description: "Open-concept zoo with accessible paths and trams",
+        bookingUrl: "https://www.wrs.com.sg/en/singapore-zoo/tickets.html"
+      },
+      { 
+        name: "Universal Studios Singapore", 
+        url: "https://www.rwsentosa.com/en/attractions/universal-studios-singapore/accessibility",
+        rating: 4,
+        description: "Theme park with accessible rides and attractions",
+        bookingUrl: "https://www.rwsentosa.com/en/attractions/universal-studios-singapore/tickets"
+      },
+      { 
+        name: "Merlion Park", 
+        url: "https://www.stb.gov.sg/content/stb/en/travel-guide-tips/accessibility.html",
+        rating: 4,
+        description: "Iconic Singapore landmark with accessible viewing areas"
+      }
     ],
     accessibleHotels: [
       {
@@ -594,11 +795,40 @@ export const countries: Country[] = [
       }
     ],
     wheelchairAccessibleAttractions: [
-      { name: "Vasa Museum", url: "https://www.vasamuseet.se/en/visit/accessibility" },
-      { name: "ABBA Museum", url: "https://abbamuseum.com/en/visit/accessibility/" },
-      { name: "Gamla Stan", url: "https://www.stockholm.se/en/accessibility" },
-      { name: "Royal Palace", url: "https://www.kungligaslotten.se/english/royal-palaces-and-sites/the-royal-palace/accessibility.html" },
-      { name: "Skansen Open Air Museum", url: "https://www.skansen.se/en/node/1643" }
+      { 
+        name: "Vasa Museum", 
+        url: "https://www.vasamuseet.se/en/visit/accessibility",
+        rating: 5,
+        description: "Maritime museum featuring a 17th-century warship",
+        bookingUrl: "https://www.vasamuseet.se/en/visit/tickets"
+      },
+      { 
+        name: "ABBA Museum", 
+        url: "https://abbamuseum.com/en/visit/accessibility/",
+        rating: 4,
+        description: "Interactive museum celebrating Sweden's most famous pop group",
+        bookingUrl: "https://abbamuseum.com/en/visit/tickets/"
+      },
+      { 
+        name: "Gamla Stan", 
+        url: "https://www.stockholm.se/en/accessibility",
+        rating: 4,
+        description: "Historic old town with accessible routes and medieval architecture"
+      },
+      { 
+        name: "Royal Palace", 
+        url: "https://www.kungligaslotten.se/english/royal-palaces-and-sites/the-royal-palace/accessibility.html",
+        rating: 4,
+        description: "Official residence of the Swedish monarch",
+        bookingUrl: "https://www.kungligaslotten.se/english/royal-palaces-and-sites/the-royal-palace/tickets.html"
+      },
+      { 
+        name: "Skansen Open Air Museum", 
+        url: "https://www.skansen.se/en/node/1643",
+        rating: 4,
+        description: "World's first open-air museum with Swedish cultural heritage",
+        bookingUrl: "https://www.skansen.se/en/tickets"
+      }
     ],
     accessibleHotels: [
       {
