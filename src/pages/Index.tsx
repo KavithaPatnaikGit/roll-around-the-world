@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Wheelchair, Star, MapPin, Search, Plane, Heart } from 'lucide-react';
+import { Accessibility, Star, MapPin, Search, Plane, Heart } from 'lucide-react';
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -108,7 +107,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-16">
           <div className="text-center max-w-4xl mx-auto">
             <div className="flex justify-center items-center gap-3 mb-6">
-              <Wheelchair className="w-12 h-12" />
+              <Accessibility className="w-12 h-12" />
               <Plane className="w-12 h-12" />
             </div>
             <h1 className="text-5xl font-bold mb-6">
@@ -198,7 +197,7 @@ const Index = () => {
                 />
                 <div className="absolute top-3 left-3">
                   <Badge className="bg-green-600 hover:bg-green-700">
-                    <Wheelchair className="w-3 h-3 mr-1" />
+                    <Accessibility className="w-3 h-3 mr-1" />
                     Accessible
                   </Badge>
                 </div>
@@ -250,7 +249,7 @@ const Index = () => {
 
         {filteredCountries.length === 0 && (
           <div className="text-center py-16">
-            <Wheelchair className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <Accessibility className="w-16 h-16 text-gray-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-600 mb-2">No destinations found</h3>
             <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
           </div>
@@ -262,7 +261,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="flex justify-center items-center gap-3 mb-4">
-              <Wheelchair className="w-8 h-8" />
+              <Accessibility className="w-8 h-8" />
               <h3 className="text-2xl font-bold">Accessible Travel</h3>
             </div>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
