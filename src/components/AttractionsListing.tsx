@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, ExternalLink, Star, Gift, CreditCard, Tag, Clock } from 'lucide-react';
+import { MapPin, ExternalLink, Star, Gift, CreditCard, Tag, Clock, Users, Coffee } from 'lucide-react';
 import { AccessibleAttraction, DiscountOffer } from '@/data/countryData';
 
 interface AttractionsListingProps {
@@ -14,6 +14,61 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
   // Separate attractions into free and paid
   const freeAttractions = attractions.filter(attraction => !attraction.bookingUrl);
   const paidAttractions = attractions.filter(attraction => attraction.bookingUrl);
+
+  // Additional meetup places and local attractions for each city
+  const getMeetupPlaces = (cityName: string) => {
+    const meetupPlaces = {
+      Amsterdam: [
+        { name: "Vondelpark Pavilion", description: "Central meeting spot with accessible facilities and café" },
+        { name: "Central Library (OBA)", description: "Modern accessible building with meeting spaces and free WiFi" },
+        { name: "Museumplein", description: "Large open square perfect for group gatherings near major museums" },
+        { name: "Café Central", description: "Accessible café popular with international visitors and locals" }
+      ],
+      Tokyo: [
+        { name: "Shibuya Sky", description: "Accessible rooftop observation deck and meeting space" },
+        { name: "Tokyo Station Marunouchi", description: "Central accessible location with many dining options" },
+        { name: "Odaiba Aqua City", description: "Shopping center with accessible facilities and Tokyo Bay views" },
+        { name: "Harajuku Kawaii Monster Café", description: "Unique accessible themed café experience" }
+      ],
+      Sydney: [
+        { name: "Circular Quay", description: "Central transport hub with harbour views and accessible facilities" },
+        { name: "The Rocks Markets", description: "Weekend markets with accessible pathways and local crafts" },
+        { name: "Darling Harbour", description: "Waterfront area with accessible restaurants and entertainment" },
+        { name: "Royal Botanic Gardens Café", description: "Accessible café with harbour views in beautiful gardens" }
+      ],
+      London: [
+        { name: "Covent Garden Market", description: "Historic market with accessible shops and street performers" },
+        { name: "South Bank", description: "Riverside walkway with accessible cultural venues and cafés" },
+        { name: "Borough Market", description: "Famous food market with accessible areas and diverse cuisine" },
+        { name: "Sky Garden", description: "Free accessible viewing deck with panoramic city views" }
+      ],
+      Berlin: [
+        { name: "Potsdamer Platz", description: "Modern accessible plaza with shops, restaurants, and cinema" },
+        { name: "Hackescher Markt", description: "Vibrant area with accessible cafés and boutique shopping" },
+        { name: "East Side Gallery Café", description: "Accessible café near the famous Berlin Wall art gallery" },
+        { name: "Prenzlauer Berg Kollwitzplatz", description: "Local square with accessible cafés and weekend markets" }
+      ],
+      Vancouver: [
+        { name: "English Bay Beach", description: "Accessible beach with stunning sunset views and nearby cafés" },
+        { name: "Granville Island Public Market", description: "Covered market with accessible local food vendors" },
+        { name: "Canada Place", description: "Iconic waterfront building with accessible convention spaces" },
+        { name: "VanDusen Botanical Garden Visitor Centre", description: "Accessible meeting space in beautiful garden setting" }
+      ],
+      Singapore: [
+        { name: "Clarke Quay", description: "Riverside entertainment district with accessible restaurants and bars" },
+        { name: "ION Orchard", description: "Accessible luxury shopping mall with diverse dining options" },
+        { name: "Marina Bay Sands Shopping", description: "Iconic mall with accessible facilities and harbour views" },
+        { name: "Haji Lane", description: "Colorful street with accessible boutique shops and cafés" }
+      ],
+      Stockholm: [
+        { name: "Stortorget Square", description: "Historic square in Gamla Stan with accessible cafés" },
+        { name: "Södermalm Viewpoints", description: "Accessible lookout points with panoramic city views" },
+        { name: "NK Department Store Café", description: "Accessible upscale café in the heart of the city" },
+        { name: "Fotografiska Museum Café", description: "Accessible café with modern art and harbour views" }
+      ]
+    };
+    return meetupPlaces[cityName as keyof typeof meetupPlaces] || [];
+  };
 
   const renderDiscountOffers = (discounts: DiscountOffer[]) => {
     if (!discounts || discounts.length === 0) return null;
@@ -142,15 +197,42 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
     </Card>
   );
 
+  const renderMeetupPlaceCard = (place: { name: string; description: string }, index: number) => (
+    <Card key={index} className="p-4 hover:shadow-md transition-shadow bg-blue-50 border-blue-200">
+      <div className="flex items-start gap-3">
+        <Coffee className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+        <div className="flex-1">
+          <h4 className="font-semibold text-lg mb-1 text-blue-800">{place.name}</h4>
+          <p className="text-sm text-blue-700">{place.description}</p>
+        </div>
+      </div>
+    </Card>
+  );
+
+  const meetupPlaces = getMeetupPlaces(cityName);
+
   return (
     <Card className="mb-8">
       <CardHeader>
         <CardTitle className="text-2xl flex items-center gap-2">
           <MapPin className="w-6 h-6" />
-          Top Wheelchair Accessible Attractions in {cityName}
+          Other Attractions & Meetup Places in {cityName}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-8">
+        {/* Meetup Places Section */}
+        {meetupPlaces.length > 0 && (
+          <div>
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-blue-600">
+              <Users className="w-5 h-5" />
+              Local Meetup Places & Hangouts
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {meetupPlaces.map((place, index) => renderMeetupPlaceCard(place, index))}
+            </div>
+          </div>
+        )}
+
         {/* Free Attractions Section */}
         {freeAttractions.length > 0 && (
           <div>
@@ -167,7 +249,7 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
         {/* Paid Attractions Section */}
         {paidAttractions.length > 0 && (
           <div>
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-blue-600">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-purple-600">
               <CreditCard className="w-5 h-5" />
               Paid Attractions
             </h3>
@@ -178,9 +260,9 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
         )}
 
         {/* Show message if no attractions */}
-        {attractions.length === 0 && (
+        {attractions.length === 0 && meetupPlaces.length === 0 && (
           <p className="text-gray-500 text-center py-8">
-            No wheelchair accessible attractions available for {cityName} at this time.
+            No wheelchair accessible attractions or meetup places available for {cityName} at this time.
           </p>
         )}
       </CardContent>
