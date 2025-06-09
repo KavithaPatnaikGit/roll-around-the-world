@@ -16,7 +16,7 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
       <CardHeader>
         <CardTitle className="text-2xl flex items-center gap-2">
           <MapPin className="w-6 h-6" />
-          Top Attractions in {cityName}
+          Top Wheelchair Accessible Attractions in {cityName}
         </CardTitle>
       </CardHeader>
       <CardContent>
