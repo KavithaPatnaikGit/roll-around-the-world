@@ -7,11 +7,10 @@ import EmergencyNumbers from '@/components/EmergencyNumbers';
 import QuickTips from '@/components/QuickTips';
 import WheelchairServices from '@/components/WheelchairServices';
 import TransportationInfo from '@/components/TransportationInfo';
-import AccessibleAttractions from '@/components/AccessibleAttractions';
+import AttractionsListing from '@/components/AttractionsListing';
 import DetailedInfo from '@/components/DetailedInfo';
 import TravelerExperienceForm from '@/components/TravelerExperienceForm';
 import TravelerExperiencesList from '@/components/TravelerExperiencesList';
-import AttractionsListing from '@/components/AttractionsListing';
 
 interface TravelerExperience {
   id: string;
@@ -85,7 +84,6 @@ const CountryDetail = () => {
           <QuickTips quickTips={country.quickTips} cityName={country.city} />
           <WheelchairServices services={country.wheelchairServices} cityName={country.city} />
           <TransportationInfo transportInfo={country.detailedInfo.transport} cityName={country.city} />
-          <AccessibleAttractions attractions={country.wheelchairAccessibleAttractions} cityName={country.city} />
           <DetailedInfo country={country} />
 
           <div className="space-y-8">
