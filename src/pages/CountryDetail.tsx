@@ -6,6 +6,7 @@ import CountryHero from '@/components/CountryHero';
 import CountryOverview from '@/components/CountryOverview';
 import EmergencyNumbers from '@/components/EmergencyNumbers';
 import QuickTips from '@/components/QuickTips';
+import WheelchairServices from '@/components/WheelchairServices';
 import TransportationInfo from '@/components/TransportationInfo';
 import AccessibleAttractions from '@/components/AccessibleAttractions';
 import DetailedInfo from '@/components/DetailedInfo';
@@ -81,6 +82,7 @@ const CountryDetail = () => {
           <CountryOverview country={country} />
           <EmergencyNumbers emergencyNumbers={country.emergencyNumbers} cityName={country.city} />
           <QuickTips quickTips={country.quickTips} cityName={country.city} />
+          <WheelchairServices services={country.wheelchairServices} cityName={country.city} />
           <TransportationInfo transportInfo={country.detailedInfo.transport} cityName={country.city} />
           <AccessibleAttractions attractions={country.wheelchairAccessibleAttractions} cityName={country.city} />
           <DetailedInfo country={country} />
