@@ -314,9 +314,9 @@ export const countries: Country[] = [
     name: "Japan",
     city: "Tokyo",
     emergencyNumbers: [
-      { type: "Police", number: "110" },
-      { type: "Ambulance", number: "119" },
-      { type: "Fire", number: "119" }
+      { service: "Police", number: "110", description: "Emergency police assistance" },
+      { service: "Ambulance", number: "119", description: "Emergency medical services" },
+      { service: "Fire", number: "119", description: "Fire department emergency response" }
     ],
     wheelchairAccessibleAttractions: [
       {
@@ -604,9 +604,9 @@ export const countries: Country[] = [
     name: "Australia",
     city: "Sydney",
     emergencyNumbers: [
-      { type: "Police", number: "000" },
-      { type: "Ambulance", number: "000" },
-      { type: "Fire", number: "000" }
+      { service: "Police", number: "000", description: "Emergency police assistance" },
+      { service: "Ambulance", number: "000", description: "Emergency medical services" },
+      { service: "Fire", number: "000", description: "Fire department emergency response" }
     ],
     wheelchairAccessibleAttractions: [
       {
