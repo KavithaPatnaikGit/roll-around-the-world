@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Utensils, ExternalLink, Star, MapPin, Plane, Train, Hotel } from 'lucide-react';
+import { Utensils, ExternalLink, Star, MapPin, Plane, Train, Hotel, Camera } from 'lucide-react';
 
 interface DiningOption {
   name: string;
@@ -15,6 +15,7 @@ interface DiningOption {
     nearAirport?: boolean;
     nearTrainStation?: boolean;
     nearAccessibleHotel?: boolean;
+    nearPaidAttraction?: boolean;
     address: string;
   };
   url?: string;
@@ -69,6 +70,55 @@ const TopDining = ({ cityName }: TopDiningProps) => {
             address: "Amsterdam Airport Schiphol, Terminal 3"
           },
           url: "https://skylounge-amsterdam.com"
+        },
+        {
+          name: "Rijksmuseum Café",
+          cuisine: "Dutch Contemporary",
+          rating: 4.3,
+          priceRange: "€€",
+          description: "Museum café with accessible entrance and Dutch specialties",
+          accessibility: "Wheelchair accessible with museum lifts",
+          location: {
+            nearPaidAttraction: true,
+            address: "Inside Rijksmuseum, Museumstraat 1"
+          }
+        },
+        {
+          name: "Anne Frank House Café",
+          cuisine: "Light Meals",
+          rating: 4.0,
+          priceRange: "€",
+          description: "Café near the famous Anne Frank House with accessible facilities",
+          accessibility: "Ground level access with accessible seating",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near Anne Frank House, Prinsengracht"
+          }
+        },
+        {
+          name: "Central Station Brasserie",
+          cuisine: "European",
+          rating: 4.1,
+          priceRange: "€€",
+          description: "Railway station restaurant with accessible platform access",
+          accessibility: "Step-free access via station lifts",
+          location: {
+            nearTrainStation: true,
+            address: "Amsterdam Central Station, Platform Level"
+          }
+        },
+        {
+          name: "Hotel V Nesplein Restaurant",
+          cuisine: "International",
+          rating: 4.4,
+          priceRange: "€€€",
+          description: "Hotel restaurant with full accessibility near major attractions",
+          accessibility: "Completely wheelchair accessible",
+          location: {
+            nearAccessibleHotel: true,
+            nearPaidAttraction: true,
+            address: "Near Van Gogh Museum and Stedelijk Museum"
+          }
         }
       ],
       Tokyo: [
@@ -110,6 +160,54 @@ const TopDining = ({ cityName }: TopDiningProps) => {
             address: "Near Park Hyatt Tokyo (wheelchair accessible hotel)"
           },
           bookingUrl: "https://robot-restaurant.com/book"
+        },
+        {
+          name: "Tokyo Skytree Restaurant",
+          cuisine: "Japanese Fusion",
+          rating: 4.5,
+          priceRange: "€€€",
+          description: "High-altitude dining with panoramic city views",
+          accessibility: "Elevator access with wheelchair-friendly seating",
+          location: {
+            nearPaidAttraction: true,
+            address: "Tokyo Skytree, Floor 345"
+          }
+        },
+        {
+          name: "Senso-ji Temple Tea House",
+          cuisine: "Traditional Japanese",
+          rating: 4.2,
+          priceRange: "€",
+          description: "Traditional tea house near historic temple with accessible path",
+          accessibility: "Ground level access with accessible restrooms",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near Senso-ji Temple, Asakusa"
+          }
+        },
+        {
+          name: "Haneda Airport Sushi Bar",
+          cuisine: "Sushi",
+          rating: 4.0,
+          priceRange: "€€",
+          description: "Fresh sushi bar with accessible counter seating",
+          accessibility: "Wheelchair accessible with lowered counter options",
+          location: {
+            nearAirport: true,
+            address: "Haneda Airport, International Terminal"
+          }
+        },
+        {
+          name: "Tokyo Station Ramen Street",
+          cuisine: "Ramen",
+          rating: 4.3,
+          priceRange: "€",
+          description: "Collection of ramen shops with accessible entrances",
+          accessibility: "Most shops wheelchair accessible via station lifts",
+          location: {
+            nearTrainStation: true,
+            address: "Tokyo Station, B1 Level Ramen Street"
+          }
         }
       ],
       Sydney: [
@@ -149,6 +247,55 @@ const TopDining = ({ cityName }: TopDiningProps) => {
           location: {
             nearTrainStation: true,
             address: "Adjacent to Sydney Central Station"
+          }
+        },
+        {
+          name: "Opera House Restaurant",
+          cuisine: "Fine Dining",
+          rating: 4.6,
+          priceRange: "€€€€",
+          description: "Iconic venue with accessible entrances and harbour views",
+          accessibility: "Lift access with wheelchair-friendly seating",
+          location: {
+            nearPaidAttraction: true,
+            address: "Sydney Opera House, Bennelong Point"
+          }
+        },
+        {
+          name: "Harbour Bridge Café",
+          cuisine: "Australian",
+          rating: 4.1,
+          priceRange: "€€",
+          description: "Café with bridge views and accessible facilities",
+          accessibility: "Ground level access with accessible parking",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near Sydney Harbour Bridge Climb entrance"
+          }
+        },
+        {
+          name: "Circular Quay Bistro",
+          cuisine: "Seafood",
+          rating: 4.3,
+          priceRange: "€€€",
+          description: "Waterfront dining near ferry terminals and major hotels",
+          accessibility: "Wheelchair accessible with harbour-level seating",
+          location: {
+            nearTrainStation: true,
+            nearAccessibleHotel: true,
+            address: "Circular Quay, near Shangri-La Hotel"
+          }
+        },
+        {
+          name: "International Terminal Restaurant",
+          cuisine: "Modern Australian",
+          rating: 4.0,
+          priceRange: "€€",
+          description: "Premium airport dining with local Australian flavors",
+          accessibility: "Fully accessible with priority seating available",
+          location: {
+            nearAirport: true,
+            address: "Sydney Airport, International Terminal"
           }
         }
       ],
@@ -193,6 +340,67 @@ const TopDining = ({ cityName }: TopDiningProps) => {
           },
           url: "https://thegilbertscott.co.uk",
           bookingUrl: "https://thegilbertscott.co.uk/book"
+        },
+        {
+          name: "Tower Bridge Restaurant",
+          cuisine: "Modern British",
+          rating: 4.5,
+          priceRange: "€€€",
+          description: "Restaurant with bridge views and accessible facilities",
+          accessibility: "Lift access with adapted seating areas",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near Tower Bridge and Tower of London"
+          }
+        },
+        {
+          name: "British Museum Café",
+          cuisine: "International",
+          rating: 4.2,
+          priceRange: "€€",
+          description: "Museum café with accessible entrance and varied menu",
+          accessibility: "Wheelchair accessible via museum main entrance",
+          location: {
+            nearPaidAttraction: true,
+            address: "British Museum, Great Russell Street"
+          }
+        },
+        {
+          name: "London Eye Restaurant",
+          cuisine: "Contemporary",
+          rating: 4.0,
+          priceRange: "€€€",
+          description: "Dining with Thames views near the iconic London Eye",
+          accessibility: "Ground level access with accessible facilities",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near London Eye, South Bank"
+          }
+        },
+        {
+          name: "Gatwick Express Café",
+          cuisine: "British",
+          rating: 3.8,
+          priceRange: "€",
+          description: "Quick dining option near airport express train",
+          accessibility: "Step-free access with wide aisles",
+          location: {
+            nearAirport: true,
+            nearTrainStation: true,
+            address: "Gatwick Airport, South Terminal"
+          }
+        },
+        {
+          name: "Claridge's Restaurant",
+          cuisine: "Fine Dining",
+          rating: 4.7,
+          priceRange: "€€€€",
+          description: "Luxury hotel dining with impeccable accessibility standards",
+          accessibility: "Fully wheelchair accessible with valet assistance",
+          location: {
+            nearAccessibleHotel: true,
+            address: "Claridge's Hotel, Mayfair"
+          }
         }
       ],
       Berlin: [
@@ -232,6 +440,55 @@ const TopDining = ({ cityName }: TopDiningProps) => {
           location: {
             nearTrainStation: true,
             address: "Berlin Hauptbahnhof, Level 1"
+          }
+        },
+        {
+          name: "Brandenburg Gate Café",
+          cuisine: "German",
+          rating: 4.3,
+          priceRange: "€€",
+          description: "Historic café near Brandenburg Gate with accessible entrance",
+          accessibility: "Ground level access with accessible seating",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near Brandenburg Gate, Pariser Platz"
+          }
+        },
+        {
+          name: "Museum Island Restaurant",
+          cuisine: "European",
+          rating: 4.1,
+          priceRange: "€€€",
+          description: "Fine dining near UNESCO World Heritage museums",
+          accessibility: "Wheelchair accessible with museum proximity",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near Pergamon Museum, Museum Island"
+          }
+        },
+        {
+          name: "East Side Gallery Bistro",
+          cuisine: "International",
+          rating: 3.9,
+          priceRange: "€€",
+          description: "Bistro near the famous Berlin Wall gallery",
+          accessibility: "Step-free access with outdoor seating",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near East Side Gallery, Mühlenstraße"
+          }
+        },
+        {
+          name: "Potsdamer Platz Restaurant",
+          cuisine: "Modern European",
+          rating: 4.2,
+          priceRange: "€€€",
+          description: "Contemporary dining in Berlin's modern business district",
+          accessibility: "Fully accessible with underground parking",
+          location: {
+            nearTrainStation: true,
+            nearAccessibleHotel: true,
+            address: "Potsdamer Platz, near Grand Hyatt Berlin"
           }
         }
       ],
@@ -273,6 +530,55 @@ const TopDining = ({ cityName }: TopDiningProps) => {
             nearTrainStation: true,
             address: "Pacific Central Station, Main Level"
           }
+        },
+        {
+          name: "Stanley Park Restaurant",
+          cuisine: "Canadian",
+          rating: 4.4,
+          priceRange: "€€€",
+          description: "Restaurant with park views and accessible pathways",
+          accessibility: "Wheelchair accessible with accessible parking",
+          location: {
+            nearPaidAttraction: true,
+            address: "Stanley Park, near Vancouver Aquarium"
+          }
+        },
+        {
+          name: "Capilano Bridge Café",
+          cuisine: "Pacific Northwest",
+          rating: 4.0,
+          priceRange: "€€",
+          description: "Café near the famous suspension bridge attraction",
+          accessibility: "Accessible entrance with bridge shuttle service",
+          location: {
+            nearPaidAttraction: true,
+            address: "Capilano Suspension Bridge Park"
+          }
+        },
+        {
+          name: "Canada Place Restaurant",
+          cuisine: "Seafood",
+          rating: 4.3,
+          priceRange: "€€€",
+          description: "Waterfront dining near cruise ship terminal",
+          accessibility: "Fully accessible with harbour views",
+          location: {
+            nearPaidAttraction: true,
+            nearAccessibleHotel: true,
+            address: "Canada Place, near Pan Pacific Hotel"
+          }
+        },
+        {
+          name: "SkyTrain Station Bistro",
+          cuisine: "International",
+          rating: 3.7,
+          priceRange: "€",
+          description: "Quick dining at major transit hub",
+          accessibility: "Step-free access via SkyTrain platforms",
+          location: {
+            nearTrainStation: true,
+            address: "Waterfront SkyTrain Station"
+          }
         }
       ],
       Singapore: [
@@ -313,6 +619,55 @@ const TopDining = ({ cityName }: TopDiningProps) => {
           },
           url: "https://raffles.com/singapore",
           bookingUrl: "https://raffles.com/singapore/dining"
+        },
+        {
+          name: "Marina Bay Sands Restaurant",
+          cuisine: "International",
+          rating: 4.7,
+          priceRange: "€€€€",
+          description: "Iconic hotel restaurant with stunning city views",
+          accessibility: "Fully wheelchair accessible with express lifts",
+          location: {
+            nearPaidAttraction: true,
+            nearAccessibleHotel: true,
+            address: "Marina Bay Sands, SkyPark level"
+          }
+        },
+        {
+          name: "Gardens by the Bay Café",
+          cuisine: "Asian Contemporary",
+          rating: 4.2,
+          priceRange: "€€",
+          description: "Café within the famous garden attraction",
+          accessibility: "Wheelchair accessible via garden pathways",
+          location: {
+            nearPaidAttraction: true,
+            address: "Gardens by the Bay, Flower Dome"
+          }
+        },
+        {
+          name: "Sentosa Island Restaurant",
+          cuisine: "Seafood",
+          rating: 4.1,
+          priceRange: "€€€",
+          description: "Beachfront dining on resort island",
+          accessibility: "Accessible via monorail and beach boardwalk",
+          location: {
+            nearPaidAttraction: true,
+            address: "Sentosa Island, near Universal Studios"
+          }
+        },
+        {
+          name: "Orchard Road Food Court",
+          cuisine: "Asian",
+          rating: 4.0,
+          priceRange: "€",
+          description: "Shopping district food court with MRT access",
+          accessibility: "Underground MRT connection with lift access",
+          location: {
+            nearTrainStation: true,
+            address: "Orchard MRT Station, ION Orchard"
+          }
         }
       ],
       Stockholm: [
@@ -353,6 +708,54 @@ const TopDining = ({ cityName }: TopDiningProps) => {
             nearTrainStation: true,
             address: "Stockholm Central Station, Upper Level"
           }
+        },
+        {
+          name: "Vasa Museum Restaurant",
+          cuisine: "Nordic",
+          rating: 4.4,
+          priceRange: "€€€",
+          description: "Museum restaurant with maritime theme and accessibility",
+          accessibility: "Wheelchair accessible via museum entrance",
+          location: {
+            nearPaidAttraction: true,
+            address: "Vasa Museum, Djurgården"
+          }
+        },
+        {
+          name: "Gamla Stan Tavern",
+          cuisine: "Traditional Swedish",
+          rating: 4.2,
+          priceRange: "€€",
+          description: "Historic old town restaurant with accessible entrance",
+          accessibility: "Ground level access with adapted seating",
+          location: {
+            nearPaidAttraction: true,
+            address: "Gamla Stan (Old Town), near Royal Palace"
+          }
+        },
+        {
+          name: "ABBA Museum Café",
+          cuisine: "Swedish",
+          rating: 4.0,
+          priceRange: "€€",
+          description: "Music-themed café with accessible facilities",
+          accessibility: "Wheelchair accessible with museum lifts",
+          location: {
+            nearPaidAttraction: true,
+            address: "ABBA The Museum, Djurgården"
+          }
+        },
+        {
+          name: "SkyView Restaurant",
+          cuisine: "Modern Swedish",
+          rating: 4.3,
+          priceRange: "€€€",
+          description: "Restaurant with panoramic city views",
+          accessibility: "Elevator access with accessible viewing areas",
+          location: {
+            nearPaidAttraction: true,
+            address: "Near Ericsson Globe SkyView attraction"
+          }
         }
       ]
     };
@@ -363,14 +766,18 @@ const TopDining = ({ cityName }: TopDiningProps) => {
     if (location.nearAirport) return <Plane className="w-4 h-4 text-blue-600" />;
     if (location.nearTrainStation) return <Train className="w-4 h-4 text-green-600" />;
     if (location.nearAccessibleHotel) return <Hotel className="w-4 h-4 text-purple-600" />;
+    if (location.nearPaidAttraction) return <Camera className="w-4 h-4 text-orange-600" />;
     return <MapPin className="w-4 h-4 text-gray-600" />;
   };
 
   const getLocationText = (location: DiningOption['location']) => {
-    if (location.nearAirport) return "Near Airport";
-    if (location.nearTrainStation) return "Near Train Station";
-    if (location.nearAccessibleHotel) return "Near Accessible Hotel";
-    return "City Location";
+    const locations = [];
+    if (location.nearAirport) locations.push("Airport");
+    if (location.nearTrainStation) locations.push("Train Station");
+    if (location.nearAccessibleHotel) locations.push("Accessible Hotel");
+    if (location.nearPaidAttraction) locations.push("Paid Attraction");
+    
+    return locations.length > 0 ? `Near ${locations.join(" & ")}` : "City Location";
   };
 
   const diningOptions = getDiningOptions(cityName);
