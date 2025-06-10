@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { countries } from '@/data/countryData';
@@ -11,6 +10,7 @@ import TransportationInfo from '@/components/TransportationInfo';
 import AttractionsListing from '@/components/AttractionsListing';
 import TopDining from '@/components/TopDining';
 import DetailedInfo from '@/components/DetailedInfo';
+import StateLevelFeatures from '@/components/StateLevelFeatures';
 import TravelerExperienceForm from '@/components/TravelerExperienceForm';
 import TravelerExperiencesList from '@/components/TravelerExperiencesList';
 
@@ -81,6 +81,12 @@ const CountryDetail = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <CountryOverview country={country} />
+          {country.stateFeatures && (
+            <StateLevelFeatures 
+              countryName={country.name} 
+              stateFeatures={country.stateFeatures} 
+            />
+          )}
           <AttractionsListing attractions={country.wheelchairAccessibleAttractions} cityName={country.city} />
           <TopDining cityName={country.city} />
           <EmergencyNumbers emergencyNumbers={country.emergencyNumbers} cityName={country.city} />

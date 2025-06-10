@@ -44,6 +44,16 @@ export interface AccessibleHotel {
   reservationUrl: string;
 }
 
+export interface StateFeature {
+  stateName: string;
+  features: {
+    name: string;
+    description: string;
+    url: string;
+    type: 'attraction' | 'transport' | 'accommodation' | 'service';
+  }[];
+}
+
 export interface Country {
   id: number;
   name: string;
@@ -58,6 +68,7 @@ export interface Country {
   wheelchairServices: WheelchairService[];
   wheelchairAccessibleAttractions: AccessibleAttraction[];
   accessibleHotels?: AccessibleHotel[];
+  stateFeatures?: StateFeature[];
   detailedInfo: {
     transport: string;
     accommodation: string;
@@ -81,6 +92,42 @@ export const countries: Country[] = [
       "Flat, wheelchair-friendly streets",
       "Accessible canal boat tours",
       "Universal design in attractions"
+    ],
+    stateFeatures: [
+      {
+        stateName: "North Holland",
+        features: [
+          {
+            name: "Zaanse Schans Windmills",
+            description: "Historic windmill village with accessible paths and visitor facilities",
+            url: "https://www.zaanseschans.nl/en/accessibility/",
+            type: "attraction"
+          },
+          {
+            name: "NS Accessible Travel Service",
+            description: "National rail service with comprehensive accessibility support",
+            url: "https://www.ns.nl/en/travel-information/traveling-with-a-disability",
+            type: "transport"
+          }
+        ]
+      },
+      {
+        stateName: "South Holland",
+        features: [
+          {
+            name: "The Hague Accessible Tourism",
+            description: "Government city with excellent accessibility infrastructure",
+            url: "https://www.denhaag.nl/en/accessibility",
+            type: "service"
+          },
+          {
+            name: "Rotterdam Architecture Tours",
+            description: "Modern city with accessible architectural highlights",
+            url: "https://www.rotterdam.nl/toerisme/accessible-rotterdam/",
+            type: "attraction"
+          }
+        ]
+      }
     ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "112", description: "Police, Fire, Medical emergencies" },
@@ -228,6 +275,42 @@ export const countries: Country[] = [
       "Modern accessible facilities",
       "Cultural respect for accessibility needs"
     ],
+    stateFeatures: [
+      {
+        stateName: "Tokyo Prefecture",
+        features: [
+          {
+            name: "Tokyo Station Accessibility Hub",
+            description: "Central station with comprehensive accessibility services and assistance",
+            url: "https://www.jreast.co.jp/e/customer_support/barrier_free/",
+            type: "transport"
+          },
+          {
+            name: "Paralympic Heritage Sites",
+            description: "Venues from Tokyo 2020 Paralympics with world-class accessibility",
+            url: "https://tokyo2020.org/en/accessibility/",
+            type: "attraction"
+          }
+        ]
+      },
+      {
+        stateName: "Osaka Prefecture",
+        features: [
+          {
+            name: "Universal Studios Japan Accessibility",
+            description: "Theme park with comprehensive disability support services",
+            url: "https://www.usj.co.jp/web/en/us/accessibility",
+            type: "attraction"
+          },
+          {
+            name: "Kansai Airport Accessibility",
+            description: "International airport with excellent accessibility infrastructure",
+            url: "https://www.kansai-airport.or.jp/en/accessibility/",
+            type: "transport"
+          }
+        ]
+      }
+    ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "110", description: "Police emergencies" },
       { service: "Fire/Medical Emergency", number: "119", description: "Fire department and ambulance" },
@@ -355,6 +438,42 @@ export const countries: Country[] = [
       "Excellent public transport",
       "Strong disability advocacy"
     ],
+    stateFeatures: [
+      {
+        stateName: "New South Wales",
+        features: [
+          {
+            name: "Blue Mountains Accessible Trails",
+            description: "Scenic mountain region with wheelchair-accessible viewing platforms",
+            url: "https://www.bluemountains.org.au/accessibility/",
+            type: "attraction"
+          },
+          {
+            name: "Transport for NSW Accessibility",
+            description: "State transport system with comprehensive accessibility services",
+            url: "https://transportnsw.info/accessibility",
+            type: "transport"
+          }
+        ]
+      },
+      {
+        stateName: "Victoria",
+        features: [
+          {
+            name: "Melbourne Accessible Tourism",
+            description: "Cultural capital with excellent accessibility infrastructure",
+            url: "https://www.visitmelbourne.com/accessibility",
+            type: "service"
+          },
+          {
+            name: "Great Ocean Road Accessible Stops",
+            description: "Scenic coastal drive with accessible viewing points",
+            url: "https://www.greatoceanroad.org.au/accessibility/",
+            type: "attraction"
+          }
+        ]
+      }
+    ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "000", description: "Police, Fire, Ambulance" },
       { service: "SES Emergency", number: "132 500", description: "State Emergency Service" },
@@ -453,6 +572,42 @@ export const countries: Country[] = [
       "Accessible black cabs",
       "Free access for carers at attractions",
       "Historic sites with modern accessibility"
+    ],
+    stateFeatures: [
+      {
+        stateName: "England",
+        features: [
+          {
+            name: "National Rail Accessibility",
+            description: "UK-wide accessible rail network with assistance services",
+            url: "https://www.nationalrail.co.uk/stations_destinations/disabled_passengers.aspx",
+            type: "transport"
+          },
+          {
+            name: "English Heritage Accessible Sites",
+            description: "Historic castles and monuments with accessibility improvements",
+            url: "https://www.english-heritage.org.uk/visit/accessibility/",
+            type: "attraction"
+          }
+        ]
+      },
+      {
+        stateName: "Scotland",
+        features: [
+          {
+            name: "Edinburgh Castle Accessibility",
+            description: "Historic fortress with accessible tours and facilities",
+            url: "https://www.edinburghcastle.scot/visit/accessibility",
+            type: "attraction"
+          },
+          {
+            name: "ScotRail Accessibility Services",
+            description: "Scottish rail network with comprehensive accessibility support",
+            url: "https://www.scotrail.co.uk/plan-your-journey/accessibility-help",
+            type: "transport"
+          }
+        ]
+      }
     ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "999", description: "Police, Fire, Ambulance, Coast Guard" },
@@ -554,6 +709,42 @@ export const countries: Country[] = [
       "Excellent public transportation",
       "Strong accessibility advocacy"
     ],
+    stateFeatures: [
+      {
+        stateName: "Berlin",
+        features: [
+          {
+            name: "Memorial Sites Accessibility",
+            description: "Holocaust and WWII memorial sites with thoughtful accessibility adaptations",
+            url: "https://www.berlin.de/en/memorials/accessibility/",
+            type: "attraction"
+          },
+          {
+            name: "BVG Accessibility Services",
+            description: "Berlin's public transport with comprehensive accessibility support",
+            url: "https://www.bvg.de/en/connections/barrier-free",
+            type: "transport"
+          }
+        ]
+      },
+      {
+        stateName: "Bavaria",
+        features: [
+          {
+            name: "Neuschwanstein Castle Accessibility",
+            description: "Famous fairy-tale castle with accessible touring options",
+            url: "https://www.neuschwanstein.de/english/tourist/accessibility.htm",
+            type: "attraction"
+          },
+          {
+            name: "Munich Airport Accessibility",
+            description: "International airport with excellent accessibility services",
+            url: "https://www.munich-airport.com/accessibility",
+            type: "transport"
+          }
+        ]
+      }
+    ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "112", description: "Police, Fire, Medical emergencies" },
       { service: "Police Non-Emergency", number: "030 4664 4664", description: "Berlin Police non-urgent matters" },
@@ -651,6 +842,42 @@ export const countries: Country[] = [
       "Accessible outdoor activities",
       "Inclusive public transportation",
       "Strong disability rights framework"
+    ],
+    stateFeatures: [
+      {
+        stateName: "British Columbia",
+        features: [
+          {
+            name: "Whistler Accessible Activities",
+            description: "Mountain resort with adaptive skiing and accessible gondolas",
+            url: "https://www.whistler.com/accessibility/",
+            type: "attraction"
+          },
+          {
+            name: "BC Transit Accessibility",
+            description: "Provincial transit system with comprehensive accessibility services",
+            url: "https://www.bctransit.com/accessibility",
+            type: "transport"
+          }
+        ]
+      },
+      {
+        stateName: "Alberta",
+        features: [
+          {
+            name: "Banff National Park Accessibility",
+            description: "Rocky Mountain national park with accessible trails and facilities",
+            url: "https://www.pc.gc.ca/en/pn-np/ab/banff/visit/accessibility",
+            type: "attraction"
+          },
+          {
+            name: "Calgary Airport Accessibility",
+            description: "Major international airport with comprehensive accessibility services",
+            url: "https://www.yyc.com/en-us/accessibility",
+            type: "transport"
+          }
+        ]
+      }
     ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "911", description: "Police emergencies" },
@@ -751,6 +978,42 @@ export const countries: Country[] = [
       "Excellent healthcare system",
       "Multilingual accessibility support"
     ],
+    stateFeatures: [
+      {
+        stateName: "Central Region",
+        features: [
+          {
+            name: "Marina Bay Accessibility Hub",
+            description: "Central district with seamless accessibility between attractions",
+            url: "https://www.marinabay.sg/accessibility/",
+            type: "service"
+          },
+          {
+            name: "Changi Airport Accessibility",
+            description: "World's best airport with exceptional accessibility features",
+            url: "https://www.changiairport.com/en/airport-experience/special-assistance.html",
+            type: "transport"
+          }
+        ]
+      },
+      {
+        stateName: "Sentosa Island",
+        features: [
+          {
+            name: "Sentosa Accessible Attractions",
+            description: "Resort island with accessible beaches and theme parks",
+            url: "https://www.sentosa.com.sg/en/plan/accessibility/",
+            type: "attraction"
+          },
+          {
+            name: "Beach Wheelchair Services",
+            description: "Free beach wheelchair loans at all Sentosa beaches",
+            url: "https://www.sentosa.com.sg/en/things-to-do/beaches/accessibility/",
+            type: "service"
+          }
+        ]
+      }
+    ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "999", description: "Police emergencies" },
       { service: "Fire/Ambulance", number: "995", description: "Fire department and medical emergencies" },
@@ -850,6 +1113,42 @@ export const countries: Country[] = [
       "Excellent accessibility legislation",
       "Comprehensive public services",
       "Strong social inclusion values"
+    ],
+    stateFeatures: [
+      {
+        stateName: "Stockholm County",
+        features: [
+          {
+            name: "Archipelago Accessible Tours",
+            description: "Island-hopping tours with accessible boats and facilities",
+            url: "https://www.stockholmarchipelago.se/accessibility/",
+            type: "attraction"
+          },
+          {
+            name: "SL Accessibility Services",
+            description: "Stockholm public transport with comprehensive accessibility support",
+            url: "https://sl.se/en/accessibility",
+            type: "transport"
+          }
+        ]
+      },
+      {
+        stateName: "Gothenburg",
+        features: [
+          {
+            name: "Liseberg Accessible Theme Park",
+            description: "Scandinavia's largest amusement park with accessibility services",
+            url: "https://www.liseberg.se/en/accessibility/",
+            type: "attraction"
+          },
+          {
+            name: "Västtrafik Accessibility",
+            description: "Regional transport with excellent accessibility infrastructure",
+            url: "https://www.vasttrafik.se/en/accessibility/",
+            type: "transport"
+          }
+        ]
+      }
     ],
     emergencyNumbers: [
       { service: "Emergency Services", number: "112", description: "Police, Fire, Medical emergencies" },
