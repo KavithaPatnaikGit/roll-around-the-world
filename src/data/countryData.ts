@@ -1,3 +1,4 @@
+
 import { AccessibleAttraction, AccessibleHotel, QuickTip, DiscountOffer, Country, StateFeature, CityInfo, TopDiningOption, WheelchairService, EmergencyNumber } from './types';
 
 // Re-export types for backward compatibility
@@ -85,7 +86,8 @@ export const countries: Country[] = [
     detailedInfo: {
       accommodation: "Wide range of accessible hotels with features like roll-in showers and elevators.",
       attractions: "Museums and parks with wheelchair access and rental options.",
-      dining: "Many restaurants offer accessible entrances and restrooms."
+      dining: "Many restaurants offer accessible entrances and restrooms.",
+      transport: "Fully accessible public transport system with trams, buses and metro."
     },
     accessibleHotels: [
       {
@@ -313,6 +315,16 @@ export const countries: Country[] = [
     id: 2,
     name: "Japan",
     city: "Tokyo",
+    image: "/placeholder.svg",
+    rating: 5,
+    description: "Tokyo offers exceptional accessibility with modern infrastructure, helpful staff, and comprehensive wheelchair-friendly attractions.",
+    highlights: [
+      "Modern accessible subway system",
+      "Wheelchair-friendly temples and shrines", 
+      "Accessible shopping districts",
+      "English-speaking accessibility support",
+      "Advanced accessible technology"
+    ],
     emergencyNumbers: [
       { service: "Police", number: "110", description: "Emergency police assistance" },
       { service: "Ambulance", number: "119", description: "Emergency medical services" },
@@ -356,7 +368,8 @@ export const countries: Country[] = [
     detailedInfo: {
       accommodation: "Hotels with barrier-free rooms and accessible bathrooms.",
       attractions: "Temples, towers, and parks with wheelchair access.",
-      dining: "Restaurants with accessible seating and entrances."
+      dining: "Restaurants with accessible seating and entrances.",
+      transport: "Modern accessible subway and train system with assistance available."
     },
     accessibleHotels: [
       {
@@ -603,6 +616,16 @@ export const countries: Country[] = [
     id: 3,
     name: "Australia",
     city: "Sydney",
+    image: "/placeholder.svg",
+    rating: 4,
+    description: "Sydney combines stunning natural beauty with excellent accessibility features across its major attractions and transport systems.",
+    highlights: [
+      "Accessible ferry system with harbor views",
+      "Wheelchair-friendly beaches",
+      "Accessible Opera House tours",
+      "Modern accessible infrastructure",
+      "Comprehensive transport accessibility"
+    ],
     emergencyNumbers: [
       { service: "Police", number: "000", description: "Emergency police assistance" },
       { service: "Ambulance", number: "000", description: "Emergency medical services" },
@@ -643,7 +666,8 @@ export const countries: Country[] = [
     detailedInfo: {
       accommodation: "Hotels with harbour views and full accessibility features.",
       attractions: "Opera House and Harbour Bridge with accessible tours.",
-      dining: "Restaurants with accessible entrances and seating."
+      dining: "Restaurants with accessible entrances and seating.",
+      transport: "Comprehensive accessible public transport including ferries, trains, and buses."
     },
     accessibleHotels: [
       {
