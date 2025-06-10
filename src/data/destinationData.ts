@@ -1,3 +1,4 @@
+
 import { Country } from './types';
 
 export const destinations: Country[] = [
@@ -235,149 +236,186 @@ export const destinations: Country[] = [
   {
     id: 5,
     name: "Germany",
-    city: "Berlin",
-    image: "/placeholder.svg",
-    rating: 4,
-    description: "Berlin combines rich history with modern accessibility standards. The German capital offers excellent public transport, accessible cultural sites, and a strong commitment to inclusive tourism.",
-    highlights: [
-      "Modern accessible public transport",
-      "Historic sites with accessibility features",
-      "Excellent accessible accommodation",
-      "Strong accessibility awareness",
-      "Comprehensive visitor support"
-    ],
-    emergencyNumbers: [
-      { service: "Police", number: "110", description: "Emergency police assistance" },
-      { service: "Ambulance", number: "112", description: "Emergency medical services" },
-      { service: "Fire", number: "112", description: "Fire department emergency response" }
-    ],
-    wheelchairAccessibleAttractions: [
-      {
-        name: "Brandenburg Gate",
-        url: "https://www.berlin.de/en/attractions-and-sights/3560249-3104052-brandenburg-gate.en.html",
-        description: "Iconic landmark with wheelchair accessibility",
-        rating: 5
-      },
-      {
-        name: "Museum Island",
-        url: "https://www.smb.museum/en/visit/barrier-free-access/",
-        description: "UNESCO World Heritage site with accessible museums",
-        rating: 4,
-        bookingUrl: "https://www.smb.museum/en/"
-      }
-    ],
-    wheelchairServices: [
-      {
-        name: "Berlin Mobility Center",
-        type: "both",
-        address: "Unter den Linden 50, 10117 Berlin",
-        phone: "+49 30 1234 5678",
-        website: "https://www.berlinmobility.de",
-        description: "Full wheelchair services and tourist support"
-      }
-    ],
-    quickTips: [
-      {
-        text: "Berlin's U-Bahn and S-Bahn are increasingly accessible - check BVG app for real-time info",
-        link: "https://www.bvg.de/en/subscriptions-and-tickets/barrier-free"
-      }
-    ],
-    detailedInfo: {
-      accommodation: "High-quality accessible hotels and guesthouses throughout the city.",
-      attractions: "Museums, monuments, and cultural sites with good accessibility.",
-      dining: "Excellent accessible restaurants serving traditional and international cuisine.",
-      transport: "Modern accessible public transport with ongoing improvements."
-    }
-  },
-  {
-    id: 6,
-    name: "Germany",
-    city: "Munich",
-    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
+    city: "Overview",
+    image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
     rating: 5,
-    description: "Munich combines Bavarian charm with outstanding accessibility infrastructure. The city offers excellent wheelchair access to historic sites, world-class museums, beautiful parks, and traditional beer gardens, making it one of Europe's most accessible destinations.",
+    isCategory: true,
+    description: "Germany sets the gold standard for accessibility across Europe. From Berlin's modern infrastructure to Munich's blend of tradition and innovation, German cities offer exceptional wheelchair accessibility, comprehensive support services, and inclusive experiences for all travelers.",
     highlights: [
-      "Fully accessible S-Bahn and U-Bahn system",
-      "Wheelchair-friendly historic city center",
-      "Accessible beer gardens and restaurants",
-      "Modern accessible accommodation",
-      "Comprehensive accessibility support services"
+      "Leading accessibility standards across all cities",
+      "Excellent public transport systems",
+      "Historic sites with modern adaptations",
+      "Comprehensive support services",
+      "Strong accessibility awareness and advocacy"
     ],
     emergencyNumbers: [
       { service: "Police", number: "110", description: "Emergency police assistance" },
       { service: "Ambulance", number: "112", description: "Emergency medical services" },
       { service: "Fire", number: "112", description: "Fire department emergency response" }
     ],
-    wheelchairAccessibleAttractions: [
-      {
-        name: "Marienplatz & New Town Hall",
-        url: "https://www.muenchen.de/en/sights/marienplatz",
-        description: "Historic city center with accessible viewing areas and elevator access to tower",
-        rating: 5,
-        bookingUrl: "https://www.muenchen.de/en/visit"
-      },
-      {
-        name: "BMW Museum & BMW Welt",
-        url: "https://www.bmw-welt.com/en/visit/accessibility.html",
-        description: "Modern automotive museum with complete wheelchair accessibility",
-        rating: 5,
-        bookingUrl: "https://www.bmw-welt.com/en/tickets"
-      },
-      {
-        name: "Deutsches Museum",
-        url: "https://www.deutsches-museum.de/en/visit/accessibility/",
-        description: "World's largest science and technology museum with accessible exhibits",
-        rating: 4,
-        bookingUrl: "https://www.deutsches-museum.de/en/tickets"
-      },
-      {
-        name: "English Garden",
-        url: "https://www.muenchen.de/en/sights/parks/english-garden",
-        description: "Large urban park with accessible paths and beer garden",
-        rating: 5
-      },
-      {
-        name: "Neuschwanstein Castle",
-        url: "https://www.neuschwanstein.de/english/tourist/access.htm",
-        description: "Fairy-tale castle with accessible shuttle service and viewing areas",
-        rating: 3,
-        bookingUrl: "https://www.hohenschwangau.de/1494.0.html"
-      }
-    ],
-    wheelchairServices: [
-      {
-        name: "München Sanitätshaus",
-        type: "both",
-        address: "Sendlinger Str. 42, 80331 München",
-        phone: "+49 89 2323 4567",
-        website: "https://www.muenchen-sanitaetshaus.de",
-        description: "Complete wheelchair services including tourist rentals and repairs"
-      },
-      {
-        name: "Reha-Technik München",
-        type: "both",
-        address: "Landsberger Str. 123, 80339 München",
-        phone: "+49 89 5432 1098",
-        website: "https://www.rehatechnik-muenchen.de",
-        description: "Professional wheelchair maintenance and rental services"
-      }
-    ],
+    wheelchairAccessibleAttractions: [],
+    wheelchairServices: [],
     quickTips: [
       {
-        text: "Munich's public transport has excellent accessibility - use the MVG app for real-time elevator status",
-        link: "https://www.mvg.de/en/services/accessibility.html"
-      },
-      {
-        text: "Many traditional beer gardens have accessible seating areas - Augustiner-Bräu is particularly wheelchair-friendly",
-        link: "https://www.augustiner-braeu.de/en/accessibility"
+        text: "German cities are among the most accessible in Europe - DB (German Railways) provides excellent accessibility services",
+        link: "https://www.bahn.de/service/barrierefrei"
       }
     ],
     detailedInfo: {
-      accommodation: "Excellent selection of accessible hotels from luxury to budget, many with roll-in showers and accessible rooms.",
-      attractions: "Historic sites, museums, and parks with comprehensive wheelchair access and support services.",
-      dining: "Traditional Bavarian restaurants and beer gardens with accessible entrances and restroom facilities.",
-      transport: "Outstanding accessible public transport with S-Bahn, U-Bahn, buses, and trams all fully wheelchair accessible."
-    }
+      accommodation: "Germany offers outstanding accessible accommodation from luxury hotels to budget-friendly options.",
+      attractions: "Historic castles, modern museums, and cultural sites with comprehensive accessibility.",
+      dining: "Traditional German restaurants and beer gardens with accessible facilities.",
+      transport: "World-class accessible public transport systems in all major cities."
+    },
+    cities: [
+      {
+        id: 51,
+        name: "Germany",
+        city: "Berlin",
+        image: "/placeholder.svg",
+        rating: 4,
+        description: "Berlin combines rich history with modern accessibility standards. The German capital offers excellent public transport, accessible cultural sites, and a strong commitment to inclusive tourism.",
+        highlights: [
+          "Modern accessible public transport",
+          "Historic sites with accessibility features",
+          "Excellent accessible accommodation",
+          "Strong accessibility awareness",
+          "Comprehensive visitor support"
+        ],
+        emergencyNumbers: [
+          { service: "Police", number: "110", description: "Emergency police assistance" },
+          { service: "Ambulance", number: "112", description: "Emergency medical services" },
+          { service: "Fire", number: "112", description: "Fire department emergency response" }
+        ],
+        wheelchairAccessibleAttractions: [
+          {
+            name: "Brandenburg Gate",
+            url: "https://www.berlin.de/en/attractions-and-sights/3560249-3104052-brandenburg-gate.en.html",
+            description: "Iconic landmark with wheelchair accessibility",
+            rating: 5
+          },
+          {
+            name: "Museum Island",
+            url: "https://www.smb.museum/en/visit/barrier-free-access/",
+            description: "UNESCO World Heritage site with accessible museums",
+            rating: 4,
+            bookingUrl: "https://www.smb.museum/en/"
+          }
+        ],
+        wheelchairServices: [
+          {
+            name: "Berlin Mobility Center",
+            type: "both",
+            address: "Unter den Linden 50, 10117 Berlin",
+            phone: "+49 30 1234 5678",
+            website: "https://www.berlinmobility.de",
+            description: "Full wheelchair services and tourist support"
+          }
+        ],
+        quickTips: [
+          {
+            text: "Berlin's U-Bahn and S-Bahn are increasingly accessible - check BVG app for real-time info",
+            link: "https://www.bvg.de/en/subscriptions-and-tickets/barrier-free"
+          }
+        ],
+        detailedInfo: {
+          accommodation: "High-quality accessible hotels and guesthouses throughout the city.",
+          attractions: "Museums, monuments, and cultural sites with good accessibility.",
+          dining: "Excellent accessible restaurants serving traditional and international cuisine.",
+          transport: "Modern accessible public transport with ongoing improvements."
+        }
+      },
+      {
+        id: 52,
+        name: "Germany",
+        city: "Munich",
+        image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
+        rating: 5,
+        description: "Munich combines Bavarian charm with outstanding accessibility infrastructure. The city offers excellent wheelchair access to historic sites, world-class museums, beautiful parks, and traditional beer gardens, making it one of Europe's most accessible destinations.",
+        highlights: [
+          "Fully accessible S-Bahn and U-Bahn system",
+          "Wheelchair-friendly historic city center",
+          "Accessible beer gardens and restaurants",
+          "Modern accessible accommodation",
+          "Comprehensive accessibility support services"
+        ],
+        emergencyNumbers: [
+          { service: "Police", number: "110", description: "Emergency police assistance" },
+          { service: "Ambulance", number: "112", description: "Emergency medical services" },
+          { service: "Fire", number: "112", description: "Fire department emergency response" }
+        ],
+        wheelchairAccessibleAttractions: [
+          {
+            name: "Marienplatz & New Town Hall",
+            url: "https://www.muenchen.de/en/sights/marienplatz",
+            description: "Historic city center with accessible viewing areas and elevator access to tower",
+            rating: 5,
+            bookingUrl: "https://www.muenchen.de/en/visit"
+          },
+          {
+            name: "BMW Museum & BMW Welt",
+            url: "https://www.bmw-welt.com/en/visit/accessibility.html",
+            description: "Modern automotive museum with complete wheelchair accessibility",
+            rating: 5,
+            bookingUrl: "https://www.bmw-welt.com/en/tickets"
+          },
+          {
+            name: "Deutsches Museum",
+            url: "https://www.deutsches-museum.de/en/visit/accessibility/",
+            description: "World's largest science and technology museum with accessible exhibits",
+            rating: 4,
+            bookingUrl: "https://www.deutsches-museum.de/en/tickets"
+          },
+          {
+            name: "English Garden",
+            url: "https://www.muenchen.de/en/sights/parks/english-garden",
+            description: "Large urban park with accessible paths and beer garden",
+            rating: 5
+          },
+          {
+            name: "Neuschwanstein Castle",
+            url: "https://www.neuschwanstein.de/english/tourist/access.htm",
+            description: "Fairy-tale castle with accessible shuttle service and viewing areas",
+            rating: 3,
+            bookingUrl: "https://www.hohenschwangau.de/1494.0.html"
+          }
+        ],
+        wheelchairServices: [
+          {
+            name: "München Sanitätshaus",
+            type: "both",
+            address: "Sendlinger Str. 42, 80331 München",
+            phone: "+49 89 2323 4567",
+            website: "https://www.muenchen-sanitaetshaus.de",
+            description: "Complete wheelchair services including tourist rentals and repairs"
+          },
+          {
+            name: "Reha-Technik München",
+            type: "both",
+            address: "Landsberger Str. 123, 80339 München",
+            phone: "+49 89 5432 1098",
+            website: "https://www.rehatechnik-muenchen.de",
+            description: "Professional wheelchair maintenance and rental services"
+          }
+        ],
+        quickTips: [
+          {
+            text: "Munich's public transport has excellent accessibility - use the MVG app for real-time elevator status",
+            link: "https://www.mvg.de/en/services/accessibility.html"
+          },
+          {
+            text: "Many traditional beer gardens have accessible seating areas - Augustiner-Bräu is particularly wheelchair-friendly",
+            link: "https://www.augustiner-braeu.de/en/accessibility"
+          }
+        ],
+        detailedInfo: {
+          accommodation: "Excellent selection of accessible hotels from luxury to budget, many with roll-in showers and accessible rooms.",
+          attractions: "Historic sites, museums, and parks with comprehensive wheelchair access and support services.",
+          dining: "Traditional Bavarian restaurants and beer gardens with accessible entrances and restroom facilities.",
+          transport: "Outstanding accessible public transport with S-Bahn, U-Bahn, buses, and trams all fully wheelchair accessible."
+        }
+      }
+    ]
   }
 ];
 

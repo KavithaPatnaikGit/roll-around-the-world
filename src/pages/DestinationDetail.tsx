@@ -13,6 +13,10 @@ import WheelchairServices from '@/components/WheelchairServices';
 import AttractionsListing from '@/components/AttractionsListing';
 import TravelerExperienceForm from '@/components/TravelerExperienceForm';
 import TravelerExperiencesList from '@/components/TravelerExperiencesList';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { MapPin, Star } from 'lucide-react';
 
 interface TravelerExperience {
   id: string;
@@ -33,7 +37,27 @@ const DestinationDetail = () => {
 
   // Support both new destinationId and legacy countryId parameters
   const id = destinationId || countryId;
-  const destination = destinations.find(d => d.id === parseInt(id || '0'));
+  
+  // Find destination including cities within categories
+  const findDestination = (id: string) => {
+    const numId = parseInt(id);
+    
+    // First check top-level destinations
+    let destination = destinations.find(d => d.id === numId);
+    if (destination) return destination;
+    
+    // Then check cities within categories
+    for (const dest of destinations) {
+      if (dest.cities) {
+        const city = dest.cities.find(c => c.id === numId);
+        if (city) return city;
+      }
+    }
+    
+    return null;
+  };
+
+  const destination = findDestination(id || '0');
 
   useEffect(() => {
     const storedExperiences = localStorage.getItem('travelerExperiences');
@@ -79,6 +103,90 @@ const DestinationDetail = () => {
     );
   }
 
+  // If it's a category page, show city overview
+  if (destination.isCategory && destination.cities) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
+        <Navigation />
+        <DestinationHero destination={destination} />
+
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <DestinationOverview destination={destination} />
+            
+            {/* Cities Grid */}
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Cities in {destination.name}</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {destination.cities.map((city) => (
+                  <Card 
+                    key={city.id} 
+                    className="group hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
+                    onClick={() => navigate(`/destination/${city.id}`)}
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <img
+                        src={city.image}
+                        alt={`${city.city}, ${city.name}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute top-4 right-4">
+                        {city.rating && (
+                          <Badge className="bg-green-600 text-white">
+                            <Star className="w-3 h-3 mr-1 fill-current" />
+                            {city.rating}
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <MapPin className="w-5 h-5 text-blue-600" />
+                        {city.city}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-700 mb-4 line-clamp-3">{city.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {city.highlights?.slice(0, 2).map((highlight, index) => (
+                          <Badge key={index} variant="secondary" className="text-xs">
+                            {highlight}
+                          </Badge>
+                        ))}
+                        {city.highlights && city.highlights.length > 2 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{city.highlights.length - 2} more
+                          </Badge>
+                        )}
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        Explore {city.city}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            <AccessibilityFeatures destination={destination} />
+            <EmergencyNumbers 
+              emergencyNumbers={destination.emergencyNumbers} 
+              cityName={destination.name} 
+            />
+            <QuickTips 
+              quickTips={destination.quickTips} 
+              cityName={destination.name} 
+              countryId={destination.id} 
+            />
+          </div>
+        </div>
+
+        <Footer />
+      </div>
+    );
+  }
+
+  // Regular city page
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navigation />

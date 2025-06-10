@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { MapPin, Star, Search, Filter } from 'lucide-react';
+import { MapPin, Star, Search, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -15,12 +15,29 @@ const DestinationsGrid = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
-  const filteredDestinations = destinations.filter(destination => {
+  // Flatten destinations to include cities from categories
+  const allDestinations = destinations.reduce((acc, destination) => {
+    if (destination.isCategory && destination.cities) {
+      return [...acc, destination, ...destination.cities];
+    }
+    return [...acc, destination];
+  }, [] as typeof destinations);
+
+  const filteredDestinations = allDestinations.filter(destination => {
     const matchesSearch = destination.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          destination.city.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesRating = selectedRating ? destination.rating >= selectedRating : true;
+    const matchesRating = selectedRating ? destination.rating && destination.rating >= selectedRating : true;
     return matchesSearch && matchesRating;
   });
+
+  const handleDestinationClick = (destination: typeof destinations[0]) => {
+    if (destination.isCategory) {
+      // For category pages, show the category overview
+      navigate(`/destination/${destination.id}`);
+    } else {
+      navigate(`/destination/${destination.id}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -78,7 +95,7 @@ const DestinationsGrid = () => {
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-gray-600">
-            Showing {filteredDestinations.length} of {destinations.length} destinations
+            Showing {filteredDestinations.length} destinations
           </p>
         </div>
 
@@ -88,7 +105,7 @@ const DestinationsGrid = () => {
             <Card 
               key={destination.id} 
               className="group hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
-              onClick={() => navigate(`/destination/${destination.id}`)}
+              onClick={() => handleDestinationClick(destination)}
             >
               <div className="relative h-48 overflow-hidden">
                 <img
@@ -97,18 +114,32 @@ const DestinationsGrid = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-4 right-4">
-                  <Badge className="bg-green-600 text-white">
-                    <Star className="w-3 h-3 mr-1 fill-current" />
-                    {destination.rating}
-                  </Badge>
+                  {destination.rating && (
+                    <Badge className="bg-green-600 text-white">
+                      <Star className="w-3 h-3 mr-1 fill-current" />
+                      {destination.rating}
+                    </Badge>
+                  )}
                 </div>
+                {destination.isCategory && (
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-blue-600 text-white">
+                      Category
+                    </Badge>
+                  </div>
+                )}
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-blue-600" />
                   {destination.name}
+                  {destination.isCategory && (
+                    <ChevronRight className="w-4 h-4 ml-auto text-gray-400" />
+                  )}
                 </CardTitle>
-                <p className="text-gray-600">{destination.city}</p>
+                <p className="text-gray-600">
+                  {destination.isCategory ? 'Multiple Cities' : destination.city}
+                </p>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 mb-4 line-clamp-3">{destination.description}</p>
@@ -125,7 +156,7 @@ const DestinationsGrid = () => {
                   )}
                 </div>
                 <Button variant="outline" size="sm" className="w-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  Explore Destination
+                  {destination.isCategory ? 'Explore Cities' : 'Explore Destination'}
                 </Button>
               </CardContent>
             </Card>

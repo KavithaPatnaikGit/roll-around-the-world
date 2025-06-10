@@ -97,4 +97,6 @@ export interface Country {
   accessibleHotels?: AccessibleHotel[];
   topDining?: TopDiningOption[];
   stateFeatures?: StateFeature[];
+  isCategory?: boolean;
+  cities?: Country[];
 }
