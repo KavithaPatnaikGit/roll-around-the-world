@@ -1,54 +1,39 @@
-import { AccessibleAttraction, AccessibleHotel, QuickTip, DiscountOffer, Country } from './types';
+import { AccessibleAttraction, AccessibleHotel, QuickTip, DiscountOffer, Country, StateFeature, CityInfo, TopDiningOption, WheelchairService, EmergencyNumber } from './types';
 
-export interface StateFeature {
-  stateName: string;
-  cities: CityInfo[];
-  features: {
-    name: string;
-    description: string;
-    url: string;
-    type: 'attraction' | 'transport' | 'accommodation' | 'service';
-  }[];
-}
-
-export interface CityInfo {
-  name: string;
-  accessibleAttractions: AccessibleAttraction[];
-  accessibleHotels: AccessibleHotel[];
-  wheelchairServices: WheelchairService[];
-  quickTips: QuickTip[];
-  topDining: TopDiningOption[];
-}
-
-export interface TopDiningOption {
-  name: string;
-  cuisine: string;
-  rating: number;
-  priceRange: string;
-  accessibilityFeatures: string[];
-  location: string;
-  reservationUrl?: string;
-  nearbyLandmarks: string[];
-}
-
-export interface WheelchairService {
-  name: string;
-  type: 'repair' | 'purchase' | 'both';
-  address: string;
-  phone?: string;
-  website?: string;
-  description: string;
-}
+// Re-export types for backward compatibility
+export type { AccessibleAttraction, AccessibleHotel, QuickTip, DiscountOffer, Country, StateFeature, CityInfo, TopDiningOption, WheelchairService, EmergencyNumber };
 
 export const countries: Country[] = [
   {
     id: 1,
     name: "Netherlands",
     city: "Amsterdam",
+    image: "/placeholder.svg",
+    rating: 5,
+    description: "Amsterdam is one of the world's most wheelchair-accessible cities, with excellent public transport, accessible canals tours, and accommodating museums.",
+    highlights: [
+      "Fully accessible tram and metro system",
+      "Wheelchair-friendly canal boat tours", 
+      "Museums with excellent accessibility features",
+      "Wide sidewalks and bike paths",
+      "Accessible historic sites with modern adaptations"
+    ],
     emergencyNumbers: [
-      { type: "Police", number: "112" },
-      { type: "Ambulance", number: "112" },
-      { type: "Fire", number: "112" }
+      { 
+        service: "Police", 
+        number: "112", 
+        description: "Emergency police assistance" 
+      },
+      { 
+        service: "Ambulance", 
+        number: "112", 
+        description: "Emergency medical services" 
+      },
+      { 
+        service: "Fire", 
+        number: "112", 
+        description: "Fire department emergency response" 
+      }
     ],
     wheelchairAccessibleAttractions: [
       {
