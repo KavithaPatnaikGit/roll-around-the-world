@@ -84,7 +84,7 @@ const CountryDetail = () => {
           <AttractionsListing attractions={country.wheelchairAccessibleAttractions} cityName={country.city} />
           <TopDining cityName={country.city} />
           <EmergencyNumbers emergencyNumbers={country.emergencyNumbers} cityName={country.city} />
-          <QuickTips quickTips={country.quickTips} cityName={country.city} />
+          <QuickTips quickTips={country.quickTips} cityName={country.city} countryId={country.id} />
           <WheelchairServices services={country.wheelchairServices} cityName={country.city} />
           <TransportationInfo transportInfo={country.detailedInfo.transport} cityName={country.city} />
           <DetailedInfo country={country} />
