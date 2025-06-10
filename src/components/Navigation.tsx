@@ -1,89 +1,99 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Accessibility, Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
-import { Home, MapPin, Train, Wrench } from 'lucide-react';
 
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const isActive = (path: string) => location.pathname === path;
+  const navItems = [
+    { label: 'Home', path: '/' },
+    { label: 'Destinations', path: '/destinations' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
+  ];
+
+  const isActivePath = (path: string) => {
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname.startsWith(path)) return true;
+    return false;
+  };
 
   return (
-    <Menubar className="border-none bg-transparent">
-      <MenubarMenu>
-        <MenubarTrigger 
-          className={`cursor-pointer ${isActive('/') ? 'bg-accent' : ''}`}
-          onClick={() => navigate('/')}
-        >
-          <Home className="w-4 h-4 mr-2" />
-          Home
-        </MenubarTrigger>
-      </MenubarMenu>
-      
-      <MenubarMenu>
-        <MenubarTrigger className="cursor-pointer">
-          <MapPin className="w-4 h-4 mr-2" />
-          Destinations
-        </MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem onClick={() => navigate('/')}>
-            All Destinations
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/1')}>
-            Netherlands
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/2')}>
-            Japan
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/3')}>
-            Australia
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/4')}>
-            United Kingdom
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/5')}>
-            Germany
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/6')}>
-            Canada
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/7')}>
-            Singapore
-          </MenubarItem>
-          <MenubarItem onClick={() => navigate('/country/8')}>
-            Sweden
-          </MenubarItem>
-        </MenubarContent>
-      </MenubarMenu>
-      
-      <MenubarMenu>
-        <MenubarTrigger 
-          className={`cursor-pointer ${isActive('/transportation') ? 'bg-accent' : ''}`}
-          onClick={() => navigate('/transportation')}
-        >
-          <Train className="w-4 h-4 mr-2" />
-          Transportation
-        </MenubarTrigger>
-      </MenubarMenu>
-      
-      <MenubarMenu>
-        <MenubarTrigger 
-          className={`cursor-pointer ${isActive('/wheelchair-services') ? 'bg-accent' : ''}`}
-          onClick={() => navigate('/wheelchair-services')}
-        >
-          <Wrench className="w-4 h-4 mr-2" />
-          Wheelchair Services
-        </MenubarTrigger>
-      </MenubarMenu>
-    </Menubar>
+    <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div 
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => navigate('/')}
+          >
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+              <Accessibility className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-xl font-bold text-gray-900">AccessiTravel</span>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <button
+                key={item.path}
+                onClick={() => navigate(item.path)}
+                className={`text-sm font-medium transition-colors ${
+                  isActivePath(item.path)
+                    ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+            <Button className="bg-blue-600 hover:bg-blue-700">
+              Plan Your Trip
+            </Button>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px]">
+                <div className="flex flex-col space-y-6 mt-6">
+                  {navItems.map((item) => (
+                    <button
+                      key={item.path}
+                      onClick={() => {
+                        navigate(item.path);
+                        setIsOpen(false);
+                      }}
+                      className={`text-left text-lg font-medium transition-colors ${
+                        isActivePath(item.path)
+                          ? 'text-blue-600'
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                  <Button className="bg-blue-600 hover:bg-blue-700 mt-4">
+                    Plan Your Trip
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 
