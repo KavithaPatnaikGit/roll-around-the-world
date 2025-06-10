@@ -1,4 +1,3 @@
-
 import { Country } from './types';
 
 export const destinations: Country[] = [
@@ -240,7 +239,7 @@ export const destinations: Country[] = [
     image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
     rating: 5,
     isCategory: true,
-    description: "Germany sets the gold standard for accessibility across Europe. From Berlin's modern infrastructure to Munich's blend of tradition and innovation, German cities offer exceptional wheelchair accessibility, comprehensive support services, and inclusive experiences for all travelers.",
+    description: "Germany sets the gold standard for accessibility across Europe. From Munich's blend of tradition and innovation to other German cities, Germany offers exceptional wheelchair accessibility, comprehensive support services, and inclusive experiences for all travelers.",
     highlights: [
       "Leading accessibility standards across all cities",
       "Excellent public transport systems",
@@ -268,63 +267,6 @@ export const destinations: Country[] = [
       transport: "World-class accessible public transport systems in all major cities."
     },
     cities: [
-      {
-        id: 51,
-        name: "Germany",
-        city: "Berlin",
-        image: "/placeholder.svg",
-        rating: 4,
-        description: "Berlin combines rich history with modern accessibility standards. The German capital offers excellent public transport, accessible cultural sites, and a strong commitment to inclusive tourism.",
-        highlights: [
-          "Modern accessible public transport",
-          "Historic sites with accessibility features",
-          "Excellent accessible accommodation",
-          "Strong accessibility awareness",
-          "Comprehensive visitor support"
-        ],
-        emergencyNumbers: [
-          { service: "Police", number: "110", description: "Emergency police assistance" },
-          { service: "Ambulance", number: "112", description: "Emergency medical services" },
-          { service: "Fire", number: "112", description: "Fire department emergency response" }
-        ],
-        wheelchairAccessibleAttractions: [
-          {
-            name: "Brandenburg Gate",
-            url: "https://www.berlin.de/en/attractions-and-sights/3560249-3104052-brandenburg-gate.en.html",
-            description: "Iconic landmark with wheelchair accessibility",
-            rating: 5
-          },
-          {
-            name: "Museum Island",
-            url: "https://www.smb.museum/en/visit/barrier-free-access/",
-            description: "UNESCO World Heritage site with accessible museums",
-            rating: 4,
-            bookingUrl: "https://www.smb.museum/en/"
-          }
-        ],
-        wheelchairServices: [
-          {
-            name: "Berlin Mobility Center",
-            type: "both",
-            address: "Unter den Linden 50, 10117 Berlin",
-            phone: "+49 30 1234 5678",
-            website: "https://www.berlinmobility.de",
-            description: "Full wheelchair services and tourist support"
-          }
-        ],
-        quickTips: [
-          {
-            text: "Berlin's U-Bahn and S-Bahn are increasingly accessible - check BVG app for real-time info",
-            link: "https://www.bvg.de/en/subscriptions-and-tickets/barrier-free"
-          }
-        ],
-        detailedInfo: {
-          accommodation: "High-quality accessible hotels and guesthouses throughout the city.",
-          attractions: "Museums, monuments, and cultural sites with good accessibility.",
-          dining: "Excellent accessible restaurants serving traditional and international cuisine.",
-          transport: "Modern accessible public transport with ongoing improvements."
-        }
-      },
       {
         id: 52,
         name: "Germany",
