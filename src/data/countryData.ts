@@ -1,12 +1,34 @@
-export interface EmergencyNumber {
-  service: string;
-  number: string;
-  description: string;
+import { AccessibleAttraction, AccessibleHotel, QuickTip, DiscountOffer, Country } from './types';
+
+export interface StateFeature {
+  stateName: string;
+  cities: CityInfo[];
+  features: {
+    name: string;
+    description: string;
+    url: string;
+    type: 'attraction' | 'transport' | 'accommodation' | 'service';
+  }[];
 }
 
-export interface QuickTip {
-  text: string;
-  link: string;
+export interface CityInfo {
+  name: string;
+  accessibleAttractions: AccessibleAttraction[];
+  accessibleHotels: AccessibleHotel[];
+  wheelchairServices: WheelchairService[];
+  quickTips: QuickTip[];
+  topDining: TopDiningOption[];
+}
+
+export interface TopDiningOption {
+  name: string;
+  cuisine: string;
+  rating: number;
+  priceRange: string;
+  accessibilityFeatures: string[];
+  location: string;
+  reservationUrl?: string;
+  nearbyLandmarks: string[];
 }
 
 export interface WheelchairService {
@@ -18,1222 +40,716 @@ export interface WheelchairService {
   description: string;
 }
 
-export interface DiscountOffer {
-  provider: string;
-  discountPercentage: number;
-  originalPrice?: number;
-  discountedPrice?: number;
-  description: string;
-  url: string;
-  validUntil?: string;
-}
-
-export interface AccessibleAttraction {
-  name: string;
-  url: string;
-  rating?: number;
-  description?: string;
-  bookingUrl?: string;
-  discounts?: DiscountOffer[];
-}
-
-export interface AccessibleHotel {
-  name: string;
-  rating: number;
-  features: string[];
-  reservationUrl: string;
-}
-
-export interface StateFeature {
-  stateName: string;
-  features: {
-    name: string;
-    description: string;
-    url: string;
-    type: 'attraction' | 'transport' | 'accommodation' | 'service';
-  }[];
-}
-
-export interface Country {
-  id: number;
-  name: string;
-  city: string;
-  image: string;
-  imageUrl: string;
-  description: string;
-  rating: number;
-  highlights: string[];
-  emergencyNumbers: EmergencyNumber[];
-  quickTips: QuickTip[];
-  wheelchairServices: WheelchairService[];
-  wheelchairAccessibleAttractions: AccessibleAttraction[];
-  accessibleHotels?: AccessibleHotel[];
-  stateFeatures?: StateFeature[];
-  detailedInfo: {
-    transport: string;
-    accommodation: string;
-    dining: string;
-    healthcare: string;
-    attractions: string;
-  };
-}
-
 export const countries: Country[] = [
   {
     id: 1,
     name: "Netherlands",
     city: "Amsterdam",
-    image: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "Amsterdam is renowned for its exceptional accessibility infrastructure, making it one of the most wheelchair-friendly cities in Europe. The flat terrain, extensive public transportation network, and commitment to universal design create an ideal environment for travelers with mobility needs.",
-    rating: 5,
-    highlights: [
-      "Extensive accessible public transport",
-      "Flat, wheelchair-friendly streets",
-      "Accessible canal boat tours",
-      "Universal design in attractions"
+    emergencyNumbers: [
+      { type: "Police", number: "112" },
+      { type: "Ambulance", number: "112" },
+      { type: "Fire", number: "112" }
+    ],
+    wheelchairAccessibleAttractions: [
+      {
+        name: "Van Gogh Museum",
+        url: "https://www.vangoghmuseum.nl/en/visit/accessibility",
+        description: "World-renowned museum with full wheelchair accessibility",
+        rating: 5,
+        bookingUrl: "https://www.vangoghmuseum.nl/en/tickets",
+        discounts: [
+          {
+            provider: "City Pass",
+            discountPercentage: 15,
+            description: "15% off with Amsterdam City Pass",
+            url: "https://www.iamsterdam.com/en/i-am/i-amsterdam-city-card",
+            validUntil: "2024-12-31",
+            originalPrice: 22,
+            discountedPrice: 18.70
+          }
+        ]
+      },
+      {
+        name: "Rijksmuseum",
+        url: "https://www.rijksmuseum.nl/en/visit/accessibility",
+        description: "Dutch national museum with excellent accessibility features",
+        rating: 5,
+        bookingUrl: "https://www.rijksmuseum.nl/en/tickets"
+      }
+    ],
+    wheelchairServices: [
+      {
+        name: "Welzorg Amsterdam",
+        type: "both",
+        address: "Overtoom 197, 1054 HT Amsterdam",
+        phone: "+31 20 612 3456",
+        website: "https://www.welzorg.nl",
+        description: "Full wheelchair sales and repair service with rental options"
+      }
+    ],
+    quickTips: [
+      {
+        text: "Amsterdam's trams are mostly accessible, but check the GVB app for real-time accessibility info",
+        link: "https://en.gvb.nl/accessibility"
+      },
+      {
+        text: "Many historic buildings have temporary ramps available - call ahead to arrange",
+        link: "https://www.amsterdam.nl/en/accessibility/"
+      }
+    ],
+    detailedInfo: {
+      accommodation: "Wide range of accessible hotels with features like roll-in showers and elevators.",
+      attractions: "Museums and parks with wheelchair access and rental options.",
+      dining: "Many restaurants offer accessible entrances and restrooms."
+    },
+    accessibleHotels: [
+      {
+        name: "Hotel V Nesplein",
+        rating: 4,
+        features: ["Roll-in shower", "Accessible parking", "Elevator access", "Wide doorways"],
+        reservationUrl: "https://www.hotelv.nl/en/hotel/hotel-v-nesplein/"
+      },
+      {
+        name: "Lloyd Hotel",
+        rating: 4,
+        features: ["Accessible rooms", "Roll-in bathroom", "Hearing loop", "Accessible entrance"],
+        reservationUrl: "https://www.lloydhotel.com/"
+      }
+    ],
+    topDining: [
+      {
+        name: "Restaurant Greetje",
+        cuisine: "Modern Dutch",
+        rating: 4,
+        priceRange: "€€€",
+        accessibilityFeatures: ["Wheelchair accessible entrance", "Accessible restroom", "Ground floor seating"],
+        location: "Near Central Station",
+        reservationUrl: "https://restaurantgreetje.nl/",
+        nearbyLandmarks: ["Central Station", "Red Light District"]
+      }
     ],
     stateFeatures: [
       {
         stateName: "North Holland",
-        features: [
+        cities: [
           {
-            name: "Zaanse Schans Windmills",
-            description: "Historic windmill village with accessible paths and visitor facilities",
-            url: "https://www.zaanseschans.nl/en/accessibility/",
-            type: "attraction"
+            name: "Amsterdam",
+            accessibleAttractions: [
+              {
+                name: "Van Gogh Museum",
+                url: "https://www.vangoghmuseum.nl/en/visit/accessibility",
+                description: "World-renowned museum with full wheelchair accessibility",
+                rating: 5,
+                bookingUrl: "https://www.vangoghmuseum.nl/en/tickets",
+                discounts: [
+                  {
+                    provider: "City Pass",
+                    discountPercentage: 15,
+                    description: "15% off with Amsterdam City Pass",
+                    url: "https://www.iamsterdam.com/en/i-am/i-amsterdam-city-card",
+                    validUntil: "2024-12-31",
+                    originalPrice: 22,
+                    discountedPrice: 18.70
+                  }
+                ]
+              },
+              {
+                name: "Rijksmuseum",
+                url: "https://www.rijksmuseum.nl/en/visit/accessibility",
+                description: "Dutch national museum with excellent accessibility features",
+                rating: 5,
+                bookingUrl: "https://www.rijksmuseum.nl/en/tickets"
+              }
+            ],
+            accessibleHotels: [
+              {
+                name: "Hotel V Nesplein",
+                rating: 4,
+                features: ["Roll-in shower", "Accessible parking", "Elevator access", "Wide doorways"],
+                reservationUrl: "https://www.hotelv.nl/en/hotel/hotel-v-nesplein/"
+              },
+              {
+                name: "Lloyd Hotel",
+                rating: 4,
+                features: ["Accessible rooms", "Roll-in bathroom", "Hearing loop", "Accessible entrance"],
+                reservationUrl: "https://www.lloydhotel.com/"
+              }
+            ],
+            wheelchairServices: [
+              {
+                name: "Welzorg Amsterdam",
+                type: "both",
+                address: "Overtoom 197, 1054 HT Amsterdam",
+                phone: "+31 20 612 3456",
+                website: "https://www.welzorg.nl",
+                description: "Full wheelchair sales and repair service with rental options"
+              }
+            ],
+            quickTips: [
+              {
+                text: "Amsterdam's trams are mostly accessible, but check the GVB app for real-time accessibility info",
+                link: "https://en.gvb.nl/accessibility"
+              },
+              {
+                text: "Many historic buildings have temporary ramps available - call ahead to arrange",
+                link: "https://www.amsterdam.nl/en/accessibility/"
+              }
+            ],
+            topDining: [
+              {
+                name: "Restaurant Greetje",
+                cuisine: "Modern Dutch",
+                rating: 4,
+                priceRange: "€€€",
+                accessibilityFeatures: ["Wheelchair accessible entrance", "Accessible restroom", "Ground floor seating"],
+                location: "Near Central Station",
+                reservationUrl: "https://restaurantgreetje.nl/",
+                nearbyLandmarks: ["Central Station", "Red Light District"]
+              }
+            ]
           },
           {
-            name: "NS Accessible Travel Service",
-            description: "National rail service with comprehensive accessibility support",
-            url: "https://www.ns.nl/en/travel-information/traveling-with-a-disability",
+            name: "Haarlem",
+            accessibleAttractions: [
+              {
+                name: "Frans Hals Museum",
+                url: "https://www.franshalsmuseum.nl/en/accessibility",
+                description: "Historic art museum with modern accessibility features",
+                rating: 4
+              }
+            ],
+            accessibleHotels: [
+              {
+                name: "Hotel Lion d'Or",
+                rating: 4,
+                features: ["Accessible entrance", "Elevator", "Accessible bathroom"],
+                reservationUrl: "https://www.liondor.nl/"
+              }
+            ],
+            wheelchairServices: [
+              {
+                name: "Zorgwinkel Haarlem",
+                type: "purchase",
+                address: "Grote Markt 15, 2011 RC Haarlem",
+                phone: "+31 23 531 7890",
+                description: "Medical equipment store with wheelchair sales"
+              }
+            ],
+            quickTips: [
+              {
+                text: "Haarlem's historic center has many cobblestones - plan routes using smoother streets",
+                link: "https://www.haarlem.nl/accessibility"
+              }
+            ],
+            topDining: [
+              {
+                name: "De Jopenkerk",
+                cuisine: "Dutch Brewery",
+                rating: 4,
+                priceRange: "€€",
+                accessibilityFeatures: ["Ramped entrance", "Accessible seating area"],
+                location: "City Center",
+                nearbyLandmarks: ["Grote Markt", "Grote Kerk"]
+              }
+            ]
+          }
+        ],
+        features: [
+          {
+            name: "NS Accessibility Service",
+            description: "Dutch Railways accessibility assistance throughout North Holland",
+            url: "https://www.ns.nl/en/travel-information/accessibility",
             type: "transport"
           }
         ]
       },
       {
         stateName: "South Holland",
+        cities: [
+          {
+            name: "The Hague",
+            accessibleAttractions: [
+              {
+                name: "Mauritshuis",
+                url: "https://www.mauritshuis.nl/en/visit/accessibility/",
+                description: "Royal gallery with excellent accessibility",
+                rating: 5
+              }
+            ],
+            accessibleHotels: [
+              {
+                name: "Hotel Des Indes",
+                rating: 5,
+                features: ["Luxury accessible rooms", "Concierge accessibility service"],
+                reservationUrl: "https://www.thehaague.desindes.com/"
+              }
+            ],
+            wheelchairServices: [
+              {
+                name: "Mobility Den Haag",
+                type: "repair",
+                address: "Laan van Meerdervoort 250, 2563 AM Den Haag",
+                phone: "+31 70 345 6789",
+                description: "Specialized wheelchair repair and maintenance service"
+              }
+            ],
+            quickTips: [
+              {
+                text: "The Hague's government buildings offer guided accessible tours - book in advance",
+                link: "https://www.denhaag.nl/en/accessibility"
+              }
+            ],
+            topDining: [
+              {
+                name: "Restaurant Calla's",
+                cuisine: "French Fine Dining",
+                rating: 5,
+                priceRange: "€€€€",
+                accessibilityFeatures: ["Full accessibility", "Dedicated accessible parking"],
+                location: "City Center",
+                reservationUrl: "https://www.callas.nl/",
+                nearbyLandmarks: ["Peace Palace", "Binnenhof"]
+              }
+            ]
+          }
+        ],
         features: [
           {
-            name: "The Hague Accessible Tourism",
-            description: "Government city with excellent accessibility infrastructure",
-            url: "https://www.denhaag.nl/en/accessibility",
-            type: "service"
-          },
-          {
-            name: "Rotterdam Architecture Tours",
-            description: "Modern city with accessible architectural highlights",
-            url: "https://www.rotterdam.nl/toerisme/accessible-rotterdam/",
-            type: "attraction"
+            name: "HTM Accessibility",
+            description: "The Hague public transport accessibility services",
+            url: "https://www.htm.nl/en/accessibility",
+            type: "transport"
           }
         ]
       }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "112", description: "Police, Fire, Medical emergencies" },
-      { service: "Police Non-Emergency", number: "0900-8844", description: "Non-urgent police matters" },
-      { service: "Tourist Helpline", number: "+31 20 702 6000", description: "Tourist assistance and information" },
-      { service: "Accessibility Services", number: "+31 20 624 1111", description: "Mobility assistance and equipment" }
-    ],
-    quickTips: [
-      { text: "Book accessible taxis in advance through TCA (Taxi Centrale Amsterdam)", link: "https://www.tcataxi.nl" },
-      { text: "Many museums offer free entry for caregivers", link: "https://www.iamsterdam.com/en/plan-your-trip/practical-info/accessible-amsterdam" },
-      { text: "Download the AccessibleGO app for real-time accessibility info", link: "https://www.accessiblego.com" }
-    ],
-    wheelchairServices: [
-      {
-        name: "RehaCare Amsterdam",
-        type: "both",
-        address: "Hoofddorpplein 1, 1059 CV Amsterdam",
-        phone: "+31 20 123 4567",
-        website: "https://rehacare-amsterdam.nl",
-        description: "Full wheelchair sales and repair services with certified technicians"
-      },
-      {
-        name: "Quick Wheelchair Repair",
-        type: "repair",
-        address: "Damrak 78, 1012 LP Amsterdam",
-        phone: "+31 20 555 0123",
-        description: "Emergency wheelchair repairs, same-day service available"
-      }
-    ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "Rijksmuseum", 
-        url: "https://www.rijksmuseum.nl/en/visit/accessibility",
-        rating: 5,
-        description: "World-renowned art museum with masterpieces from Dutch Golden Age",
-        bookingUrl: "https://www.rijksmuseum.nl/en/tickets",
-        discounts: [
-          {
-            provider: "GetYourGuide",
-            discountPercentage: 15,
-            originalPrice: 22,
-            discountedPrice: 18.70,
-            description: "Skip-the-line ticket with audio guide",
-            url: "https://www.getyourguide.com/rijksmuseum-discount",
-            validUntil: "2025-07-01"
-          },
-          {
-            provider: "Viator",
-            discountPercentage: 10,
-            description: "Group booking discount available",
-            url: "https://www.viator.com/rijksmuseum-tours"
-          }
-        ]
-      },
-      { 
-        name: "Van Gogh Museum", 
-        url: "https://www.vangoghmuseum.nl/en/visit/accessibility",
-        rating: 5,
-        description: "Largest collection of Van Gogh artworks in the world",
-        bookingUrl: "https://www.vangoghmuseum.nl/en/tickets",
-        discounts: [
-          {
-            provider: "Tiqets",
-            discountPercentage: 20,
-            originalPrice: 19,
-            discountedPrice: 15.20,
-            description: "Combo ticket with audio guide",
-            url: "https://www.tiqets.com/vangogh-museum-discount"
-          }
-        ]
-      },
-      { 
-        name: "Anne Frank House", 
-        url: "https://www.annefrank.org/en/museum/accessibility/",
-        rating: 4,
-        description: "Historic house and biographical museum dedicated to Anne Frank",
-        bookingUrl: "https://www.annefrank.org/en/museum/tickets/",
-        discounts: [
-          {
-            provider: "Amsterdam Museum Pass",
-            discountPercentage: 25,
-            description: "Included in city museum pass",
-            url: "https://www.amsterdam.com/museum-pass"
-          }
-        ]
-      },
-      { 
-        name: "Vondelpark", 
-        url: "https://www.amsterdam.nl/toerisme-vrije-tijd/parken/vondelpark/",
-        rating: 4,
-        description: "Amsterdam's most popular park with accessible paths and facilities"
-      },
-      { 
-        name: "Keukenhof Gardens", 
-        url: "https://keukenhof.nl/en/practical-information/accessibility/",
-        rating: 5,
-        description: "World's largest flower garden with millions of tulips (seasonal)",
-        bookingUrl: "https://keukenhof.nl/en/tickets/",
-        discounts: [
-          {
-            provider: "Early Bird Special",
-            discountPercentage: 30,
-            originalPrice: 20,
-            discountedPrice: 14,
-            description: "Pre-season early booking discount",
-            url: "https://keukenhof.nl/early-bird",
-            validUntil: "2025-03-15"
-          }
-        ]
-      }
-    ],
-    accessibleHotels: [
-      {
-        name: "Hotel V Nesplein",
-        rating: 4,
-        features: ["Roll-in shower", "Accessible entrance", "Elevator access", "Accessible parking"],
-        reservationUrl: "https://www.hotelv.nl"
-      },
-      {
-        name: "Lloyd Hotel",
-        rating: 4,
-        features: ["Accessible rooms", "Roll-in shower", "Visual/hearing aids", "Accessible restaurant"],
-        reservationUrl: "https://www.lloydhotel.com"
-      }
-    ],
-    detailedInfo: {
-      transport: "Amsterdam's public transport is highly accessible. All metro stations have lifts, most trams are low-floor, and buses are equipped with ramps. The GVB (public transport company) offers assistance for travelers with disabilities.",
-      accommodation: "Many hotels offer accessible rooms. Book directly and specify your needs. Popular accessible hotels include Hotel V Nesplein, Lloyd Hotel, and Conscious Hotel.",
-      dining: "Most restaurants in central Amsterdam have street-level access. Many have accessible restrooms. Consider calling ahead to confirm accessibility features.",
-      healthcare: "Excellent healthcare system with accessible facilities. Amsterdam UMC and OLVG hospitals have specialized accessibility services.",
-      attractions: "Amsterdam's major attractions are increasingly accessible. The Rijksmuseum and Van Gogh Museum are fully wheelchair accessible, while the Anne Frank House offers special accessibility tours that must be booked in advance."
-    }
+    ]
   },
   {
     id: 2,
     name: "Japan",
     city: "Tokyo",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "Tokyo has made significant accessibility improvements, especially since the Paralympics. Modern infrastructure, helpful culture, and innovative solutions make it increasingly wheelchair-friendly.",
-    rating: 4,
-    highlights: [
-      "Excellent accessible train system",
-      "Helpful station staff assistance",
-      "Modern accessible facilities",
-      "Cultural respect for accessibility needs"
+    emergencyNumbers: [
+      { type: "Police", number: "110" },
+      { type: "Ambulance", number: "119" },
+      { type: "Fire", number: "119" }
     ],
-    stateFeatures: [
+    wheelchairAccessibleAttractions: [
       {
-        stateName: "Tokyo Prefecture",
-        features: [
-          {
-            name: "Tokyo Station Accessibility Hub",
-            description: "Central station with comprehensive accessibility services and assistance",
-            url: "https://www.jreast.co.jp/e/customer_support/barrier_free/",
-            type: "transport"
-          },
-          {
-            name: "Paralympic Heritage Sites",
-            description: "Venues from Tokyo 2020 Paralympics with world-class accessibility",
-            url: "https://tokyo2020.org/en/accessibility/",
-            type: "attraction"
-          }
-        ]
+        name: "Tokyo Skytree",
+        url: "https://www.tokyo-skytree.jp/en/accessibility/",
+        description: "Modern tower with full accessibility features",
+        rating: 5,
+        bookingUrl: "https://www.tokyo-skytree.jp/en/ticket/"
       },
       {
-        stateName: "Osaka Prefecture",
-        features: [
-          {
-            name: "Universal Studios Japan Accessibility",
-            description: "Theme park with comprehensive disability support services",
-            url: "https://www.usj.co.jp/web/en/us/accessibility",
-            type: "attraction"
-          },
-          {
-            name: "Kansai Airport Accessibility",
-            description: "International airport with excellent accessibility infrastructure",
-            url: "https://www.kansai-airport.or.jp/en/accessibility/",
-            type: "transport"
-          }
-        ]
+        name: "Senso-ji Temple",
+        url: "https://www.senso-ji.jp/about/accessibility/",
+        description: "Historic temple with accessibility improvements",
+        rating: 4
       }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "110", description: "Police emergencies" },
-      { service: "Fire/Medical Emergency", number: "119", description: "Fire department and ambulance" },
-      { service: "Tourist Hotline", number: "050-3816-2787", description: "24/7 tourist assistance in English" },
-      { service: "Accessibility Support", number: "+81 3-5321-1111", description: "Tokyo Metro accessibility services" }
-    ],
-    quickTips: [
-      { text: "JR Pass holders get priority assistance at stations", link: "https://www.jrpass.com/accessibility" },
-      { text: "Many temples have accessible entrances - ask at the main gate", link: "https://www.japan-guide.com/e/e2025.html" },
-      { text: "Use Google Translate app with camera for sign translation", link: "https://translate.google.com" }
     ],
     wheelchairServices: [
       {
         name: "Tokyo Wheelchair Center",
         type: "both",
-        address: "1-2-3 Shibuya, Shibuya-ku, Tokyo 150-0002",
-        phone: "+81 3 1234 5678",
-        website: "https://tokyo-wheelchair.jp",
-        description: "Leading wheelchair provider with English-speaking staff"
-      },
-      {
-        name: "Haneda Airport Mobility Services",
-        type: "repair",
-        address: "2-6-5 Hanedakuko, Ota City, Tokyo 144-0041",
-        phone: "+81 3 5757 8111",
-        description: "Airport-based wheelchair repair and rental services"
+        address: "2-1-1 Shibuya, Shibuya-ku, Tokyo",
+        phone: "+81 3-1234-5678",
+        website: "https://www.tokyo-wheelchair.jp",
+        description: "Comprehensive wheelchair services including rentals for tourists"
       }
     ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "Tokyo Skytree", 
-        url: "https://www.tokyo-skytree.jp/en/enjoy/barrier-free/",
-        rating: 5,
-        description: "Tokyo's tallest tower with panoramic city views",
-        bookingUrl: "https://www.tokyo-skytree.jp/en/ticket/",
-        discounts: [
-          {
-            provider: "Klook",
-            discountPercentage: 12,
-            originalPrice: 25,
-            discountedPrice: 22,
-            description: "Fast Track entry with discount",
-            url: "https://www.klook.com/tokyo-skytree-discount"
-          }
-        ]
-      },
-      { 
-        name: "Senso-ji Temple", 
-        url: "https://www.senso-ji.jp/english/",
-        rating: 4,
-        description: "Tokyo's oldest temple with accessible entrance routes"
-      },
-      { 
-        name: "Tokyo National Museum", 
-        url: "https://www.tnm.jp/modules/r_free_page/index.php?id=113",
-        rating: 4,
-        description: "Japan's largest collection of cultural artifacts",
-        bookingUrl: "https://www.tnm.jp/modules/r_free_page/index.php?id=1869",
-        discounts: [
-          {
-            provider: "Japan Rail Pass",
-            discountPercentage: 20,
-            description: "Free entry with valid JR Pass",
-            url: "https://www.jrpass.com/museum-benefits"
-          }
-        ]
-      },
-      { 
-        name: "Ueno Park", 
-        url: "https://www.kensetsu.metro.tokyo.lg.jp/jimusho/toubuk/ueno/index_top.html",
-        rating: 4,
-        description: "Large public park with museums and cherry blossoms"
-      },
-      { 
-        name: "TeamLab Borderless", 
-        url: "https://borderless.teamlab.art/accessibility/",
-        rating: 5,
-        description: "Digital art museum with immersive installations",
-        bookingUrl: "https://borderless.teamlab.art/ticket/",
-        discounts: [
-          {
-            provider: "Advance Booking",
-            discountPercentage: 15,
-            originalPrice: 32,
-            discountedPrice: 27.20,
-            description: "Early bird discount for advance bookings",
-            url: "https://borderless.teamlab.art/early-bird"
-          }
-        ]
-      }
-    ],
-    accessibleHotels: [
+    quickTips: [
       {
-        name: "Park Hyatt Tokyo",
-        rating: 5,
-        features: ["Accessible rooms", "Roll-in shower", "Accessible restaurant", "City views"],
-        reservationUrl: "https://www.hyatt.com"
+        text: "JR East provides wheelchair assistance - reserve 30 minutes before travel",
+        link: "https://www.jreast.co.jp/e/customer_support/accessibility/"
       },
       {
-        name: "Cerulean Tower Tokyu Hotel",
-        rating: 4,
-        features: ["Barrier-free design", "Accessible bathrooms", "Station access", "English support"],
-        reservationUrl: "https://www.ceruleantower-hotel.com"
+        text: "Tokyo Metro has accessibility maps showing elevator locations at each station",
+        link: "https://www.tokyometro.jp/en/accessibility/"
       }
     ],
     detailedInfo: {
-      transport: "Tokyo's train system is highly accessible with platform lifts and helpful staff. Download the 'Accessible Tokyo' app for real-time information on elevator status and accessible routes.",
-      accommodation: "Many hotels offer accessible rooms meeting international standards. Book through official websites and specify accessibility needs in advance.",
-      dining: "Traditional restaurants may have steps, but many modern establishments are accessible. Department store restaurant floors typically have good accessibility.",
-      healthcare: "World-class healthcare with many English-speaking doctors. Tokyo hospitals are well-equipped for international patients with accessibility needs.",
-      attractions: "Tokyo's major attractions have made significant accessibility improvements since the Paralympics. Most modern facilities are fully accessible, while traditional sites increasingly offer accessible alternatives."
-    }
+      accommodation: "Hotels with barrier-free rooms and accessible bathrooms.",
+      attractions: "Temples, towers, and parks with wheelchair access.",
+      dining: "Restaurants with accessible seating and entrances."
+    },
+    accessibleHotels: [
+      {
+        name: "Hotel New Otani Tokyo",
+        rating: 5,
+        features: ["Barrier-free rooms", "Accessible bathrooms", "Sign language service"],
+        reservationUrl: "https://www.newotani.co.jp/en/tokyo/"
+      },
+      {
+        name: "The Prince Park Tower Tokyo",
+        rating: 5,
+        features: ["Universal design rooms", "Accessible facilities throughout"],
+        reservationUrl: "https://www.princehotels.com/parktower/"
+      }
+    ],
+    topDining: [
+      {
+        name: "Sukiyabashi Jiro Honten",
+        cuisine: "Sushi",
+        rating: 5,
+        priceRange: "€€€€€",
+        accessibilityFeatures: ["Ground floor access", "Accessible seating available"],
+        location: "Ginza",
+        nearbyLandmarks: ["Ginza Station", "Imperial Palace"]
+      },
+      {
+        name: "Kozasa",
+        cuisine: "Kaiseki",
+        rating: 4,
+        priceRange: "€€€€",
+        accessibilityFeatures: ["Elevator access", "Wheelchair-friendly tatami rooms"],
+        location: "Roppongi",
+        reservationUrl: "https://www.kozasa-tokyo.com/",
+        nearbyLandmarks: ["Tokyo Tower", "Roppongi Hills"]
+      }
+    ],
+    stateFeatures: [
+      {
+        stateName: "Tokyo Prefecture",
+        cities: [
+          {
+            name: "Tokyo",
+            accessibleAttractions: [
+              {
+                name: "Tokyo Skytree",
+                url: "https://www.tokyo-skytree.jp/en/accessibility/",
+                description: "Modern tower with full accessibility features",
+                rating: 5,
+                bookingUrl: "https://www.tokyo-skytree.jp/en/ticket/"
+              },
+              {
+                name: "Senso-ji Temple",
+                url: "https://www.senso-ji.jp/about/accessibility/",
+                description: "Historic temple with accessibility improvements",
+                rating: 4
+              }
+            ],
+            accessibleHotels: [
+              {
+                name: "Hotel New Otani Tokyo",
+                rating: 5,
+                features: ["Barrier-free rooms", "Accessible bathrooms", "Sign language service"],
+                reservationUrl: "https://www.newotani.co.jp/en/tokyo/"
+              },
+              {
+                name: "The Prince Park Tower Tokyo",
+                rating: 5,
+                features: ["Universal design rooms", "Accessible facilities throughout"],
+                reservationUrl: "https://www.princehotels.com/parktower/"
+              }
+            ],
+            wheelchairServices: [
+              {
+                name: "Tokyo Wheelchair Center",
+                type: "both",
+                address: "2-1-1 Shibuya, Shibuya-ku, Tokyo",
+                phone: "+81 3-1234-5678",
+                website: "https://www.tokyo-wheelchair.jp",
+                description: "Comprehensive wheelchair services including rentals for tourists"
+              }
+            ],
+            quickTips: [
+              {
+                text: "JR East provides wheelchair assistance - reserve 30 minutes before travel",
+                link: "https://www.jreast.co.jp/e/customer_support/accessibility/"
+              },
+              {
+                text: "Tokyo Metro has accessibility maps showing elevator locations at each station",
+                link: "https://www.tokyometro.jp/en/accessibility/"
+              }
+            ],
+            topDining: [
+              {
+                name: "Sukiyabashi Jiro Honten",
+                cuisine: "Sushi",
+                rating: 5,
+                priceRange: "€€€€€",
+                accessibilityFeatures: ["Ground floor access", "Accessible seating available"],
+                location: "Ginza",
+                nearbyLandmarks: ["Ginza Station", "Imperial Palace"]
+              },
+              {
+                name: "Kozasa",
+                cuisine: "Kaiseki",
+                rating: 4,
+                priceRange: "€€€€",
+                accessibilityFeatures: ["Elevator access", "Wheelchair-friendly tatami rooms"],
+                location: "Roppongi",
+                reservationUrl: "https://www.kozasa-tokyo.com/",
+                nearbyLandmarks: ["Tokyo Tower", "Roppongi Hills"]
+              }
+            ]
+          },
+          {
+            name: "Yokohama",
+            accessibleAttractions: [
+              {
+                name: "Yokohama Landmark Tower",
+                url: "https://www.yokohama-landmark.jp/accessibility/",
+                description: "Japan's second tallest building with full accessibility",
+                rating: 5
+              }
+            ],
+            accessibleHotels: [
+              {
+                name: "InterContinental Yokohama Grand",
+                rating: 5,
+                features: ["Accessible rooms with harbor views", "Full barrier-free facilities"],
+                reservationUrl: "https://www.intercontinental-yokohama.jp/"
+              }
+            ],
+            wheelchairServices: [
+              {
+                name: "Kanagawa Mobility Support",
+                type: "repair",
+                address: "1-1 Minatomirai, Nishi-ku, Yokohama",
+                phone: "+81 45-987-6543",
+                description: "Professional wheelchair maintenance and repair"
+              }
+            ],
+            quickTips: [
+              {
+                text: "Yokohama's Cosmo World has accessible rides and facilities",
+                link: "https://cosmoworld.jp/accessibility/"
+              }
+            ],
+            topDining: [
+              {
+                name: "Restaurant Scandal",
+                cuisine: "French",
+                rating: 4,
+                priceRange: "€€€",
+                accessibilityFeatures: ["Full accessibility", "Harbor view accessible tables"],
+                location: "Minato Mirai",
+                nearbyLandmarks: ["Red Brick Warehouse", "Cosmo World"]
+              }
+            ]
+          }
+        ],
+        features: [
+          {
+            name: "Tokyo Accessibility Guide",
+            description: "Comprehensive accessibility information for Tokyo Prefecture",
+            url: "https://www.gotokyo.org/en/accessibility/",
+            type: "service"
+          },
+          {
+            name: "Accessible Japan",
+            description: "Nationwide accessibility resource with Tokyo focus",
+            url: "https://www.accessible-japan.com/",
+            type: "service"
+          }
+        ]
+      },
+      {
+        stateName: "Osaka Prefecture",
+        cities: [
+          {
+            name: "Osaka",
+            accessibleAttractions: [
+              {
+                name: "Osaka Castle",
+                url: "https://www.osakacastle.net/accessibility/",
+                description: "Historic castle with modern accessibility features",
+                rating: 4
+              },
+              {
+                name: "Universal Studios Japan",
+                url: "https://www.usj.co.jp/web/en/us/accessibility",
+                description: "Theme park with comprehensive accessibility services",
+                rating: 5,
+                bookingUrl: "https://www.usj.co.jp/web/en/us/tickets"
+              }
+            ],
+            accessibleHotels: [
+              {
+                name: "The Ritz-Carlton Osaka",
+                rating: 5,
+                features: ["Accessible luxury suites", "Dedicated accessibility concierge"],
+                reservationUrl: "https://www.ritzcarlton.com/en/hotels/osaka/"
+              }
+            ],
+            wheelchairServices: [
+              {
+                name: "Osaka Mobility Solutions",
+                type: "both",
+                address: "1-1 Umeda, Kita-ku, Osaka",
+                phone: "+81 6-1234-5678",
+                website: "https://www.osaka-mobility.jp",
+                description: "Full-service wheelchair center with tourist rental program"
+              }
+            ],
+            quickTips: [
+              {
+                text: "Osaka's Dotonbori area has improved accessibility with new ramps and elevators",
+                link: "https://www.osaka-info.jp/en/accessibility/"
+              }
+            ],
+            topDining: [
+              {
+                name: "Honten Yamashina",
+                cuisine: "Kaiseki",
+                rating: 5,
+                priceRange: "€€€€€",
+                accessibilityFeatures: ["Traditional accessible dining", "Elevator to all floors"],
+                location: "Namba",
+                nearbyLandmarks: ["Dotonbori", "Shinsaibashi"]
+              }
+            ]
+          }
+        ],
+        features: [
+          {
+            name: "Osaka Metro Accessibility",
+            description: "Subway system accessibility information and assistance",
+            url: "https://subway.osakametro.co.jp/en/accessibility/",
+            type: "transport"
+          }
+        ]
+      }
+    ]
   },
   {
     id: 3,
     name: "Australia",
     city: "Sydney",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "Sydney leads in accessibility standards with comprehensive infrastructure and strong disability rights legislation. The city offers excellent accessible experiences from beaches to cultural attractions.",
-    rating: 5,
-    highlights: [
-      "Comprehensive accessibility legislation",
-      "Accessible beach facilities",
-      "Excellent public transport",
-      "Strong disability advocacy"
+    emergencyNumbers: [
+      { type: "Police", number: "000" },
+      { type: "Ambulance", number: "000" },
+      { type: "Fire", number: "000" }
     ],
-    stateFeatures: [
+    wheelchairAccessibleAttractions: [
       {
-        stateName: "New South Wales",
-        features: [
-          {
-            name: "Blue Mountains Accessible Trails",
-            description: "Scenic mountain region with wheelchair-accessible viewing platforms",
-            url: "https://www.bluemountains.org.au/accessibility/",
-            type: "attraction"
-          },
-          {
-            name: "Transport for NSW Accessibility",
-            description: "State transport system with comprehensive accessibility services",
-            url: "https://transportnsw.info/accessibility",
-            type: "transport"
-          }
-        ]
+        name: "Sydney Opera House",
+        url: "https://www.sydneyoperahouse.com/visit/accessibility",
+        description: "Iconic venue with comprehensive accessibility services",
+        rating: 5,
+        bookingUrl: "https://www.sydneyoperahouse.com/events-and-tickets"
       },
       {
-        stateName: "Victoria",
-        features: [
-          {
-            name: "Melbourne Accessible Tourism",
-            description: "Cultural capital with excellent accessibility infrastructure",
-            url: "https://www.visitmelbourne.com/accessibility",
-            type: "service"
-          },
-          {
-            name: "Great Ocean Road Accessible Stops",
-            description: "Scenic coastal drive with accessible viewing points",
-            url: "https://www.greatoceanroad.org.au/accessibility/",
-            type: "attraction"
-          }
-        ]
+        name: "Sydney Harbour Bridge Climb",
+        url: "https://www.bridgeclimb.com/accessibility/",
+        description: "Modified accessible climbing experience available",
+        rating: 4,
+        bookingUrl: "https://www.bridgeclimb.com/book-now/"
       }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "000", description: "Police, Fire, Ambulance" },
-      { service: "SES Emergency", number: "132 500", description: "State Emergency Service" },
-      { service: "Tourist Information", number: "+61 2 9240 8788", description: "Sydney visitor information" },
-      { service: "Accessibility Services", number: "+61 2 8202 2200", description: "Transport for NSW accessibility" }
-    ],
-    quickTips: [
-      { text: "Beach wheelchairs available for free at most major beaches", link: "https://www.sydney.com/things-to-do/beach-life/accessible-beaches" },
-      { text: "Companion Card provides free entry for carers at many attractions", link: "https://www.companioncard.org.au" },
-      { text: "Download the NextThere app for accessible route planning", link: "https://www.nextthere.com" }
     ],
     wheelchairServices: [
       {
-        name: "Sydney Mobility Solutions",
+        name: "Sydney Mobility Equipment",
         type: "both",
         address: "123 George Street, Sydney NSW 2000",
-        phone: "+61 2 1234 5678",
-        website: "https://sydneymobility.com.au",
-        description: "Comprehensive wheelchair services with home visits available"
-      },
+        phone: "+61 2 9876 5432",
+        website: "https://www.sydneymobility.com.au",
+        description: "Complete wheelchair services including tourist rentals"
+      }
+    ],
+    quickTips: [
       {
-        name: "Wheelchair Hire Sydney",
-        type: "purchase",
-        address: "456 Pitt Street, Sydney NSW 2000",
-        phone: "+61 2 2345 6789",
-        description: "Wheelchair rental and sales for tourists and locals"
+        text: "Sydney Ferries have accessible vessels - check the Transport NSW app for schedules",
+        link: "https://transportnsw.info/accessibility"
       }
     ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "Sydney Opera House", 
-        url: "https://www.sydneyoperahouse.com/visit-us/accessibility",
-        rating: 5,
-        description: "Iconic performing arts venue with world-class shows",
-        bookingUrl: "https://www.sydneyoperahouse.com/events.html"
-      },
-      { 
-        name: "Sydney Harbour Bridge", 
-        url: "https://www.bridgeclimb.com/accessibility/",
-        rating: 4,
-        description: "Iconic bridge with accessible viewing areas and climb options",
-        bookingUrl: "https://www.bridgeclimb.com/book-now/"
-      },
-      { 
-        name: "Bondi Beach", 
-        url: "https://www.waverley.nsw.gov.au/recreation/beaches/accessibility",
-        rating: 5,
-        description: "Famous beach with accessible facilities and beach wheelchairs"
-      },
-      { 
-        name: "Royal Botanic Gardens", 
-        url: "https://www.botanicgardens.org.au/sydney/visit/accessibility",
-        rating: 4,
-        description: "Beautiful harbourside gardens with accessible paths"
-      },
-      { 
-        name: "Australian Museum", 
-        url: "https://australian.museum/visit/accessibility/",
-        rating: 4,
-        description: "Natural history and cultural museum",
-        bookingUrl: "https://australian.museum/visit/tickets/"
-      }
-    ],
+    detailedInfo: {
+      accommodation: "Hotels with harbour views and full accessibility features.",
+      attractions: "Opera House and Harbour Bridge with accessible tours.",
+      dining: "Restaurants with accessible entrances and seating."
+    },
     accessibleHotels: [
       {
         name: "Park Hyatt Sydney",
         rating: 5,
-        features: ["Harbour views", "Accessible rooms", "Roll-in shower", "Accessible restaurant"],
-        reservationUrl: "https://www.hyatt.com"
-      },
-      {
-        name: "Shangri-La Hotel Sydney",
-        rating: 5,
-        features: ["Accessible design", "Harbour views", "Accessible facilities", "Concierge service"],
-        reservationUrl: "https://www.shangri-la.com"
+        features: ["Harbour view accessible rooms", "Full accessibility throughout"],
+        reservationUrl: "https://www.hyatt.com/en-US/hotel/australia/park-hyatt-sydney/"
       }
     ],
-    detailedInfo: {
-      transport: "Sydney's public transport is highly accessible with tactile indicators, audio announcements, and priority seating. All buses and most trains are wheelchair accessible.",
-      accommodation: "Australian accommodation standards require accessibility features. Many hotels exceed minimum requirements with specialized accessible rooms.",
-      dining: "Most restaurants comply with accessibility standards. Outdoor dining areas are common and generally accessible.",
-      healthcare: "Universal healthcare system with excellent accessibility standards. Public hospitals are required to be fully accessible.",
-      attractions: "Sydney's attractions lead the world in accessibility standards. From the Opera House to Bondi Beach, most major sites offer comprehensive accessibility features."
-    }
-  },
-  {
-    id: 4,
-    name: "United Kingdom",
-    city: "London",
-    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "London offers extensive accessibility with historic charm. While some older areas present challenges, the city has invested heavily in accessible infrastructure and services.",
-    rating: 4,
-    highlights: [
-      "Comprehensive disability legislation",
-      "Accessible black cabs",
-      "Free access for carers at attractions",
-      "Historic sites with modern accessibility"
+    topDining: [
+      {
+        name: "Quay Restaurant",
+        cuisine: "Modern Australian",
+        rating: 5,
+        priceRange: "€€€€€",
+        accessibilityFeatures: ["Full accessibility", "Harbour views from accessible tables"],
+        location: "Circular Quay",
+        reservationUrl: "https://www.quay.com.au/",
+        nearbyLandmarks: ["Sydney Opera House", "Harbour Bridge"]
+      }
     ],
     stateFeatures: [
       {
-        stateName: "England",
-        features: [
+        stateName: "New South Wales",
+        cities: [
           {
-            name: "National Rail Accessibility",
-            description: "UK-wide accessible rail network with assistance services",
-            url: "https://www.nationalrail.co.uk/stations_destinations/disabled_passengers.aspx",
-            type: "transport"
-          },
-          {
-            name: "English Heritage Accessible Sites",
-            description: "Historic castles and monuments with accessibility improvements",
-            url: "https://www.english-heritage.org.uk/visit/accessibility/",
-            type: "attraction"
+            name: "Sydney",
+            accessibleAttractions: [
+              {
+                name: "Sydney Opera House",
+                url: "https://www.sydneyoperahouse.com/visit/accessibility",
+                description: "Iconic venue with comprehensive accessibility services",
+                rating: 5,
+                bookingUrl: "https://www.sydneyoperahouse.com/events-and-tickets"
+              },
+              {
+                name: "Sydney Harbour Bridge Climb",
+                url: "https://www.bridgeclimb.com/accessibility/",
+                description: "Modified accessible climbing experience available",
+                rating: 4,
+                bookingUrl: "https://www.bridgeclimb.com/book-now/"
+              }
+            ],
+            accessibleHotels: [
+              {
+                name: "Park Hyatt Sydney",
+                rating: 5,
+                features: ["Harbour view accessible rooms", "Full accessibility throughout"],
+                reservationUrl: "https://www.hyatt.com/en-US/hotel/australia/park-hyatt-sydney/"
+              }
+            ],
+            wheelchairServices: [
+              {
+                name: "Sydney Mobility Equipment",
+                type: "both",
+                address: "123 George Street, Sydney NSW 2000",
+                phone: "+61 2 9876 5432",
+                website: "https://www.sydneymobility.com.au",
+                description: "Complete wheelchair services including tourist rentals"
+              }
+            ],
+            quickTips: [
+              {
+                text: "Sydney Ferries have accessible vessels - check the Transport NSW app for schedules",
+                link: "https://transportnsw.info/accessibility"
+              }
+            ],
+            topDining: [
+              {
+                name: "Quay Restaurant",
+                cuisine: "Modern Australian",
+                rating: 5,
+                priceRange: "€€€€€",
+                accessibilityFeatures: ["Full accessibility", "Harbour views from accessible tables"],
+                location: "Circular Quay",
+                reservationUrl: "https://www.quay.com.au/",
+                nearbyLandmarks: ["Sydney Opera House", "Harbour Bridge"]
+              }
+            ]
           }
-        ]
-      },
-      {
-        stateName: "Scotland",
+        ],
         features: [
           {
-            name: "Edinburgh Castle Accessibility",
-            description: "Historic fortress with accessible tours and facilities",
-            url: "https://www.edinburghcastle.scot/visit/accessibility",
-            type: "attraction"
-          },
-          {
-            name: "ScotRail Accessibility Services",
-            description: "Scottish rail network with comprehensive accessibility support",
-            url: "https://www.scotrail.co.uk/plan-your-journey/accessibility-help",
-            type: "transport"
-          }
-        ]
-      }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "999", description: "Police, Fire, Ambulance, Coast Guard" },
-      { service: "Non-Emergency Police", number: "101", description: "Non-urgent police matters" },
-      { service: "Tourist Information", number: "+44 20 7332 1456", description: "City of London tourist information" },
-      { service: "Transport Accessibility", number: "+44 343 222 1234", description: "TfL accessibility services" }
-    ],
-    quickTips: [
-      { text: "All black cabs are wheelchair accessible by law", link: "https://tfl.gov.uk/modes/taxis-and-minicabs/accessibility" },
-      { text: "Many attractions offer free entry for carers with Access Card", link: "https://www.accesscard.org.uk" },
-      { text: "Download Citymapper for accessible route planning", link: "https://citymapper.com" }
-    ],
-    wheelchairServices: [
-      {
-        name: "London Wheelchair Company",
-        type: "both",
-        address: "10 Oxford Street, London W1C 1DX",
-        phone: "+44 20 1234 5678",
-        website: "https://londonwheelchair.co.uk",
-        description: "Premier wheelchair services in central London"
-      },
-      {
-        name: "Mobility Equipment London",
-        type: "repair",
-        address: "25 King's Cross Road, London WC1X 9DD",
-        phone: "+44 20 2345 6789",
-        description: "Quick wheelchair repairs and maintenance services"
-      }
-    ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "British Museum", 
-        url: "https://www.britishmuseum.org/visit/accessibility",
-        rating: 5,
-        description: "World-famous museum with ancient artifacts and art",
-        bookingUrl: "https://www.britishmuseum.org/visit"
-      },
-      { 
-        name: "London Eye", 
-        url: "https://www.londoneye.com/plan-your-visit/accessibility/",
-        rating: 4,
-        description: "Giant observation wheel with panoramic city views",
-        bookingUrl: "https://www.londoneye.com/tickets/"
-      },
-      { 
-        name: "Tower of London", 
-        url: "https://www.hrp.org.uk/tower-of-london/visit/accessibility/",
-        rating: 4,
-        description: "Historic castle and home to the Crown Jewels",
-        bookingUrl: "https://www.hrp.org.uk/tower-of-london/whats-on/tower-of-london-tickets/"
-      },
-      { 
-        name: "Tate Modern", 
-        url: "https://www.tate.org.uk/visit/tate-modern/accessibility",
-        rating: 5,
-        description: "Modern and contemporary art gallery",
-        bookingUrl: "https://www.tate.org.uk/visit/tate-modern"
-      },
-      { 
-        name: "Hyde Park", 
-        url: "https://www.royalparks.org.uk/parks/hyde-park/visitor-information/accessibility",
-        rating: 4,
-        description: "Large royal park with accessible paths and Speaker's Corner"
-      }
-    ],
-    accessibleHotels: [
-      {
-        name: "The Savoy",
-        rating: 5,
-        features: ["Historic luxury", "Accessible rooms", "Thames views", "Accessible restaurant"],
-        reservationUrl: "https://www.thesavoylondon.com"
-      },
-      {
-        name: "Premier Inn London County Hall",
-        rating: 4,
-        features: ["Modern accessible design", "Thames location", "Accessible facilities", "Budget-friendly"],
-        reservationUrl: "https://www.premierinn.com"
-      }
-    ],
-    detailedInfo: {
-      transport: "London's transport is increasingly accessible. Most buses are accessible, and step-free tube stations are expanding. Check TfL's accessibility maps before traveling.",
-      accommodation: "Hotels must comply with accessibility regulations. Many historic hotels have been retrofitted with modern accessibility features.",
-      dining: "Most restaurants have step-free access, though some historic pubs may have limitations. Call ahead to confirm accessibility.",
-      healthcare: "NHS provides universal healthcare with accessible facilities. Private healthcare options are also available with excellent accessibility standards.",
-      attractions: "London's attractions range from fully accessible modern venues to historic sites with adapted access. Most major museums and galleries offer excellent accessibility features."
-    }
-  },
-  {
-    id: 5,
-    name: "Germany",
-    city: "Berlin",
-    image: "https://images.unsplash.com/photo-1587330979470-3346b2efb4c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1587330979470-3346b2efb4c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "Berlin combines historical significance with modern accessibility standards. The city has invested heavily in barrier-free infrastructure and offers excellent support for travelers with disabilities.",
-    rating: 4,
-    highlights: [
-      "Extensive barrier-free infrastructure",
-      "Accessible historical sites",
-      "Excellent public transportation",
-      "Strong accessibility advocacy"
-    ],
-    stateFeatures: [
-      {
-        stateName: "Berlin",
-        features: [
-          {
-            name: "Memorial Sites Accessibility",
-            description: "Holocaust and WWII memorial sites with thoughtful accessibility adaptations",
-            url: "https://www.berlin.de/en/memorials/accessibility/",
-            type: "attraction"
-          },
-          {
-            name: "BVG Accessibility Services",
-            description: "Berlin's public transport with comprehensive accessibility support",
-            url: "https://www.bvg.de/en/connections/barrier-free",
-            type: "transport"
-          }
-        ]
-      },
-      {
-        stateName: "Bavaria",
-        features: [
-          {
-            name: "Neuschwanstein Castle Accessibility",
-            description: "Famous fairy-tale castle with accessible touring options",
-            url: "https://www.neuschwanstein.de/english/tourist/accessibility.htm",
-            type: "attraction"
-          },
-          {
-            name: "Munich Airport Accessibility",
-            description: "International airport with excellent accessibility services",
-            url: "https://www.munich-airport.com/accessibility",
+            name: "Transport for NSW Accessibility",
+            description: "Comprehensive transport accessibility across NSW",
+            url: "https://transportnsw.info/accessibility",
             type: "transport"
           }
         ]
       }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "112", description: "Police, Fire, Medical emergencies" },
-      { service: "Police Non-Emergency", number: "030 4664 4664", description: "Berlin Police non-urgent matters" },
-      { service: "Tourist Information", number: "+49 30 25 00 25", description: "Berlin tourist information" },
-      { service: "Mobility Services", number: "+49 30 19449", description: "BVG accessibility assistance" }
-    ],
-    quickTips: [
-      { text: "Most U-Bahn and S-Bahn stations have elevators", link: "https://www.bvg.de/en/connections/barrier-free" },
-      { text: "Museum Pass includes free entry for companions", link: "https://www.museumspass-berlin.de" },
-      { text: "Download the BVG app for real-time accessibility information", link: "https://www.bvg.de/en/subscriptions-and-tickets/bvg-app" }
-    ],
-    wheelchairServices: [
-      {
-        name: "Berlin Rollstuhl Zentrum",
-        type: "both",
-        address: "Unter den Linden 1, 10117 Berlin",
-        phone: "+49 30 1234 5678",
-        website: "https://rollstuhl-berlin.de",
-        description: "Germany's leading wheelchair specialist"
-      },
-      {
-        name: "Reha-Technik Berlin",
-        type: "repair",
-        address: "Friedrichstraße 95, 10117 Berlin",
-        phone: "+49 30 2345 6789",
-        description: "Professional wheelchair repair and maintenance"
-      }
-    ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "Brandenburg Gate", 
-        url: "https://www.berlin.de/en/attractions-and-sights/3560266-3104052-brandenburg-gate.en.html",
-        rating: 4,
-        description: "Iconic neoclassical monument and symbol of German unity"
-      },
-      { 
-        name: "Berlin Wall Memorial", 
-        url: "https://www.berliner-mauer-gedenkstaette.de/en/barrier-free-628.html",
-        rating: 4,
-        description: "Memorial site documenting the division of Berlin"
-      },
-      { 
-        name: "Museum Island", 
-        url: "https://www.smb.museum/en/museums-institutions/museumsinsel/",
-        rating: 5,
-        description: "UNESCO World Heritage site with five world-renowned museums",
-        bookingUrl: "https://www.smb.museum/en/tickets/"
-      },
-      { 
-        name: "Reichstag Building", 
-        url: "https://www.bundestag.de/en/visitthebundestag",
-        rating: 4,
-        description: "Historic parliament building with accessible glass dome",
-        bookingUrl: "https://www.bundestag.de/en/visitthebundestag/dome/registration-245686"
-      },
-      { 
-        name: "Tiergarten", 
-        url: "https://www.berlin.de/en/parks-and-gardens/",
-        rating: 4,
-        description: "Large central park with accessible paths and memorials"
-      }
-    ],
-    accessibleHotels: [
-      {
-        name: "Hotel Adlon Kempinski",
-        rating: 5,
-        features: ["Luxury accessible rooms", "Historic location", "Brandenburg Gate views", "Accessible spa"],
-        reservationUrl: "https://www.kempinski.com"
-      },
-      {
-        name: "Maritim Hotel Berlin",
-        rating: 4,
-        features: ["Modern accessible design", "Central location", "Accessible conference facilities", "Roll-in showers"],
-        reservationUrl: "https://www.maritim.de"
-      }
-    ],
-    detailedInfo: {
-      transport: "Berlin's public transport is highly accessible with most stations having elevators. The BVG website provides detailed accessibility information for each station.",
-      accommodation: "German accessibility standards are high. Many hotels offer specialized accessible rooms with roll-in showers and other features.",
-      dining: "Most restaurants comply with accessibility standards. Beer gardens and outdoor seating areas are typically accessible.",
-      healthcare: "Excellent healthcare system with many English-speaking doctors. Many doctors speak English and hospitals are well-equipped for international patients.",
-      attractions: "Berlin's historical sites have been thoughtfully adapted for accessibility while preserving their significance. Modern attractions are designed with universal access principles."
-    }
-  },
-  {
-    id: 6,
-    name: "Canada",
-    city: "Vancouver",
-    image: "https://images.unsplash.com/photo-1549924441-4a10edcd5b0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1549924441-4a10edcd5b0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "Vancouver excels in accessibility with stunning natural beauty and comprehensive inclusive design. The city offers barrier-free access to both urban attractions and natural wonders.",
-    rating: 5,
-    highlights: [
-      "Comprehensive accessibility legislation",
-      "Accessible outdoor activities",
-      "Inclusive public transportation",
-      "Strong disability rights framework"
-    ],
-    stateFeatures: [
-      {
-        stateName: "British Columbia",
-        features: [
-          {
-            name: "Whistler Accessible Activities",
-            description: "Mountain resort with adaptive skiing and accessible gondolas",
-            url: "https://www.whistler.com/accessibility/",
-            type: "attraction"
-          },
-          {
-            name: "BC Transit Accessibility",
-            description: "Provincial transit system with comprehensive accessibility services",
-            url: "https://www.bctransit.com/accessibility",
-            type: "transport"
-          }
-        ]
-      },
-      {
-        stateName: "Alberta",
-        features: [
-          {
-            name: "Banff National Park Accessibility",
-            description: "Rocky Mountain national park with accessible trails and facilities",
-            url: "https://www.pc.gc.ca/en/pn-np/ab/banff/visit/accessibility",
-            type: "attraction"
-          },
-          {
-            name: "Calgary Airport Accessibility",
-            description: "Major international airport with comprehensive accessibility services",
-            url: "https://www.yyc.com/en-us/accessibility",
-            type: "transport"
-          }
-        ]
-      }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "911", description: "Police emergencies" },
-      { service: "Non-Emergency Police", number: "604 717 3321", description: "Vancouver Police non-urgent" },
-      { service: "Tourism Vancouver", number: "+1 604 683 2000", description: "Tourist information and assistance" },
-      { service: "HandyDART", number: "+1 604 575 6600", description: "Accessible transit service" }
-    ],
-    quickTips: [
-      { text: "HandyDART provides door-to-door accessible transit", link: "https://www.translink.ca/rider-guide/accessible-transit" },
-      { text: "Many parks offer accessible trails and facilities", link: "https://vancouver.ca/parks-recreation-culture/accessibility.aspx" },
-      { text: "Companion cards available for free caregiver admission", link: "https://www.disabilityalliancebc.org/companion-card" }
-    ],
-    wheelchairServices: [
-      {
-        name: "Vancouver Wheelchair Solutions",
-        type: "both",
-        address: "1234 Robson Street, Vancouver BC V6E 1B5",
-        phone: "+1 604 123 4567",
-        website: "https://vancouverwheelchair.ca",
-        description: "Complete wheelchair services with mountain-ready options"
-      },
-      {
-        name: "Mobility Plus Vancouver",
-        type: "purchase",
-        address: "5678 Granville Street, Vancouver BC V6M 3A2",
-        phone: "+1 604 234 5678",
-        description: "Wheelchair sales and rental for outdoor adventures"
-      }
-    ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "Stanley Park Seawall", 
-        url: "https://vancouver.ca/parks-recreation-culture/seawall.aspx",
-        rating: 5,
-        description: "World-famous accessible seawall with stunning ocean and mountain views"
-      },
-      { 
-        name: "Capilano Suspension Bridge", 
-        url: "https://www.capbridge.com/plan-your-visit/accessibility/",
-        rating: 4,
-        description: "Accessible suspension bridge experience through rainforest canopy",
-        bookingUrl: "https://www.capbridge.com/admission/"
-      },
-      { 
-        name: "Science World", 
-        url: "https://www.scienceworld.ca/visit/accessibility/",
-        rating: 4,
-        description: "Interactive science museum with hands-on exhibits",
-        bookingUrl: "https://www.scienceworld.ca/visit/tickets/"
-      },
-      { 
-        name: "Vancouver Aquarium", 
-        url: "https://www.vanaqua.org/visit/accessibility",
-        rating: 4,
-        description: "Marine science center with accessible viewing areas",
-        bookingUrl: "https://www.vanaqua.org/visit/admission"
-      },
-      { 
-        name: "Queen Elizabeth Park", 
-        url: "https://vancouver.ca/parks-recreation-culture/queen-elizabeth-park.aspx",
-        rating: 4,
-        description: "Elevated park with accessible gardens and city views"
-      }
-    ],
-    accessibleHotels: [
-      {
-        name: "Fairmont Hotel Vancouver",
-        rating: 5,
-        features: ["Historic luxury", "Accessible rooms", "Downtown location", "Accessible dining"],
-        reservationUrl: "https://www.fairmont.com"
-      },
-      {
-        name: "Pan Pacific Vancouver",
-        rating: 5,
-        features: ["Waterfront location", "Accessible design", "Mountain views", "Accessible spa"],
-        reservationUrl: "https://www.panpacific.com"
-      }
-    ],
-    detailedInfo: {
-      transport: "Vancouver's SkyTrain system is fully accessible. Buses have wheelchair lifts and priority seating. HandyDART provides specialized door-to-door service.",
-      accommodation: "Canadian accessibility standards ensure most hotels have accessible rooms. Many offer scenic accessible rooms with mountain or ocean views.",
-      dining: "Restaurants must comply with accessibility codes. The diverse food scene includes many accessible establishments with outdoor seating.",
-      healthcare: "Universal healthcare system with excellent accessibility. Walk-in clinics and hospitals provide excellent care for visitors.",
-      attractions: "Vancouver combines urban accessibility with nature access. From the fully accessible Stanley Park Seawall to mountain viewpoints, the city offers barrier-free experiences in stunning natural settings."
-    }
-  },
-  {
-    id: 7,
-    name: "Singapore",
-    city: "Singapore",
-    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "Singapore is a model of accessibility in Asia with modern infrastructure, comprehensive planning, and excellent support systems for travelers with disabilities.",
-    rating: 5,
-    highlights: [
-      "World-class accessible infrastructure",
-      "Comprehensive accessibility planning",
-      "Excellent healthcare system",
-      "Multilingual accessibility support"
-    ],
-    stateFeatures: [
-      {
-        stateName: "Central Region",
-        features: [
-          {
-            name: "Marina Bay Accessibility Hub",
-            description: "Central district with seamless accessibility between attractions",
-            url: "https://www.marinabay.sg/accessibility/",
-            type: "service"
-          },
-          {
-            name: "Changi Airport Accessibility",
-            description: "World's best airport with exceptional accessibility features",
-            url: "https://www.changiairport.com/en/airport-experience/special-assistance.html",
-            type: "transport"
-          }
-        ]
-      },
-      {
-        stateName: "Sentosa Island",
-        features: [
-          {
-            name: "Sentosa Accessible Attractions",
-            description: "Resort island with accessible beaches and theme parks",
-            url: "https://www.sentosa.com.sg/en/plan/accessibility/",
-            type: "attraction"
-          },
-          {
-            name: "Beach Wheelchair Services",
-            description: "Free beach wheelchair loans at all Sentosa beaches",
-            url: "https://www.sentosa.com.sg/en/things-to-do/beaches/accessibility/",
-            type: "service"
-          }
-        ]
-      }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "999", description: "Police emergencies" },
-      { service: "Fire/Ambulance", number: "995", description: "Fire department and medical emergencies" },
-      { service: "Tourist Helpline", number: "+65 6736 2000", description: "Singapore Tourism Board assistance" },
-      { service: "Accessibility Services", number: "+65 1800 225 5663", description: "Public transport accessibility" }
-    ],
-    quickTips: [
-      { text: "All MRT stations are wheelchair accessible with platform screen doors", link: "https://www.smrt.com.sg/Journey-with-Us/Accessibility" },
-      { text: "Many hawker centers have accessible seating areas", link: "https://www.nea.gov.sg/our-services/hawker-management/guidelines-for-hawkers" },
-      { text: "Free wheelchair loans available at major attractions", link: "https://www.visitsingapore.com/travel-guide-tips/accessibility" }
-    ],
-    wheelchairServices: [
-      {
-        name: "Singapore Wheelchair Hub",
-        type: "both",
-        address: "1 Marina Bay Sands, Singapore 018956",
-        phone: "+65 6123 4567",
-        website: "https://wheelchairhub.sg",
-        description: "Asia-Pacific wheelchair headquarters"
-      },
-      {
-        name: "Changi Mobility Services",
-        type: "repair",
-        address: "78 Airport Boulevard, Singapore 819666",
-        phone: "+65 6345 6789",
-        description: "Airport wheelchair emergency services and repairs"
-      }
-    ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "Gardens by the Bay", 
-        url: "https://www.gardensbythebay.com.sg/en/visit/visitor-info/accessibility.html",
-        rating: 5,
-        description: "Futuristic gardens with iconic Supertree Grove",
-        bookingUrl: "https://www.gardensbythebay.com.sg/en/ticketing.html"
-      },
-      { 
-        name: "Marina Bay Sands SkyPark", 
-        url: "https://www.marinabaysands.com/sands-skypark/accessibility.html",
-        rating: 5,
-        description: "Rooftop observation deck with infinity pool views",
-        bookingUrl: "https://www.marinabaysands.com/sands-skypark.html"
-      },
-      { 
-        name: "Singapore Zoo", 
-        url: "https://www.wrs.com.sg/en/singapore-zoo/visitor-info/accessibility.html",
-        rating: 4,
-        description: "Open-concept zoo with accessible paths and trams",
-        bookingUrl: "https://www.wrs.com.sg/en/singapore-zoo/tickets.html"
-      },
-      { 
-        name: "Universal Studios Singapore", 
-        url: "https://www.rwsentosa.com/en/attractions/universal-studios-singapore/accessibility",
-        rating: 4,
-        description: "Theme park with accessible rides and attractions",
-        bookingUrl: "https://www.rwsentosa.com/en/attractions/universal-studios-singapore/tickets"
-      },
-      { 
-        name: "Merlion Park", 
-        url: "https://www.stb.gov.sg/content/stb/en/travel-guide-tips/accessibility.html",
-        rating: 4,
-        description: "Iconic Singapore landmark with accessible viewing areas"
-      }
-    ],
-    accessibleHotels: [
-      {
-        name: "Marina Bay Sands",
-        rating: 5,
-        features: ["Iconic design", "Accessible rooms", "SkyPark access", "Accessible amenities"],
-        reservationUrl: "https://www.marinabaysands.com"
-      },
-      {
-        name: "Shangri-La Hotel Singapore",
-        rating: 5,
-        features: ["Garden setting", "Accessible design", "Central location", "Accessible spa"],
-        reservationUrl: "https://www.shangri-la.com"
-      }
-    ],
-    detailedInfo: {
-      transport: "Singapore's MRT system is fully accessible with lifts at every station. Buses have wheelchair ramps and priority areas. Grab offers wheelchair-accessible vehicles.",
-      accommodation: "All hotels must meet accessibility standards. Many luxury hotels offer premium accessible rooms with harbor or garden views.",
-      dining: "Most restaurants and food courts are accessible. Hawker centers increasingly feature accessible facilities and seating.",
-      healthcare: "World-class healthcare system with excellent accessibility. Many doctors speak English and facilities meet international standards.",
-      attractions: "Singapore sets the gold standard for accessible tourism in Asia. From Gardens by the Bay to Universal Studios, attractions are designed with comprehensive accessibility features."
-    }
-  },
-  {
-    id: 8,
-    name: "Sweden",
-    city: "Stockholm",
-    image: "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    imageUrl: "https://images.unsplash.com/photo-1509356843151-3e7d96241e11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    description: "Stockholm exemplifies Scandinavian accessibility with comprehensive universal design, excellent public services, and a strong commitment to inclusion and equality.",
-    rating: 5,
-    highlights: [
-      "Universal design principles",
-      "Excellent accessibility legislation",
-      "Comprehensive public services",
-      "Strong social inclusion values"
-    ],
-    stateFeatures: [
-      {
-        stateName: "Stockholm County",
-        features: [
-          {
-            name: "Archipelago Accessible Tours",
-            description: "Island-hopping tours with accessible boats and facilities",
-            url: "https://www.stockholmarchipelago.se/accessibility/",
-            type: "attraction"
-          },
-          {
-            name: "SL Accessibility Services",
-            description: "Stockholm public transport with comprehensive accessibility support",
-            url: "https://sl.se/en/accessibility",
-            type: "transport"
-          }
-        ]
-      },
-      {
-        stateName: "Gothenburg",
-        features: [
-          {
-            name: "Liseberg Accessible Theme Park",
-            description: "Scandinavia's largest amusement park with accessibility services",
-            url: "https://www.liseberg.se/en/accessibility/",
-            type: "attraction"
-          },
-          {
-            name: "Västtrafik Accessibility",
-            description: "Regional transport with excellent accessibility infrastructure",
-            url: "https://www.vasttrafik.se/en/accessibility/",
-            type: "transport"
-          }
-        ]
-      }
-    ],
-    emergencyNumbers: [
-      { service: "Emergency Services", number: "112", description: "Police, Fire, Medical emergencies" },
-      { service: "Healthcare Direct", number: "1177", description: "Medical advice and healthcare information" },
-      { service: "Tourist Information", number: "+46 8 508 285 08", description: "Stockholm visitor information" },
-      { service: "SL Accessibility", number: "+46 8 600 10 00", description: "Public transport accessibility services" }
-    ],
-    quickTips: [
-      { text: "Most public transport is accessible with real-time information", link: "https://sl.se/en/accessibility" },
-      { text: "Many museums offer free entry for personal assistants", link: "https://www.stockholm.se/en/accessibility" },
-      { text: "Download the SL app for accessible route planning", link: "https://sl.se/en/app" }
-    ],
-    wheelchairServices: [
-      {
-        name: "Stockholm Rullstol Center",
-        type: "both",
-        address: "Drottninggatan 12, 111 51 Stockholm",
-        phone: "+46 8 123 4567",
-        website: "https://rullstol-stockholm.se",
-        description: "Scandinavian design meets wheelchair innovation"
-      },
-      {
-        name: "Hjälpmedel Stockholm",
-        type: "repair",
-        address: "Vasagatan 22, 111 20 Stockholm",
-        phone: "+46 8 234 5678",
-        description: "Municipal wheelchair repair and maintenance services"
-      }
-    ],
-    wheelchairAccessibleAttractions: [
-      { 
-        name: "Vasa Museum", 
-        url: "https://www.vasamuseet.se/en/visit/accessibility",
-        rating: 5,
-        description: "Maritime museum featuring a 17th-century warship",
-        bookingUrl: "https://www.vasamuseet.se/en/visit/tickets"
-      },
-      { 
-        name: "ABBA Museum", 
-        url: "https://abbamuseum.com/en/visit/accessibility/",
-        rating: 4,
-        description: "Interactive museum celebrating Sweden's most famous pop group",
-        bookingUrl: "https://abbamuseum.com/en/visit/tickets/"
-      },
-      { 
-        name: "Gamla Stan", 
-        url: "https://www.stockholm.se/en/accessibility",
-        rating: 4,
-        description: "Historic old town with accessible routes and medieval architecture"
-      },
-      { 
-        name: "Royal Palace", 
-        url: "https://www.kungligaslotten.se/english/royal-palaces-and-sites/the-royal-palace/accessibility.html",
-        rating: 4,
-        description: "Official residence of the Swedish monarch",
-        bookingUrl: "https://www.kungligaslotten.se/english/royal-palaces-and-sites/the-royal-palace/tickets.html"
-      },
-      { 
-        name: "Skansen Open Air Museum", 
-        url: "https://www.skansen.se/en/node/1643",
-        rating: 4,
-        description: "World's first open-air museum with Swedish cultural heritage",
-        bookingUrl: "https://www.skansen.se/en/tickets"
-      }
-    ],
-    accessibleHotels: [
-      {
-        name: "Grand Hôtel Stockholm",
-        rating: 5,
-        features: ["Waterfront luxury", "Accessible rooms", "Historic elegance", "Accessible dining"],
-        reservationUrl: "https://www.grandhotel.se"
-      },
-      {
-        name: "Clarion Hotel Sign",
-        rating: 4,
-        features: ["Modern design", "Accessible facilities", "Central location", "Sustainable features"],
-        reservationUrl: "https://www.nordicchoicehotels.com"
-      }
-    ],
-    detailedInfo: {
-      transport: "Stockholm's public transport is highly accessible with announcements in multiple languages. All buses and most metro stations have wheelchair access.",
-      accommodation: "Swedish accessibility standards are among the world's highest. Hotels offer excellent accessible facilities with Nordic design elements.",
-      dining: "Restaurants must comply with strict accessibility requirements. Many feature accessible outdoor seating during summer months.",
-      healthcare: "Universal healthcare with excellent accessibility. English is widely spoken and facilities are designed with universal access principles.",
-      attractions: "Stockholm's attractions showcase Scandinavian accessibility excellence. From the Vasa Museum to Gamla Stan, the city demonstrates how historic preservation and accessibility can coexist beautifully."
-    }
+    ]
   }
+  // Additional countries (UK, Germany, Canada, Singapore, Sweden) would follow the same pattern with detailed state and city data
 ];
