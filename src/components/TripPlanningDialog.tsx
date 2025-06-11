@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon, MapPin, Users, Plane, X, Plus } from 'lucide-react';
+import { Calendar as CalendarIcon, MapPin, Users, Plane, X, Plus, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -92,6 +92,11 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
   const tripStartDate = form.watch('tripStartDate');
   const tripEndDate = form.watch('tripEndDate');
 
+  // Sort destinations by start date in ascending order
+  const sortedDestinations = [...destinations].sort((a, b) => 
+    new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  );
+
   const addDestination = () => {
     if (newDestination.name && newDestination.startDate && newDestination.endDate) {
       const destinationToAdd = newDestination as DestinationData;
@@ -101,13 +106,30 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
   };
 
   const removeDestination = (index: number) => {
-    form.setValue('destinations', destinations.filter((_, i) => i !== index));
+    // Find the destination to remove from the original array
+    const destinationToRemove = sortedDestinations[index];
+    const originalIndex = destinations.findIndex(dest => 
+      dest.name === destinationToRemove.name && 
+      dest.startDate.getTime() === destinationToRemove.startDate.getTime()
+    );
+    form.setValue('destinations', destinations.filter((_, i) => i !== originalIndex));
   };
 
   const onSubmit = (data: TripPlanningFormData) => {
     console.log('Multi-destination trip planning data:', data);
     
-    const destinationsList = data.destinations.map(dest => 
+    // Sort destinations by start date for display and storage
+    const sortedData = {
+      ...data,
+      destinations: [...data.destinations].sort((a, b) => 
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      )
+    };
+    
+    // Save to localStorage for persistence
+    localStorage.setItem('plannedTrip', JSON.stringify(sortedData));
+    
+    const destinationsList = sortedData.destinations.map(dest => 
       `${dest.name} (${format(dest.startDate, 'MMM dd')} - ${format(dest.endDate, 'MMM dd')})`
     ).join(', ');
     
@@ -353,33 +375,71 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
               </div>
             </div>
 
-            {/* Destinations List */}
-            {destinations.length > 0 && (
+            {/* Trip Itinerary - Chronologically Ordered Destinations */}
+            {sortedDestinations.length > 0 && (
               <FormField
                 control={form.control}
                 name="destinations"
                 render={() => (
                   <FormItem>
-                    <FormLabel>Your Destinations</FormLabel>
-                    <div className="space-y-3">
-                      {destinations.map((destination, index) => (
+                    <FormLabel className="flex items-center gap-2 text-lg font-semibold">
+                      <Clock className="w-5 h-5 text-blue-600" />
+                      Your Trip Itinerary
+                      <span className="text-sm font-normal text-gray-600">
+                        ({sortedDestinations.length} destination{sortedDestinations.length !== 1 ? 's' : ''})
+                      </span>
+                    </FormLabel>
+                    <div className="space-y-4">
+                      {sortedDestinations.map((destination, index) => (
                         <div
-                          key={index}
-                          className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                          key={`${destination.name}-${destination.startDate.getTime()}`}
+                          className="relative p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200"
                         >
-                          <div className="flex-1">
-                            <div className="font-medium">{destination.name}</div>
-                            <div className="text-sm text-gray-600">
-                              {format(destination.startDate, 'MMM dd, yyyy')} - {format(destination.endDate, 'MMM dd, yyyy')}
+                          {/* Step indicator */}
+                          <div className="absolute -left-2 top-6 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
+                            {index + 1}
+                          </div>
+                          
+                          <div className="ml-8">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-lg text-gray-900 mb-2">
+                                  {destination.name}
+                                </h4>
+                                <div className="flex items-center gap-3 text-gray-700">
+                                  <div className="flex items-center gap-1">
+                                    <CalendarIcon className="w-4 h-4 text-blue-600" />
+                                    <span className="font-medium">
+                                      {format(destination.startDate, 'EEE, MMM dd, yyyy')}
+                                    </span>
+                                  </div>
+                                  <ArrowRight className="w-4 h-4 text-gray-400" />
+                                  <div className="flex items-center gap-1">
+                                    <CalendarIcon className="w-4 h-4 text-blue-600" />
+                                    <span className="font-medium">
+                                      {format(destination.endDate, 'EEE, MMM dd, yyyy')}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="mt-2 text-sm text-gray-600">
+                                  Duration: {Math.ceil((destination.endDate.getTime() - destination.startDate.getTime()) / (1000 * 60 * 60 * 24))} day{Math.ceil((destination.endDate.getTime() - destination.startDate.getTime()) / (1000 * 60 * 60 * 24)) !== 1 ? 's' : ''}
+                                </div>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => removeDestination(index)}
+                                className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-full transition-colors"
+                                title="Remove destination"
+                              >
+                                <X className="w-4 h-4" />
+                              </button>
                             </div>
                           </div>
-                          <button
-                            type="button"
-                            onClick={() => removeDestination(index)}
-                            className="text-red-500 hover:text-red-700 p-1"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
+                          
+                          {/* Connection line to next destination */}
+                          {index < sortedDestinations.length - 1 && (
+                            <div className="absolute -bottom-4 left-3 w-0.5 h-8 bg-blue-300"></div>
+                          )}
                         </div>
                       ))}
                     </div>
