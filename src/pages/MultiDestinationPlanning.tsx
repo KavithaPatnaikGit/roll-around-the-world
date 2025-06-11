@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, Calendar, Users, Plus, X } from 'lucide-react';
@@ -137,6 +136,9 @@ const MultiDestinationPlanning = () => {
       title: "Trip planned successfully!",
       description: `Your multi-destination trip to ${selectedDestinations.length} cities has been saved.`,
     });
+
+    // Navigate to the Destination Planner page
+    navigate('/destination-planner');
   };
 
   return (
@@ -344,3 +346,5 @@ const MultiDestinationPlanning = () => {
 };
 
 export default MultiDestinationPlanning;
+
+}
