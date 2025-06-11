@@ -12,15 +12,17 @@ import {
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
-interface DestinationData {
-  name: string;
-  startDate: Date;
-  endDate: Date;
-}
-
 interface AddDestinationSectionProps {
-  newDestination: Partial<DestinationData>;
-  setNewDestination: (destination: Partial<DestinationData>) => void;
+  newDestination: {
+    name: string;
+    startDate?: Date;
+    endDate?: Date;
+  };
+  setNewDestination: (destination: {
+    name: string;
+    startDate?: Date;
+    endDate?: Date;
+  }) => void;
   addDestination: () => void;
   tripStartDate?: Date;
   tripEndDate?: Date;
