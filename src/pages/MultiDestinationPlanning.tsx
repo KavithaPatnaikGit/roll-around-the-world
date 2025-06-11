@@ -346,5 +346,3 @@ const MultiDestinationPlanning = () => {
 };
 
 export default MultiDestinationPlanning;
-
-}
