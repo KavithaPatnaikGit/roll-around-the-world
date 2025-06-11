@@ -63,7 +63,11 @@ interface TripPlanningDialogProps {
 
 const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
   const [open, setOpen] = useState(false);
-  const [newDestination, setNewDestination] = useState<Partial<DestinationData>>({
+  const [newDestination, setNewDestination] = useState<{
+    name: string;
+    startDate?: Date;
+    endDate?: Date;
+  }>({
     name: '',
   });
   const { toast } = useToast();
@@ -81,13 +85,17 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
   const tripEndDate = form.watch('tripEndDate');
 
   // Sort destinations by start date in ascending order
-  const sortedDestinations = [...destinations].sort((a, b) => 
+  const sortedDestinations: DestinationData[] = [...destinations].sort((a, b) => 
     new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
   );
 
   const addDestination = () => {
     if (newDestination.name && newDestination.startDate && newDestination.endDate) {
-      const destinationToAdd = newDestination as DestinationData;
+      const destinationToAdd: DestinationData = {
+        name: newDestination.name,
+        startDate: newDestination.startDate,
+        endDate: newDestination.endDate
+      };
       form.setValue('destinations', [...destinations, destinationToAdd]);
       setNewDestination({ name: '' });
     }
