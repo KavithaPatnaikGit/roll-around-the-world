@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Accessibility, Menu } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import TripPlanningDialog from '@/components/TripPlanningDialog';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -54,11 +53,12 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
-            <TripPlanningDialog>
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                Plan Your Trip
-              </Button>
-            </TripPlanningDialog>
+            <Button 
+              className="bg-blue-600 hover:bg-blue-700"
+              onClick={() => navigate('/plan-trip')}
+            >
+              Plan Your Trip
+            </Button>
           </div>
 
           {/* Mobile Navigation */}
@@ -87,11 +87,15 @@ const Navigation = () => {
                       {item.label}
                     </button>
                   ))}
-                  <TripPlanningDialog>
-                    <Button className="bg-blue-600 hover:bg-blue-700 mt-4">
-                      Plan Your Trip
-                    </Button>
-                  </TripPlanningDialog>
+                  <Button 
+                    className="bg-blue-600 hover:bg-blue-700 mt-4"
+                    onClick={() => {
+                      navigate('/plan-trip');
+                      setIsOpen(false);
+                    }}
+                  >
+                    Plan Your Trip
+                  </Button>
                 </div>
               </SheetContent>
             </Sheet>
