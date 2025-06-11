@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import InterDestinationTransport from '@/components/InterDestinationTransport';
 import { destinations } from '@/data/destinationData';
 import { Country } from '@/data/types';
 
@@ -57,6 +58,79 @@ const MultiDestinationPlanning = () => {
     city.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     city.country.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Generate transportation routes between selected destinations
+  const generateTransportationRoutes = () => {
+    if (selectedDestinations.length < 2) return [];
+
+    const routes = [];
+    for (let i = 0; i < selectedDestinations.length - 1; i++) {
+      const from = selectedDestinations[i];
+      const to = selectedDestinations[i + 1];
+      
+      // Generate transportation options based on the cities
+      const transportOptions = [];
+      
+      // Flight options (always available for international routes)
+      if (from.cityData.country.name !== to.cityData.country.name) {
+        transportOptions.push({
+          type: 'flight' as const,
+          duration: '2-4 hours',
+          estimatedCost: '$150-400',
+          provider: 'Major Airlines',
+          accessibility: 'Wheelchair assistance available, priority boarding for disabled passengers',
+          bookingUrl: `https://www.skyscanner.com/flights-from/${from.cityData.name.toLowerCase()}-to-${to.cityData.name.toLowerCase()}`
+        });
+      }
+
+      // Train options (for certain routes)
+      if (isTrainRouteAvailable(from.cityData.country.name, to.cityData.country.name)) {
+        transportOptions.push({
+          type: 'train' as const,
+          duration: '3-8 hours',
+          estimatedCost: '$80-200',
+          provider: 'National Railways',
+          accessibility: 'Wheelchair accessible carriages, assistance booking available',
+          bookingUrl: `https://www.trainline.com`
+        });
+      }
+
+      // Bus options (for European routes mainly)
+      if (isBusRouteAvailable(from.cityData.country.name, to.cityData.country.name)) {
+        transportOptions.push({
+          type: 'bus' as const,
+          duration: '6-12 hours',
+          estimatedCost: '$30-80',
+          provider: 'FlixBus / Eurolines',
+          accessibility: 'Wheelchair accessible buses available, advance booking required'
+        });
+      }
+
+      if (transportOptions.length > 0) {
+        routes.push({
+          from: from.cityData.name,
+          to: to.cityData.name,
+          options: transportOptions
+        });
+      }
+    }
+
+    return routes;
+  };
+
+  const isTrainRouteAvailable = (fromCountry: string, toCountry: string) => {
+    const trainConnectedCountries = [
+      'Netherlands', 'Germany', 'United Kingdom', 'Sweden', 'Japan'
+    ];
+    return trainConnectedCountries.includes(fromCountry) && trainConnectedCountries.includes(toCountry);
+  };
+
+  const isBusRouteAvailable = (fromCountry: string, toCountry: string) => {
+    const busConnectedCountries = [
+      'Netherlands', 'Germany', 'United Kingdom', 'Sweden'
+    ];
+    return busConnectedCountries.includes(fromCountry) && busConnectedCountries.includes(toCountry);
+  };
 
   const addDestination = (cityData: { name: string; city: string; country: Country }) => {
     const isAlreadySelected = selectedDestinations.some(dest => dest.cityData.name === cityData.name);
@@ -140,6 +214,8 @@ const MultiDestinationPlanning = () => {
     // Navigate to the Destination Planner page
     navigate('/destination-planner');
   };
+
+  const transportationRoutes = generateTransportationRoutes();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -336,6 +412,9 @@ const MultiDestinationPlanning = () => {
                 )}
               </CardContent>
             </Card>
+
+            {/* Transportation Routes */}
+            <InterDestinationTransport routes={transportationRoutes} />
           </div>
         </div>
       </div>
