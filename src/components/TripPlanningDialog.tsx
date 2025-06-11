@@ -83,8 +83,8 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
     },
   });
 
-  // Properly type the watched values
-  const destinations: DestinationData[] = form.watch('destinations') || [];
+  // Properly type the watched values with type assertion since we know destinations will be complete when added
+  const destinations = (form.watch('destinations') || []) as DestinationData[];
   const tripStartDate = form.watch('tripStartDate');
   const tripEndDate = form.watch('tripEndDate');
 
