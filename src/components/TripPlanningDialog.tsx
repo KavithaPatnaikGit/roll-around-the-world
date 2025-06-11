@@ -1,9 +1,8 @@
 
 import React, { useState } from 'react';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon, MapPin, Users, Plane, X, Plus, Clock, ArrowRight } from 'lucide-react';
+import { Plane } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
 import {
   Dialog,
   DialogContent,
@@ -12,25 +11,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import TripDetailsSection from './TripDetailsSection';
+import AddDestinationSection from './AddDestinationSection';
+import TripItinerarySection from './TripItinerarySection';
 
 const destinationSchema = z.object({
   name: z.string().min(1, 'Destination name is required'),
@@ -161,293 +149,21 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* Parent Trip Dates */}
-            <div className="space-y-4 p-4 border rounded-lg bg-blue-50">
-              <h3 className="font-semibold text-lg">Overall Trip Details</h3>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="tripStartDate"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Trip Start Date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              className={cn(
-                                "w-full pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, "MMM dd, yyyy")
-                              ) : (
-                                <span>Pick date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) => date < new Date()}
-                            initialFocus
-                            className={cn("p-3 pointer-events-auto")}
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <TripDetailsSection control={form.control} />
 
-                <FormField
-                  control={form.control}
-                  name="tripEndDate"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Trip End Date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              className={cn(
-                                "w-full pl-3 text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, "MMM dd, yyyy")
-                              ) : (
-                                <span>Pick date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) => date < new Date()}
-                            initialFocus
-                            className={cn("p-3 pointer-events-auto")}
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+            <AddDestinationSection
+              newDestination={newDestination}
+              setNewDestination={setNewDestination}
+              addDestination={addDestination}
+              tripStartDate={tripStartDate}
+              tripEndDate={tripEndDate}
+            />
 
-              <FormField
-                control={form.control}
-                name="travelers"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      Number of Travelers
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        min="1"
-                        max="20"
-                        placeholder="1"
-                        className="w-32"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            {/* Add New Destination */}
-            <div className="space-y-4 p-4 border rounded-lg">
-              <h3 className="font-semibold text-lg flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                Add Destinations
-              </h3>
-              
-              <div className="space-y-3">
-                <Input
-                  placeholder="Destination name..."
-                  value={newDestination.name}
-                  onChange={(e) => setNewDestination({ ...newDestination, name: e.target.value })}
-                />
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Start Date</label>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={cn(
-                            "w-full pl-3 text-left font-normal",
-                            !newDestination.startDate && "text-muted-foreground"
-                          )}
-                        >
-                          {newDestination.startDate ? (
-                            format(newDestination.startDate, "MMM dd, yyyy")
-                          ) : (
-                            <span>Pick date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={newDestination.startDate}
-                          onSelect={(date) => setNewDestination({ ...newDestination, startDate: date })}
-                          disabled={(date) => 
-                            date < new Date() || 
-                            (tripStartDate && date < tripStartDate) ||
-                            (tripEndDate && date > tripEndDate)
-                          }
-                          initialFocus
-                          className={cn("p-3 pointer-events-auto")}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">End Date</label>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={cn(
-                            "w-full pl-3 text-left font-normal",
-                            !newDestination.endDate && "text-muted-foreground"
-                          )}
-                        >
-                          {newDestination.endDate ? (
-                            format(newDestination.endDate, "MMM dd, yyyy")
-                          ) : (
-                            <span>Pick date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={newDestination.endDate}
-                          onSelect={(date) => setNewDestination({ ...newDestination, endDate: date })}
-                          disabled={(date) => 
-                            date < new Date() || 
-                            (newDestination.startDate && date < newDestination.startDate) ||
-                            (tripStartDate && date < tripStartDate) ||
-                            (tripEndDate && date > tripEndDate)
-                          }
-                          initialFocus
-                          className={cn("p-3 pointer-events-auto")}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  </div>
-                </div>
-
-                <Button
-                  type="button"
-                  onClick={addDestination}
-                  disabled={!newDestination.name || !newDestination.startDate || !newDestination.endDate}
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Destination
-                </Button>
-              </div>
-            </div>
-
-            {/* Trip Itinerary - Chronologically Ordered Destinations */}
-            {sortedDestinations.length > 0 && (
-              <FormField
-                control={form.control}
-                name="destinations"
-                render={() => (
-                  <FormItem>
-                    <FormLabel className="flex items-center gap-2 text-lg font-semibold">
-                      <Clock className="w-5 h-5 text-blue-600" />
-                      Your Trip Itinerary
-                      <span className="text-sm font-normal text-gray-600">
-                        ({sortedDestinations.length} destination{sortedDestinations.length !== 1 ? 's' : ''})
-                      </span>
-                    </FormLabel>
-                    <div className="space-y-4">
-                      {sortedDestinations.map((destination, index) => (
-                        <div
-                          key={`${destination.name}-${destination.startDate.getTime()}`}
-                          className="relative p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200"
-                        >
-                          {/* Step indicator */}
-                          <div className="absolute -left-2 top-6 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-                            {index + 1}
-                          </div>
-                          
-                          <div className="ml-8">
-                            <div className="flex items-start justify-between">
-                              <div className="flex-1">
-                                <h4 className="font-semibold text-lg text-gray-900 mb-2">
-                                  {destination.name}
-                                </h4>
-                                <div className="flex items-center gap-3 text-gray-700">
-                                  <div className="flex items-center gap-1">
-                                    <CalendarIcon className="w-4 h-4 text-blue-600" />
-                                    <span className="font-medium">
-                                      {format(destination.startDate, 'EEE, MMM dd, yyyy')}
-                                    </span>
-                                  </div>
-                                  <ArrowRight className="w-4 h-4 text-gray-400" />
-                                  <div className="flex items-center gap-1">
-                                    <CalendarIcon className="w-4 h-4 text-blue-600" />
-                                    <span className="font-medium">
-                                      {format(destination.endDate, 'EEE, MMM dd, yyyy')}
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="mt-2 text-sm text-gray-600">
-                                  Duration: {Math.ceil((destination.endDate.getTime() - destination.startDate.getTime()) / (1000 * 60 * 60 * 24))} day{Math.ceil((destination.endDate.getTime() - destination.startDate.getTime()) / (1000 * 60 * 60 * 24)) !== 1 ? 's' : ''}
-                                </div>
-                              </div>
-                              <button
-                                type="button"
-                                onClick={() => removeDestination(index)}
-                                className="text-red-500 hover:text-red-700 p-2 hover:bg-red-50 rounded-full transition-colors"
-                                title="Remove destination"
-                              >
-                                <X className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </div>
-                          
-                          {/* Connection line to next destination */}
-                          {index < sortedDestinations.length - 1 && (
-                            <div className="absolute -bottom-4 left-3 w-0.5 h-8 bg-blue-300"></div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )}
+            <TripItinerarySection
+              control={form.control}
+              sortedDestinations={sortedDestinations}
+              onRemoveDestination={removeDestination}
+            />
 
             <div className="flex gap-3">
               <Button
