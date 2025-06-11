@@ -91,10 +91,9 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
   const tripStartDate = form.watch('tripStartDate');
   const tripEndDate = form.watch('tripEndDate');
 
-  // Sort destinations by start date in ascending order
-  const sortedDestinations: DestinationData[] = destinations.length > 0 ? [...destinations].sort((a, b) => 
-    new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-  ) : [];
+  // Sort destinations by start date in ascending order - properly typed
+  const sortedDestinations: DestinationData[] = destinations.length > 0 ? 
+    [...destinations].sort((a, b) => a.startDate.getTime() - b.startDate.getTime()) : [];
 
   const addDestination = () => {
     if (newDestination.name && newDestination.startDate && newDestination.endDate) {
