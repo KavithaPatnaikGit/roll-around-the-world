@@ -302,5 +302,3 @@ const DestinationPlanner = () => {
 };
 
 export default DestinationPlanner;
-
-}
