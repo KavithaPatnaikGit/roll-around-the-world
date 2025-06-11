@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Clock } from 'lucide-react';
@@ -9,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import InterDestinationTransport from '@/components/InterDestinationTransport';
+import QuickTips from '@/components/QuickTips';
 
 interface TripDestination {
   city: string;
@@ -133,6 +133,26 @@ const DestinationPlanner = () => {
 
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const transportationRoutes = generateTransportationRoutes();
+
+  // Generate general travel tips for multi-destination trips
+  const generalTravelTips = [
+    {
+      text: "Book transportation between destinations in advance to secure better prices and accessibility accommodations.",
+      link: "https://www.example.com/advance-booking-tips"
+    },
+    {
+      text: "Research wheelchair accessibility at airports and train stations along your route before traveling.",
+      link: "https://www.example.com/transport-accessibility"
+    },
+    {
+      text: "Consider travel insurance that covers mobility equipment and medical needs for multi-destination trips.",
+      link: "https://www.example.com/travel-insurance"
+    },
+    {
+      text: "Pack essential medications and mobility aids in carry-on luggage when flying between destinations.",
+      link: "https://www.example.com/packing-tips"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -265,6 +285,13 @@ const DestinationPlanner = () => {
 
             {/* Transportation Routes */}
             <InterDestinationTransport routes={transportationRoutes} />
+
+            {/* Quick Tips Section */}
+            <QuickTips 
+              quickTips={generalTravelTips}
+              cityName="Multi-Destination Travel"
+              countryId={999} // Use a special ID for general travel tips
+            />
           </div>
         )}
       </div>
@@ -275,3 +302,5 @@ const DestinationPlanner = () => {
 };
 
 export default DestinationPlanner;
+
+}
