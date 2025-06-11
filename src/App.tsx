@@ -11,6 +11,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
 import MultiDestinationPlanning from "./pages/MultiDestinationPlanning";
+import DestinationPlanner from "./pages/DestinationPlanner";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/plan-trip" element={<MultiDestinationPlanning />} />
+          <Route path="/destination-planner" element={<DestinationPlanner />} />
           {/* Legacy route compatibility */}
           <Route path="/country/:countryId" element={<DestinationDetail />} />
           <Route path="*" element={<NotFound />} />
