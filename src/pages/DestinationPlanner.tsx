@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import InterDestinationTransport from '@/components/InterDestinationTransport';
 
 interface TripDestination {
   city: string;
@@ -32,6 +33,79 @@ const DestinationPlanner = () => {
       setTripPlan(JSON.parse(savedTrip));
     }
   }, []);
+
+  // Generate transportation routes between destinations
+  const generateTransportationRoutes = () => {
+    if (!tripPlan || tripPlan.destinations.length < 2) return [];
+
+    const routes = [];
+    for (let i = 0; i < tripPlan.destinations.length - 1; i++) {
+      const from = tripPlan.destinations[i];
+      const to = tripPlan.destinations[i + 1];
+      
+      // Generate transportation options based on the cities
+      const transportOptions = [];
+      
+      // Flight options (always available for international routes)
+      if (from.country !== to.country) {
+        transportOptions.push({
+          type: 'flight' as const,
+          duration: '2-4 hours',
+          estimatedCost: '$150-400',
+          provider: 'Major Airlines',
+          accessibility: 'Wheelchair assistance available, priority boarding for disabled passengers',
+          bookingUrl: `https://www.skyscanner.com/flights-from/${from.city.toLowerCase()}-to-${to.city.toLowerCase()}`
+        });
+      }
+
+      // Train options (for certain routes)
+      if (isTrainRouteAvailable(from.country, to.country)) {
+        transportOptions.push({
+          type: 'train' as const,
+          duration: '3-8 hours',
+          estimatedCost: '$80-200',
+          provider: 'National Railways',
+          accessibility: 'Wheelchair accessible carriages, assistance booking available',
+          bookingUrl: `https://www.trainline.com`
+        });
+      }
+
+      // Bus options (for European routes mainly)
+      if (isBusRouteAvailable(from.country, to.country)) {
+        transportOptions.push({
+          type: 'bus' as const,
+          duration: '6-12 hours',
+          estimatedCost: '$30-80',
+          provider: 'FlixBus / Eurolines',
+          accessibility: 'Wheelchair accessible buses available, advance booking required'
+        });
+      }
+
+      if (transportOptions.length > 0) {
+        routes.push({
+          from: from.city,
+          to: to.city,
+          options: transportOptions
+        });
+      }
+    }
+
+    return routes;
+  };
+
+  const isTrainRouteAvailable = (fromCountry: string, toCountry: string) => {
+    const trainConnectedCountries = [
+      'Netherlands', 'Germany', 'United Kingdom', 'Sweden', 'Japan'
+    ];
+    return trainConnectedCountries.includes(fromCountry) && trainConnectedCountries.includes(toCountry);
+  };
+
+  const isBusRouteAvailable = (fromCountry: string, toCountry: string) => {
+    const busConnectedCountries = [
+      'Netherlands', 'Germany', 'United Kingdom', 'Sweden'
+    ];
+    return busConnectedCountries.includes(fromCountry) && busConnectedCountries.includes(toCountry);
+  };
 
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
@@ -58,6 +132,7 @@ const DestinationPlanner = () => {
   };
 
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const transportationRoutes = generateTransportationRoutes();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -92,99 +167,104 @@ const DestinationPlanner = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Trip Summary */}
-            <div className="lg:col-span-1">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5" />
-                    Trip Summary
-                  </CardTitle>
-                  <CardDescription>
-                    Planned on {format(new Date(tripPlan.createdAt), 'MMM dd, yyyy')}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {tripPlan.destinations.map((destination, index) => (
-                    <div key={index} className="p-3 border border-gray-200 rounded-lg">
-                      <div className="font-medium">{destination.city}</div>
-                      <div className="text-sm text-gray-600">{destination.country}</div>
-                      <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {format(new Date(destination.startDate), 'MMM dd')} - {format(new Date(destination.endDate), 'MMM dd')}
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Calendar */}
-            <div className="lg:col-span-2">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Trip Summary */}
+              <div className="lg:col-span-1">
+                <Card>
+                  <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Calendar className="w-5 h-5" />
-                      {format(currentMonth, 'MMMM yyyy')}
+                      <MapPin className="w-5 h-5" />
+                      Trip Summary
                     </CardTitle>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={() => navigateMonth('prev')}>
-                        Previous
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={() => navigateMonth('next')}>
-                        Next
-                      </Button>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  {/* Calendar Grid */}
-                  <div className="grid grid-cols-7 gap-1">
-                    {/* Week day headers */}
-                    {weekDays.map(day => (
-                      <div key={day} className="p-2 text-center text-sm font-medium text-gray-500">
-                        {day}
+                    <CardDescription>
+                      Planned on {format(new Date(tripPlan.createdAt), 'MMM dd, yyyy')}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {tripPlan.destinations.map((destination, index) => (
+                      <div key={index} className="p-3 border border-gray-200 rounded-lg">
+                        <div className="font-medium">{destination.city}</div>
+                        <div className="text-sm text-gray-600">{destination.country}</div>
+                        <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {format(new Date(destination.startDate), 'MMM dd')} - {format(new Date(destination.endDate), 'MMM dd')}
+                        </div>
                       </div>
                     ))}
-                    
-                    {/* Calendar days */}
-                    {calendarDays.map(day => {
-                      const destinations = getDestinationsForDate(day);
-                      const isCurrentMonth = isSameMonth(day, currentMonth);
-                      const isToday = isSameDay(day, new Date());
-                      
-                      return (
-                        <div 
-                          key={day.toISOString()} 
-                          className={`min-h-[80px] p-1 border border-gray-100 ${
-                            isCurrentMonth ? 'bg-white' : 'bg-gray-50'
-                          } ${isToday ? 'bg-blue-50 border-blue-200' : ''}`}
-                        >
-                          <div className={`text-sm ${
-                            isCurrentMonth ? 'text-gray-900' : 'text-gray-400'
-                          } ${isToday ? 'font-bold text-blue-600' : ''}`}>
-                            {format(day, 'd')}
-                          </div>
-                          <div className="space-y-1 mt-1">
-                            {destinations.map((destination, index) => (
-                              <Badge 
-                                key={index} 
-                                variant="secondary" 
-                                className="text-xs block truncate bg-blue-100 text-blue-800"
-                              >
-                                {destination.city}
-                              </Badge>
-                            ))}
-                          </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Calendar */}
+              <div className="lg:col-span-2">
+                <Card>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="flex items-center gap-2">
+                        <Calendar className="w-5 h-5" />
+                        {format(currentMonth, 'MMMM yyyy')}
+                      </CardTitle>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" onClick={() => navigateMonth('prev')}>
+                          Previous
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => navigateMonth('next')}>
+                          Next
+                        </Button>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    {/* Calendar Grid */}
+                    <div className="grid grid-cols-7 gap-1">
+                      {/* Week day headers */}
+                      {weekDays.map(day => (
+                        <div key={day} className="p-2 text-center text-sm font-medium text-gray-500">
+                          {day}
                         </div>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
+                      ))}
+                      
+                      {/* Calendar days */}
+                      {calendarDays.map(day => {
+                        const destinations = getDestinationsForDate(day);
+                        const isCurrentMonth = isSameMonth(day, currentMonth);
+                        const isToday = isSameDay(day, new Date());
+                        
+                        return (
+                          <div 
+                            key={day.toISOString()} 
+                            className={`min-h-[80px] p-1 border border-gray-100 ${
+                              isCurrentMonth ? 'bg-white' : 'bg-gray-50'
+                            } ${isToday ? 'bg-blue-50 border-blue-200' : ''}`}
+                          >
+                            <div className={`text-sm ${
+                              isCurrentMonth ? 'text-gray-900' : 'text-gray-400'
+                            } ${isToday ? 'font-bold text-blue-600' : ''}`}>
+                              {format(day, 'd')}
+                            </div>
+                            <div className="space-y-1 mt-1">
+                              {destinations.map((destination, index) => (
+                                <Badge 
+                                  key={index} 
+                                  variant="secondary" 
+                                  className="text-xs block truncate bg-blue-100 text-blue-800"
+                                >
+                                  {destination.city}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
+
+            {/* Transportation Routes */}
+            <InterDestinationTransport routes={transportationRoutes} />
           </div>
         )}
       </div>
