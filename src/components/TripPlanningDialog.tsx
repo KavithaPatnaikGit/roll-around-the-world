@@ -57,17 +57,20 @@ const tripPlanningSchema = z.object({
 type TripPlanningFormData = z.infer<typeof tripPlanningSchema>;
 type DestinationData = z.infer<typeof destinationSchema>;
 
+// Type for new destination being added (with optional fields)
+type NewDestinationData = {
+  name: string;
+  startDate?: Date;
+  endDate?: Date;
+};
+
 interface TripPlanningDialogProps {
   children: React.ReactNode;
 }
 
 const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
   const [open, setOpen] = useState(false);
-  const [newDestination, setNewDestination] = useState<{
-    name: string;
-    startDate?: Date;
-    endDate?: Date;
-  }>({
+  const [newDestination, setNewDestination] = useState<NewDestinationData>({
     name: '',
   });
   const { toast } = useToast();
@@ -80,12 +83,12 @@ const TripPlanningDialog = ({ children }: TripPlanningDialogProps) => {
     },
   });
 
-  const destinations = form.watch('destinations');
+  const destinations = form.watch('destinations') || [];
   const tripStartDate = form.watch('tripStartDate');
   const tripEndDate = form.watch('tripEndDate');
 
   // Sort destinations by start date in ascending order
-  const sortedDestinations: DestinationData[] = destinations ? [...destinations].sort((a, b) => 
+  const sortedDestinations: DestinationData[] = destinations.length > 0 ? [...destinations].sort((a, b) => 
     new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
   ) : [];
 
