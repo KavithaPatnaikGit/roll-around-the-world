@@ -1,0 +1,320 @@
+
+import { Country } from '../types';
+
+export const unitedStates: Country = {
+  id: 6,
+  name: "United States",
+  city: "Overview",
+  image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-4.0.3&auto=format&fit=crop&w=4000&h=6000&q=80",
+  rating: 5,
+  isCategory: true,
+  description: "The United States leads the world in accessibility legislation and infrastructure through the Americans with Disabilities Act (ADA). From New York's vibrant cultural scene to San Francisco's innovative spirit and Disney World's magical experiences, the US offers unparalleled accessibility across diverse destinations.",
+  highlights: [
+    "ADA compliance ensuring consistent accessibility standards",
+    "World-class accessible public transportation systems",
+    "Comprehensive accessibility in national parks",
+    "Leading accessible entertainment and attractions",
+    "Extensive accessible accommodation options"
+  ],
+  emergencyNumbers: [
+    { service: "Police", number: "911", description: "Emergency police assistance" },
+    { service: "Ambulance", number: "911", description: "Emergency medical services" },
+    { service: "Fire", number: "911", description: "Fire department emergency response" }
+  ],
+  wheelchairAccessibleAttractions: [],
+  wheelchairServices: [],
+  quickTips: [
+    {
+      text: "The ADA ensures consistent accessibility standards across all public spaces in the US",
+      link: "https://www.ada.gov/"
+    }
+  ],
+  detailedInfo: {
+    accommodation: "The US offers the world's most comprehensive accessible accommodation options with ADA-compliant hotels nationwide.",
+    attractions: "From Disney World to national parks, attractions feature world-leading accessibility with detailed accessibility guides.",
+    dining: "Restaurants nationwide comply with ADA standards ensuring accessible entrances, seating, and restroom facilities.",
+    transport: "Major cities feature accessible public transport, with Amtrak and airlines providing comprehensive accessibility services."
+  },
+  cities: [
+    {
+      id: 61,
+      name: "United States",
+      city: "New York City",
+      image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=7372&h=4392&q=80",
+      rating: 5,
+      description: "New York City stands as one of the world's most accessible major cities, with comprehensive subway accessibility, world-renowned accessible attractions, and a vibrant cultural scene that welcomes all visitors. The city that never sleeps ensures accessibility around the clock.",
+      highlights: [
+        "Extensive accessible subway system with elevators",
+        "Broadway theaters with accessible seating",
+        "Wheelchair-friendly Central Park and High Line",
+        "ADA-compliant museums and attractions",
+        "Comprehensive accessible taxi and rideshare options"
+      ],
+      emergencyNumbers: [
+        { service: "Police", number: "911", description: "Emergency police assistance" },
+        { service: "Ambulance", number: "911", description: "Emergency medical services" },
+        { service: "Fire", number: "911", description: "Fire department emergency response" }
+      ],
+      wheelchairAccessibleAttractions: [
+        {
+          name: "Statue of Liberty & Ellis Island",
+          url: "https://www.nps.gov/stli/planyourvisit/accessibility.htm",
+          description: "Iconic landmarks with accessible ferry service and comprehensive accessibility features",
+          rating: 5,
+          bookingUrl: "https://www.statueofliberty.org/"
+        },
+        {
+          name: "Empire State Building",
+          url: "https://www.esbnyc.com/visit/accessibility",
+          description: "Art Deco skyscraper with full accessibility to observation decks",
+          rating: 5,
+          bookingUrl: "https://www.esbnyc.com/buy-tickets"
+        },
+        {
+          name: "Metropolitan Museum of Art",
+          url: "https://www.metmuseum.org/visit/accessibility",
+          description: "World-renowned museum with comprehensive accessibility services and programs",
+          rating: 5,
+          bookingUrl: "https://www.metmuseum.org/visit"
+        },
+        {
+          name: "Central Park",
+          url: "https://www.centralparknyc.org/visit/accessibility",
+          description: "Iconic urban park with accessible paths, restrooms, and attractions",
+          rating: 5
+        },
+        {
+          name: "High Line",
+          url: "https://www.thehighline.org/visit/accessibility/",
+          description: "Elevated park with elevator access and accessible walkways throughout",
+          rating: 5
+        },
+        {
+          name: "9/11 Memorial & Museum",
+          url: "https://www.911memorial.org/visit/accessibility",
+          description: "Moving memorial and museum with full accessibility features",
+          rating: 5,
+          bookingUrl: "https://www.911memorial.org/visit"
+        }
+      ],
+      wheelchairServices: [
+        {
+          name: "Wheelchair Getaways NYC",
+          type: "both",
+          address: "Multiple locations in NYC",
+          phone: "+1 212-582-4730",
+          website: "https://www.wheelchairgetaways.com/",
+          description: "Comprehensive wheelchair rental and accessibility equipment services"
+        },
+        {
+          name: "NYC Mobility Equipment",
+          type: "both",
+          address: "123 Broadway, New York, NY 10001",
+          phone: "+1 212-555-0123",
+          website: "https://www.nycmobility.com",
+          description: "Full-service mobility equipment center with tourist rentals and repairs"
+        }
+      ],
+      quickTips: [
+        {
+          text: "NYC subway has over 140 accessible stations - use the MTA app for real-time elevator status",
+          link: "https://new.mta.info/accessibility"
+        },
+        {
+          text: "All NYC buses are wheelchair accessible with kneeling features and priority seating",
+          link: "https://new.mta.info/accessibility/buses"
+        },
+        {
+          text: "Broadway theaters offer accessible seating and assistive listening devices - book directly with theaters",
+          link: "https://www.broadway.org/accessibility/"
+        }
+      ],
+      detailedInfo: {
+        accommodation: "NYC offers extensive accessible accommodation from luxury hotels to budget options, all ADA-compliant with roll-in showers and accessible rooms.",
+        attractions: "World-class museums, landmarks, and entertainment venues with comprehensive accessibility, detailed guides, and assistance services.",
+        dining: "Diverse dining scene with ADA-compliant restaurants offering accessible entrances, seating, and restroom facilities across all cuisines.",
+        transport: "Comprehensive accessible public transport with subway, buses, taxis, and rideshare options, plus accessible ferry services to Staten Island."
+      }
+    },
+    {
+      id: 62,
+      name: "United States",
+      city: "San Francisco",
+      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2600&h=1548&q=80",
+      rating: 4,
+      description: "San Francisco combines stunning natural beauty with progressive accessibility features. Despite its famous hills, the city offers excellent accessible transportation, innovative accessibility solutions, and breathtaking accessible viewpoints of the Golden Gate Bridge and bay.",
+      highlights: [
+        "Cable cars with accessibility accommodations",
+        "Accessible Golden Gate Bridge walkways",
+        "Wheelchair-friendly Fisherman's Wharf",
+        "Comprehensive MUNI accessibility",
+        "Innovative accessibility technology implementations"
+      ],
+      emergencyNumbers: [
+        { service: "Police", number: "911", description: "Emergency police assistance" },
+        { service: "Ambulance", number: "911", description: "Emergency medical services" },
+        { service: "Fire", number: "911", description: "Fire department emergency response" }
+      ],
+      wheelchairAccessibleAttractions: [
+        {
+          name: "Golden Gate Bridge",
+          url: "https://www.goldengate.org/visit/accessibility/",
+          description: "Iconic bridge with accessible sidewalks and viewing areas",
+          rating: 5
+        },
+        {
+          name: "Alcatraz Island",
+          url: "https://www.nps.gov/alca/planyourvisit/accessibility.htm",
+          description: "Historic prison island with accessible ferry and audio tour",
+          rating: 4,
+          bookingUrl: "https://www.alcatrazcruises.com/"
+        },
+        {
+          name: "Fisherman's Wharf & Pier 39",
+          url: "https://www.pier39.com/visit/accessibility/",
+          description: "Popular waterfront destination with accessible shops and attractions",
+          rating: 5
+        },
+        {
+          name: "San Francisco Museum of Modern Art",
+          url: "https://www.sfmoma.org/visit/accessibility/",
+          description: "World-class modern art museum with comprehensive accessibility features",
+          rating: 5,
+          bookingUrl: "https://www.sfmoma.org/visit/"
+        },
+        {
+          name: "Lombard Street",
+          url: "https://www.sftravel.com/article/accessibility-san-francisco",
+          description: "Famous winding street with accessible viewing areas at top and bottom",
+          rating: 3
+        }
+      ],
+      wheelchairServices: [
+        {
+          name: "Bay Area Mobility",
+          type: "both",
+          address: "456 Mission St, San Francisco, CA 94105",
+          phone: "+1 415-555-0456",
+          website: "https://www.bayareamobility.com",
+          description: "Complete wheelchair services including specialized equipment for SF's hills"
+        },
+        {
+          name: "SF Accessibility Solutions",
+          type: "both",
+          address: "789 Market St, San Francisco, CA 94103",
+          phone: "+1 415-555-0789",
+          website: "https://www.sfaccessibility.com",
+          description: "Innovative mobility solutions and equipment rental for tourists"
+        }
+      ],
+      quickTips: [
+        {
+          text: "MUNI buses and trains are fully accessible - use the SF MTA app for real-time accessibility info",
+          link: "https://www.sfmta.com/accessibility"
+        },
+        {
+          text: "Many cable car routes offer accessible alternatives via bus - check MUNI for parallel routes",
+          link: "https://www.sfmta.com/getting-around/accessibility/accessible-cable-cars"
+        },
+        {
+          text: "Golden Gate Park has accessible paths and attractions including the de Young Museum",
+          link: "https://sfrecpark.org/Facilities/Facility/Details/Golden-Gate-Park-143"
+        }
+      ],
+      detailedInfo: {
+        accommodation: "San Francisco offers accessible hotels with stunning bay views, many featuring accessible rooms with roll-in showers and elevator access.",
+        attractions: "Iconic landmarks and cultural sites with accessibility adaptations for the city's unique topography, including accessible viewpoints.",
+        dining: "Diverse culinary scene with accessible restaurants offering everything from fresh seafood to innovative cuisine, all ADA-compliant.",
+        transport: "Comprehensive accessible public transport with buses, trains, and accessible taxi services, plus accessible alternatives to cable cars."
+      }
+    },
+    {
+      id: 63,
+      name: "United States", 
+      city: "Orlando",
+      image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?ixlib=rb-4.0.3&auto=format&fit=crop&w=3456&h=5184&q=80",
+      rating: 5,
+      description: "Orlando stands as the world's premier accessible destination for family entertainment, home to Disney World's industry-leading accessibility services, Universal Studios' comprehensive accommodations, and numerous other attractions designed with accessibility in mind from the ground up.",
+      highlights: [
+        "Disney World's world-renowned accessibility services",
+        "Universal Studios' comprehensive accessibility programs",
+        "Accessible transportation throughout the theme park corridor",
+        "Specialized accessible accommodation options",
+        "Industry-leading assistive technology implementations"
+      ],
+      emergencyNumbers: [
+        { service: "Police", number: "911", description: "Emergency police assistance" },
+        { service: "Ambulance", number: "911", description: "Emergency medical services" },
+        { service: "Fire", number: "911", description: "Fire department emergency response" }
+      ],
+      wheelchairAccessibleAttractions: [
+        {
+          name: "Walt Disney World Resort",
+          url: "https://disneyworld.disney.go.com/guest-services/disability-access-service/",
+          description: "Four theme parks with industry-leading accessibility services and accommodations",
+          rating: 5,
+          bookingUrl: "https://disneyworld.disney.go.com/tickets/"
+        },
+        {
+          name: "Universal Orlando Resort",
+          url: "https://www.universalorlando.com/web/en/us/plan-your-visit/accessibility",
+          description: "Two theme parks with comprehensive accessibility services and adaptive attractions",
+          rating: 5,
+          bookingUrl: "https://www.universalorlando.com/web/en/us/tickets"
+        },
+        {
+          name: "SeaWorld Orlando",
+          url: "https://seaworld.com/orlando/plan-your-visit/accessibility/",
+          description: "Marine life theme park with accessible shows and attractions",
+          rating: 4,
+          bookingUrl: "https://seaworld.com/orlando/tickets/"
+        },
+        {
+          name: "ICON Park",
+          url: "https://iconparkorlando.com/accessibility/",
+          description: "Entertainment complex with accessible attractions including The Wheel",
+          rating: 4,
+          bookingUrl: "https://iconparkorlando.com/"
+        }
+      ],
+      wheelchairServices: [
+        {
+          name: "Orlando Mobility Rentals",
+          type: "both",
+          address: "Multiple Orlando locations",
+          phone: "+1 407-555-0123",
+          website: "https://www.orlandomobility.com",
+          description: "Specialized theme park mobility equipment including delivery to hotels"
+        },
+        {
+          name: "Theme Park Accessibility",
+          type: "both",
+          address: "International Drive area",
+          phone: "+1 407-555-0456",
+          website: "https://www.themeparkaccessibility.com",
+          description: "Complete accessibility equipment rental and theme park specialist services"
+        }
+      ],
+      quickTips: [
+        {
+          text: "Disney's Disability Access Service (DAS) allows you to return to attractions at scheduled times - register at Guest Relations",
+          link: "https://disneyworld.disney.go.com/guest-services/disability-access-service/"
+        },
+        {
+          text: "Universal's Express Pass is available for guests with disabilities - inquire at Guest Services",
+          link: "https://www.universalorlando.com/web/en/us/plan-your-visit/accessibility"
+        },
+        {
+          text: "Many hotels on International Drive offer free shuttle services to theme parks with accessible vehicles",
+          link: "https://www.visitorlando.com/things-to-do/transportation/i-ride-trolley/"
+        }
+      ],
+      detailedInfo: {
+        accommodation: "Orlando features the world's largest selection of accessible vacation rentals and hotels, many specifically designed for families with accessibility needs.",
+        attractions: "Home to the world's most accessible theme parks with comprehensive services including ride accessibility, assistive listening devices, and specialized programs.",
+        dining: "Extensive dining options within theme parks and throughout the city, all featuring accessible seating and comprehensive dietary accommodation services.",
+        transport: "Accessible transportation options including theme park shuttles, accessible rental cars, and specialized services for guests with disabilities."
+      }
+    }
+  ]
+};
