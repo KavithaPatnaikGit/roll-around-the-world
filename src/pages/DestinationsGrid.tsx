@@ -32,9 +32,12 @@ const DestinationsGrid = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Accessible Travel Destinations
           </h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-3">
             Discover the world's most wheelchair-accessible destinations with detailed guides, 
-            transport information, and traveler experiences. Share your story about a Destination.
+            transport information, and traveler experiences.
+          </p>
+          <p className="text-sm md:text-base text-blue-200 italic">
+            Share your story about a Destination.
           </p>
         </div>
       </div>
