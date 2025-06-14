@@ -26,8 +26,8 @@ const HomePage = () => {
               Trusted by 10,000+ Travelers
             </Badge>
             <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-8 leading-tight tracking-tight">
-              Accessible Travel
-              <span className="block text-blue-600">Made Simple</span>
+              Roll Around
+              <span className="block text-blue-600">The World</span>
             </h1>
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
               Discover barrier-free destinations, verified accommodations, and trusted experiences 
@@ -167,7 +167,7 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Why AccessiTravel?
+              Why Roll-around-the-world?
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
               Built by travelers, for travelers. We understand what truly accessible travel means.
