@@ -1,3 +1,4 @@
+
 import { Country } from './types';
 
 export const destinations: Country[] = [
