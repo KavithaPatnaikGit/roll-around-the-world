@@ -1,4 +1,3 @@
-
 import { Country } from './types';
 
 export const destinations: Country[] = [
@@ -6,7 +5,7 @@ export const destinations: Country[] = [
     id: 1,
     name: "Netherlands",
     city: "Amsterdam",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
     rating: 5,
     description: "Amsterdam is one of the world's most wheelchair-accessible cities, with excellent public transport, accessible canal tours, and accommodating museums. The city's flat terrain and modern infrastructure make it ideal for travelers with mobility needs.",
     highlights: [
@@ -64,7 +63,7 @@ export const destinations: Country[] = [
     id: 2,
     name: "Japan",
     city: "Tokyo",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
     rating: 5,
     description: "Tokyo offers exceptional accessibility with modern infrastructure, helpful staff, and comprehensive wheelchair-friendly attractions. The city combines traditional culture with cutting-edge accessibility technology.",
     highlights: [
@@ -121,7 +120,7 @@ export const destinations: Country[] = [
     id: 3,
     name: "Australia",
     city: "Sydney",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
     rating: 4,
     description: "Sydney combines stunning natural beauty with excellent accessibility features across its major attractions and transport systems. The harbor city offers unique accessible experiences from beaches to cultural landmarks.",
     highlights: [
@@ -179,7 +178,7 @@ export const destinations: Country[] = [
     id: 4,
     name: "United Kingdom",
     city: "London",
-    image: "/placeholder.svg",
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=6000&h=4000&q=80",
     rating: 4,
     description: "London leads in accessibility with comprehensive transport systems, world-class museums, and historic sites adapted for all visitors. The city offers an excellent blend of heritage and modern accessibility.",
     highlights: [
