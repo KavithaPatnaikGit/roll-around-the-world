@@ -43,17 +43,21 @@ const DestinationsGrid = () => {
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       
-      <div className="container mx-auto px-4 py-12">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Accessible <span className="text-blue-600">Destinations</span>
+      {/* Hero Banner Section */}
+      <div className="relative bg-gradient-to-r from-blue-600 to-green-600 py-20">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative container mx-auto px-4 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Accessible <span className="text-yellow-300">Destinations</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our curated collection of wheelchair-friendly destinations around the world
+          <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+            Explore our curated collection of wheelchair-friendly destinations around the world. 
+            Discover places that welcome all travelers with comprehensive accessibility features.
           </p>
         </div>
-
+      </div>
+      
+      <div className="container mx-auto px-4 py-12">
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="flex flex-col md:flex-row gap-4 items-center">
