@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Accessibility, MapPin, Star, Users, Award, Globe, Sparkles, Shield, Heart } from 'lucide-react';
+import { ArrowRight, Accessibility, MapPin, Star, Users, Award, Globe, CheckCircle, Shield, Heart, Zap, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -14,71 +14,82 @@ const HomePage = () => {
   const featuredDestinations = destinations.slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-green-50">
+    <div className="min-h-screen bg-white">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative py-24 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-green-600/10"></div>
-        <div className="container mx-auto text-center relative">
-          <div className="mb-12">
-            <Badge className="bg-gradient-to-r from-green-100 to-blue-100 text-green-800 hover:from-green-200 hover:to-blue-200 mb-6 px-6 py-2 text-base font-medium">
-              <Accessibility className="w-5 h-5 mr-2" />
-              Accessibility First Travel
+      <section className="relative py-32 px-4">
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="bg-blue-50 text-blue-700 border-blue-200 mb-8 px-4 py-2 text-sm font-medium">
+              <Accessibility className="w-4 h-4 mr-2" />
+              Trusted by 10,000+ Travelers
             </Badge>
-            <h1 className="text-6xl md:text-8xl font-bold text-gray-900 mb-8 leading-tight">
-              Travel Beyond
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-green-600">
-                All Barriers
-              </span>
+            <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-8 leading-tight tracking-tight">
+              Accessible Travel
+              <span className="block text-blue-600">Made Simple</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
-              Experience the world's most accessible destinations with confidence. 
-              From wheelchair-friendly attractions to inclusive accommodations, 
-              we make travel accessible for everyone, everywhere.
+            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+              Discover barrier-free destinations, verified accommodations, and trusted experiences 
+              from a community that understands your needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-10 py-6 text-xl font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-sm"
                 onClick={() => navigate('/destinations')}
               >
-                <Sparkles className="w-6 h-6 mr-3" />
-                Explore Destinations
-                <ArrowRight className="w-6 h-6 ml-3" />
+                Start Exploring
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 px-10 py-6 text-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 text-lg font-semibold rounded-full"
                 onClick={() => navigate('/about')}
               >
-                <Heart className="w-6 h-6 mr-3" />
-                Our Story
+                <Heart className="w-5 h-5 mr-2" />
+                Learn More
               </Button>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+                <span>Expert Verified</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="w-4 h-4 text-blue-500" />
+                <span>Community Driven</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4 text-purple-500" />
+                <span>Award Winning</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white/70 backdrop-blur-sm">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div className="space-y-4 p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 transition-all duration-300">
-              <div className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">50+</div>
-              <div className="text-gray-700 text-lg font-medium">Accessible Destinations</div>
-              <div className="text-gray-600 text-sm">Carefully verified for accessibility</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-blue-600 mb-2">50+</div>
+              <div className="text-gray-900 font-semibold mb-1">Verified Destinations</div>
+              <div className="text-gray-600 text-sm">Accessibility confirmed</div>
             </div>
-            <div className="space-y-4 p-8 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 transition-all duration-300">
-              <div className="text-5xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">1000+</div>
-              <div className="text-gray-700 text-lg font-medium">Verified Reviews</div>
-              <div className="text-gray-600 text-sm">From real travelers like you</div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-green-600 mb-2">1,000+</div>
+              <div className="text-gray-900 font-semibold mb-1">Community Reviews</div>
+              <div className="text-gray-600 text-sm">Real experiences shared</div>
             </div>
-            <div className="space-y-4 p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200 transition-all duration-300">
-              <div className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">24/7</div>
-              <div className="text-gray-700 text-lg font-medium">Travel Support</div>
-              <div className="text-gray-600 text-sm">Always here when you need us</div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-purple-600 mb-2">24/7</div>
+              <div className="text-gray-900 font-semibold mb-1">Travel Support</div>
+              <div className="text-gray-600 text-sm">Always here to help</div>
             </div>
           </div>
         </div>
@@ -87,53 +98,47 @@ const HomePage = () => {
       {/* Featured Destinations */}
       <section className="py-24 px-4">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200 mb-6 px-4 py-2">
-              <Globe className="w-4 h-4 mr-2" />
-              Handpicked Selection
-            </Badge>
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">
-              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Destinations</span>
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Popular Destinations
             </h2>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
-              Discover extraordinary places known for their exceptional accessibility, 
-              inclusive experiences, and warm welcomes for all travelers
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Handpicked locations known for exceptional accessibility and inclusive experiences
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {featuredDestinations.map((destination) => (
               <Card 
                 key={destination.id} 
-                className="group hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:scale-105"
+                className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-0 shadow-sm overflow-hidden"
                 onClick={() => navigate(`/destination/${destination.id}`)}
               >
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
                   <img
                     src={destination.image}
                     alt={`${destination.city}, ${destination.name}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-white/90 text-green-800 shadow-lg">
-                      <Star className="w-3 h-3 mr-1 fill-current" />
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-white/95 text-gray-900 shadow-sm border-0">
+                      <Star className="w-3 h-3 mr-1 fill-yellow-400 text-yellow-400" />
                       {destination.rating}
                     </Badge>
                   </div>
                 </div>
-                <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center gap-3 text-xl">
-                    <MapPin className="w-5 h-5 text-blue-600" />
+                <CardHeader className="pb-3">
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <MapPin className="w-4 h-4 text-blue-600" />
                     {destination.name}
                   </CardTitle>
-                  <p className="text-gray-600 font-medium">{destination.city}</p>
+                  <p className="text-gray-600 text-sm font-medium">{destination.city}</p>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <p className="text-gray-700 mb-6 line-clamp-2 leading-relaxed">{destination.description}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <p className="text-gray-700 text-sm mb-4 line-clamp-2">{destination.description}</p>
+                  <div className="flex flex-wrap gap-1">
                     {destination.highlights?.slice(0, 2).map((highlight, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs bg-blue-50 text-blue-700 hover:bg-blue-100">
+                      <Badge key={index} variant="secondary" className="text-xs bg-blue-50 text-blue-700">
                         {highlight}
                       </Badge>
                     ))}
@@ -147,57 +152,76 @@ const HomePage = () => {
             <Button 
               size="lg" 
               variant="outline"
-              className="px-8 py-4 text-lg font-semibold border-2 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-200"
+              className="px-8 py-3 border-gray-300 hover:bg-gray-50 rounded-full"
               onClick={() => navigate('/destinations')}
             >
               View All Destinations
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-gradient-to-r from-gray-50 to-blue-50">
+      <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200 mb-6 px-4 py-2">
-              <Shield className="w-4 h-4 mr-2" />
-              Why Choose Us
-            </Badge>
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">
-              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">AccessiTravel</span> Difference
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Why AccessiTravel?
             </h2>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
-              We're more than just a travel platform—we're your trusted partner 
-              in creating memorable, accessible adventures
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Built by travelers, for travelers. We understand what truly accessible travel means.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <Card className="text-center p-8 border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Accessibility className="w-10 h-10 text-blue-600" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="text-center p-8 border-0 shadow-sm bg-white">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Target className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Verified Accessibility</h3>
-              <p className="text-gray-600 leading-relaxed">Every destination is personally verified by our accessibility experts and community members</p>
+              <h3 className="text-xl font-bold mb-4 text-gray-900">Expert Verification</h3>
+              <p className="text-gray-600 leading-relaxed">Every location is personally verified by accessibility specialists and experienced travelers</p>
             </Card>
             
-            <Card className="text-center p-8 border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Users className="w-10 h-10 text-green-600" />
+            <Card className="text-center p-8 border-0 shadow-sm bg-white">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Users className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Community Driven</h3>
-              <p className="text-gray-600 leading-relaxed">Real reviews and experiences from travelers with disabilities who've been there</p>
+              <h3 className="text-xl font-bold mb-4 text-gray-900">Real Community</h3>
+              <p className="text-gray-600 leading-relaxed">Authentic reviews and tips from travelers who share similar accessibility needs</p>
             </Card>
             
-            <Card className="text-center p-8 border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Award className="w-10 h-10 text-purple-600" />
+            <Card className="text-center p-8 border-0 shadow-sm bg-white">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <Zap className="w-8 h-8 text-purple-600" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">Award Winning</h3>
-              <p className="text-gray-600 leading-relaxed">Recognized globally for promoting inclusive travel experiences and accessibility awareness</p>
+              <h3 className="text-xl font-bold mb-4 text-gray-900">Instant Support</h3>
+              <p className="text-gray-600 leading-relaxed">24/7 travel assistance and expert guidance whenever you need it most</p>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 px-4">
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
+            <Globe className="w-16 h-16 text-blue-600 mx-auto mb-8" />
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              Ready to Explore the World?
+            </h2>
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+              Join thousands of travelers discovering accessible destinations with confidence. 
+              Your next adventure awaits.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg font-semibold rounded-full shadow-sm"
+              onClick={() => navigate('/destinations')}
+            >
+              Start Your Journey
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
           </div>
         </div>
       </section>
