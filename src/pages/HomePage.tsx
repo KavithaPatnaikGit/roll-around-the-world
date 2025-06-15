@@ -17,26 +17,30 @@ const HomePage = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
       
-      {/* Hero Section */}
+      {/* Hero Section with Banner Background */}
       <section className="relative py-32 px-4">
-        <div className="container mx-auto">
+        {/* Banner Background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-green-600"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
+        
+        <div className="relative container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="bg-blue-50 text-blue-700 border-blue-200 mb-8 px-4 py-2 text-sm font-medium">
+            <Badge className="bg-white/20 backdrop-blur-sm border-white/30 text-white mb-8 px-4 py-2 text-sm font-medium">
               <Accessibility className="w-4 h-4 mr-2" />
               Trusted by 10,000+ Travelers
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-8 leading-tight tracking-tight">
-              Roll Around
-              <span className="block text-blue-600">The World</span>
+            <h1 className="text-5xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tight">
+              Discover Accessible
+              <span className="block">Adventures</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
               Discover barrier-free destinations, verified accommodations, and trusted experiences 
               from a community that understands your needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button 
                 size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-sm"
+                className="bg-white text-blue-600 hover:bg-white/90 px-8 py-4 text-lg font-semibold rounded-full shadow-sm"
                 onClick={() => navigate('/destinations')}
               >
                 Start Exploring
@@ -45,7 +49,7 @@ const HomePage = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 text-lg font-semibold rounded-full"
+                className="border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold rounded-full"
                 onClick={() => navigate('/about')}
               >
                 <Heart className="w-5 h-5 mr-2" />
@@ -54,17 +58,17 @@ const HomePage = () => {
             </div>
             
             {/* Trust Indicators */}
-            <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500">
+            <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-white/80">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
+                <CheckCircle className="w-4 h-4 text-green-400" />
                 <span>Expert Verified</span>
               </div>
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-blue-500" />
+                <Shield className="w-4 h-4 text-blue-300" />
                 <span>Community Driven</span>
               </div>
               <div className="flex items-center gap-2">
-                <Award className="w-4 h-4 text-purple-500" />
+                <Award className="w-4 h-4 text-purple-300" />
                 <span>Award Winning</span>
               </div>
             </div>
