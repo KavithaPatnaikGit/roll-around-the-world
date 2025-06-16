@@ -315,6 +315,106 @@ export const unitedStates: Country = {
         dining: "Extensive dining options within theme parks and throughout the city, all featuring accessible seating and comprehensive dietary accommodation services.",
         transport: "Accessible transportation options including theme park shuttles, accessible rental cars, and specialized services for guests with disabilities."
       }
+    },
+    {
+      id: 64,
+      name: "United States",
+      city: "Boston",
+      image: "https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&h=1600&q=80",
+      rating: 4,
+      description: "Boston combines rich American history with modern accessibility features. Known as the 'Walking City,' Boston has adapted its historic charm with comprehensive accessibility infrastructure, making iconic sites like the Freedom Trail, world-renowned museums, and prestigious universities accessible to all visitors.",
+      highlights: [
+        "Accessible Freedom Trail with alternative routes",
+        "MBTA public transportation with accessibility features",
+        "Wheelchair-friendly Fenway Park tours",
+        "Comprehensive museum accessibility programs",
+        "Accessible harbor cruises and waterfront attractions"
+      ],
+      emergencyNumbers: [
+        { service: "Police", number: "911", description: "Emergency police assistance" },
+        { service: "Ambulance", number: "911", description: "Emergency medical services" },
+        { service: "Fire", number: "911", description: "Fire department emergency response" }
+      ],
+      wheelchairAccessibleAttractions: [
+        {
+          name: "Freedom Trail",
+          url: "https://www.thefreedomtrail.org/accessibility",
+          description: "Historic walking trail with accessible routes and transportation options to key sites",
+          rating: 4
+        },
+        {
+          name: "Museum of Fine Arts Boston",
+          url: "https://www.mfa.org/visit/accessibility",
+          description: "World-class art museum with comprehensive accessibility services and programs",
+          rating: 5,
+          bookingUrl: "https://www.mfa.org/tickets"
+        },
+        {
+          name: "Boston Tea Party Ships & Museum",
+          url: "https://www.bostonteapartyship.com/accessibility",
+          description: "Interactive historical experience with accessible ships and exhibits",
+          rating: 4,
+          bookingUrl: "https://www.bostonteapartyship.com/tickets"
+        },
+        {
+          name: "Fenway Park",
+          url: "https://www.mlb.com/redsox/ballpark/accessibility",
+          description: "Historic baseball stadium with accessible seating and tours",
+          rating: 4,
+          bookingUrl: "https://www.mlb.com/redsox/tickets"
+        },
+        {
+          name: "Boston Harbor Islands",
+          url: "https://www.bostonharborislands.org/accessibility",
+          description: "Scenic islands accessible via ferry with accessible trails and facilities",
+          rating: 4,
+          bookingUrl: "https://www.bostonharborislands.org/ferry-schedule"
+        },
+        {
+          name: "Harvard University & MIT",
+          url: "https://www.harvard.edu/accessibility",
+          description: "Prestigious universities offering accessible campus tours and facilities",
+          rating: 4
+        }
+      ],
+      wheelchairServices: [
+        {
+          name: "Boston Mobility Solutions",
+          type: "both",
+          address: "123 Commonwealth Ave, Boston, MA 02116",
+          phone: "+1 617-555-0123",
+          website: "https://www.bostonmobility.com",
+          description: "Complete wheelchair rental and repair services for tourists and residents"
+        },
+        {
+          name: "New England Accessibility Equipment",
+          type: "both",
+          address: "456 Boylston St, Boston, MA 02116",
+          phone: "+1 617-555-0456",
+          website: "https://www.neaccessibility.com",
+          description: "Specialized accessibility equipment and historic site navigation aids"
+        }
+      ],
+      quickTips: [
+        {
+          text: "MBTA offers accessible subway, bus, and trolley services - use the MBTA app for real-time accessibility updates",
+          link: "https://www.mbta.com/accessibility"
+        },
+        {
+          text: "Freedom Trail offers accessible alternatives to cobblestone sections - download the accessible route map",
+          link: "https://www.thefreedomtrail.org/accessibility"
+        },
+        {
+          text: "Boston Common and Public Garden have accessible paths and the Swan Boats offer wheelchair boarding",
+          link: "https://www.boston.gov/parks/boston-common"
+        }
+      ],
+      detailedInfo: {
+        accommodation: "Boston offers accessible hotels ranging from historic properties with modern accessibility retrofits to contemporary hotels with full ADA compliance.",
+        attractions: "Historic sites and modern attractions with creative accessibility solutions, including alternative routes for cobblestone areas and accessible museum programs.",
+        dining: "Diverse culinary scene featuring accessible restaurants from traditional New England seafood to innovative cuisine, all meeting ADA standards.",
+        transport: "Comprehensive accessible public transportation including subway, buses, accessible taxis, and specialized services for historic site navigation."
+      }
     }
   ]
 };
