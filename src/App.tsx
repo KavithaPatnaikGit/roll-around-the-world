@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import MultiDestinationPlanning from "./pages/MultiDestinationPlanning";
 import DestinationPlanner from "./pages/DestinationPlanner";
 import AITravelAssistant from "./pages/AITravelAssistant";
+import GoogleForm from "./pages/GoogleForm";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/plan-trip" element={<MultiDestinationPlanning />} />
           <Route path="/destination-planner" element={<DestinationPlanner />} />
           <Route path="/ai-assistant" element={<AITravelAssistant />} />
+          <Route path="/feedback" element={<GoogleForm />} />
           {/* Legacy route compatibility */}
           <Route path="/country/:countryId" element={<DestinationDetail />} />
           <Route path="*" element={<NotFound />} />
