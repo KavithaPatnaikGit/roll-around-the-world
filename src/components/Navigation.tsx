@@ -14,6 +14,7 @@ const Navigation = () => {
     { label: 'Home', path: '/' },
     { label: 'Destinations', path: '/destinations' },
     { label: 'Planner', path: '/destination-planner' },
+    { label: 'AI Assistant', path: '/ai-assistant' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];

@@ -12,6 +12,7 @@ import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
 import MultiDestinationPlanning from "./pages/MultiDestinationPlanning";
 import DestinationPlanner from "./pages/DestinationPlanner";
+import AITravelAssistant from "./pages/AITravelAssistant";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/plan-trip" element={<MultiDestinationPlanning />} />
           <Route path="/destination-planner" element={<DestinationPlanner />} />
+          <Route path="/ai-assistant" element={<AITravelAssistant />} />
           {/* Legacy route compatibility */}
           <Route path="/country/:countryId" element={<DestinationDetail />} />
           <Route path="*" element={<NotFound />} />
