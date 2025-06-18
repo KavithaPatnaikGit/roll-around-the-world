@@ -21,7 +21,7 @@ const GoogleForm = () => {
           
           <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '80vh' }}>
             <iframe 
-              src="https://docs.google.com/forms/d/e/1FAIpQLSduWbFHkG5F8w8UJsGGq1p_A-J7oTMCNkV_tPBYtEhx8zZzSA/viewform?embedded=true"
+              src="https://docs.google.com/forms/d/e/1FAIpQLSfYxP6yZ8qhXhRxbSV5L4hTw9Kc8jE6nF7oU2iG3vN4mQ1pR8/viewform?embedded=true"
               width="100%" 
               height="100%" 
               frameBorder="0"
