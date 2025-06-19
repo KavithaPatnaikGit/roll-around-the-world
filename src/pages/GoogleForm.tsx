@@ -21,18 +21,17 @@ const GoogleForm = () => {
           
           <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '80vh' }}>
             <iframe 
-  src="https://docs.google.com/forms/d/e/1FAIpQLSf1f-BEpQehfRnGTnxrmXUoFfxeUH6NLS42niyTNiuUDCgo3w/viewform?embedded=true"
-  width="100%" 
-  height="100%" 
-  frameBorder="0"
-  marginHeight="0"
-  marginWidth="0"
-  title="Feedback Form"
-  className="w-full h-full"
->
-  Loading…
-</iframe>
-
+              src="https://docs.google.com/forms/d/e/1FAIpQLSf1f-BEpQehfRnGTnxrmXUoFfxeUH6NLS42niyTNiuUDCgo3w/viewform?embedded=true"
+              width="100%" 
+              height="100%" 
+              frameBorder={0}
+              marginHeight={0}
+              marginWidth={0}
+              title="Feedback Form"
+              className="w-full h-full"
+            >
+              Loading…
+            </iframe>
           </div>
         </div>
       </div>
