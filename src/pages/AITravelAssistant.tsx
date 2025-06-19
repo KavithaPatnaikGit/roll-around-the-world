@@ -3,7 +3,7 @@ import React from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import WordDownloadButton from '@/components/WordDownloadButton';
-import { Download } from 'lucide-react';
+import FirecrawlSection from '@/components/FirecrawlSection';
 
 const AITravelAssistant = () => {
   return (
@@ -22,7 +22,7 @@ const AITravelAssistant = () => {
             </p>
           </div>
           
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '70vh' }}>
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8" style={{ height: '50vh' }}>
             <iframe 
               src="https://app.relevanceai.com/agents/bcbe5a/5f9108a2948f-42cb-b23d-c8f3b5b3af7d/47a49c1b-1369-4853-ae75-77a6a81ea827/share?hide_tool_steps=false&hide_file_uploads=false&hide_conversation_list=false&bubble_style=agent&primary_color=%23685FFF&bubble_icon=pd%2Fchat&input_placeholder_text=Type+your+message...&hide_logo=false&hide_description=false" 
               width="100%" 
@@ -32,6 +32,8 @@ const AITravelAssistant = () => {
               className="w-full h-full"
             />
           </div>
+
+          <FirecrawlSection />
           
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-500">
