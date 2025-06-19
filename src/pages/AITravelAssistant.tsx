@@ -21,15 +21,10 @@ const AITravelAssistant = () => {
             </p>
           </div>
           
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8" style={{ height: '50vh' }}>
-            <iframe 
-              src="https://app.relevanceai.com/agents/bcbe5a/5f9108a2948f-42cb-b23d-c8f3b5b3af7d/47a49c1b-1369-4853-ae75-77a6a81ea827/share?hide_tool_steps=false&hide_file_uploads=false&hide_conversation_list=false&bubble_style=agent&primary_color=%23685FFF&bubble_icon=pd%2Fchat&input_placeholder_text=Type+your+message...&hide_logo=false&hide_description=false" 
-              width="100%" 
-              height="100%" 
-              frameBorder="0"
-              title="AI Travel Assistant"
-              className="w-full h-full"
-            />
+          <div className="bg-white rounded-lg shadow-lg p-8 mb-8 text-center">
+            <p className="text-gray-500 text-lg">
+              AI Assistant temporarily unavailable
+            </p>
           </div>
           
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
