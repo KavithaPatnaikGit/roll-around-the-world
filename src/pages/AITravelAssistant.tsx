@@ -2,9 +2,8 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import EmailShareModal from '@/components/EmailShareModal';
-import { Button } from '@/components/ui/button';
-import { Share2 } from 'lucide-react';
+import WordDownloadButton from '@/components/WordDownloadButton';
+import { Download } from 'lucide-react';
 
 const AITravelAssistant = () => {
   return (
@@ -39,12 +38,7 @@ const AITravelAssistant = () => {
               Available 24/7 to help you plan your perfect accessible journey
             </p>
             
-            <EmailShareModal>
-              <Button variant="outline" className="flex items-center gap-2">
-                <Share2 className="w-4 h-4" />
-                Share via Email
-              </Button>
-            </EmailShareModal>
+            <WordDownloadButton />
           </div>
         </div>
       </div>
