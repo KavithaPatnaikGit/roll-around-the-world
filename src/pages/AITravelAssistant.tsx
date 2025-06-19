@@ -3,7 +3,6 @@ import React from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import WordDownloadButton from '@/components/WordDownloadButton';
-import FirecrawlSection from '@/components/FirecrawlSection';
 
 const AITravelAssistant = () => {
   return (
@@ -32,8 +31,6 @@ const AITravelAssistant = () => {
               className="w-full h-full"
             />
           </div>
-
-          <FirecrawlSection />
           
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-500">
