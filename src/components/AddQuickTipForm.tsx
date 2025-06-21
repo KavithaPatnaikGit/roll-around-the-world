@@ -51,7 +51,8 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!placeName.trim() || !text.trim() || !link.trim() || !category) return;
+    // Only require placeName, text, and category - link is optional
+    if (!placeName.trim() || !text.trim() || !category) return;
     
     if (checkForDuplicate(text)) {
       return;
@@ -59,7 +60,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
 
     const newTip = {
       text: text.trim(),
-      link: link.trim(),
+      link: link.trim() || '#', // Provide default link if empty
       category,
       placeName: placeName.trim()
     };
@@ -72,6 +73,9 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
     setShowForm(false);
     setIsDuplicate(false);
   };
+
+  // Check if form is valid (all required fields filled and no duplicates)
+  const isFormValid = placeName.trim() && text.trim() && category && !isDuplicate;
 
   if (!showForm) {
     return (
@@ -99,7 +103,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="place-name">Place/Attraction/Accommodation Name</Label>
+            <Label htmlFor="place-name">Place/Attraction/Accommodation Name *</Label>
             <Input
               id="place-name"
               value={placeName}
@@ -110,7 +114,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
           </div>
 
           <div>
-            <Label htmlFor="tip-text">Your Tip</Label>
+            <Label htmlFor="tip-text">Your Tip *</Label>
             <Textarea
               id="tip-text"
               value={text}
@@ -128,7 +132,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
           </div>
 
           <div>
-            <Label htmlFor="tip-category">Category</Label>
+            <Label htmlFor="tip-category">Category *</Label>
             <Select value={category} onValueChange={setCategory}>
               <SelectTrigger className="mt-1">
                 <SelectValue placeholder="Select a category for your tip" />
@@ -158,7 +162,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
           <div className="flex gap-2 pt-2">
             <Button 
               type="submit" 
-              disabled={!placeName.trim() || !text.trim() || !link.trim() || !category || isDuplicate}
+              disabled={!isFormValid}
               className="flex-1"
             >
               Add Tip
