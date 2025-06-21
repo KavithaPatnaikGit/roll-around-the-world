@@ -11,7 +11,7 @@ import { QuickTip } from '@/data/countryData';
 
 interface AddQuickTipFormProps {
   existingTips: QuickTip[];
-  onAddTip: (tip: QuickTip & { category?: string }) => void;
+  onAddTip: (tip: QuickTip & { category?: string; placeName?: string }) => void;
   cityName: string;
 }
 
@@ -24,6 +24,7 @@ const CATEGORIES = [
 ];
 
 const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormProps) => {
+  const [placeName, setPlaceName] = useState('');
   const [text, setText] = useState('');
   const [link, setLink] = useState('');
   const [category, setCategory] = useState('');
@@ -50,7 +51,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!text.trim() || !link.trim() || !category) return;
+    if (!placeName.trim() || !text.trim() || !link.trim() || !category) return;
     
     if (checkForDuplicate(text)) {
       return;
@@ -59,10 +60,12 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
     const newTip = {
       text: text.trim(),
       link: link.trim(),
-      category
+      category,
+      placeName: placeName.trim()
     };
 
     onAddTip(newTip);
+    setPlaceName('');
     setText('');
     setLink('');
     setCategory('');
@@ -95,6 +98,17 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <Label htmlFor="place-name">Place/Attraction/Accommodation Name</Label>
+            <Input
+              id="place-name"
+              value={placeName}
+              onChange={(e) => setPlaceName(e.target.value)}
+              placeholder="Enter the name of the place, attraction, or accommodation..."
+              className="mt-1"
+            />
+          </div>
+
           <div>
             <Label htmlFor="tip-text">Your Tip</Label>
             <Textarea
@@ -144,7 +158,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
           <div className="flex gap-2 pt-2">
             <Button 
               type="submit" 
-              disabled={!text.trim() || !link.trim() || !category || isDuplicate}
+              disabled={!placeName.trim() || !text.trim() || !link.trim() || !category || isDuplicate}
               className="flex-1"
             >
               Add Tip
@@ -154,6 +168,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
               variant="outline" 
               onClick={() => {
                 setShowForm(false);
+                setPlaceName('');
                 setText('');
                 setLink('');
                 setCategory('');

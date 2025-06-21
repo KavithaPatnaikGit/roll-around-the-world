@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -17,6 +18,7 @@ interface UserTip extends QuickTip {
   addedAt: string;
   isUserGenerated: boolean;
   category?: string;
+  placeName?: string;
 }
 
 interface ScrapedFeedback {
@@ -59,7 +61,7 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
     }
   }, [countryId, cityName]);
 
-  const handleAddTip = (newTip: QuickTip & { category?: string }) => {
+  const handleAddTip = (newTip: QuickTip & { category?: string; placeName?: string }) => {
     const userTip: UserTip = {
       ...newTip,
       id: `user_${Date.now()}`,
@@ -215,6 +217,11 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                     <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
+                        {tip.placeName && (
+                          <span className="text-sm font-medium text-blue-600">
+                            {tip.placeName}
+                          </span>
+                        )}
                         {tip.category && (
                           <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700">
                             {CATEGORIES.find(c => c.value === tip.category)?.label}
