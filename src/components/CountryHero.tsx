@@ -36,7 +36,7 @@ const CountryHero = ({ country }: CountryHeroProps) => {
           <h1 className="text-5xl font-bold mb-4">{country.name}</h1>
           <p className="text-2xl mb-4">{country.city}</p>
           <div className="flex justify-center items-center gap-2 mb-4">
-            <div className="flex" role="img" aria-label={`${rating} out of 5 stars accessibility rating`}>
+            <div className="flex" role="img" aria-label={`${country.rating} out of 5 stars accessibility rating`}>
               {renderStars(country.rating)}
             </div>
             <span className="text-lg ml-2 sr-only">
