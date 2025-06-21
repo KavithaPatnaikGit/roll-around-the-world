@@ -1,4 +1,3 @@
-
 import { Country } from '../types';
 
 export const unitedStates: Country = {
@@ -375,6 +374,20 @@ export const unitedStates: Country = {
           url: "https://www.harvard.edu/accessibility",
           description: "Prestigious universities offering accessible campus tours and facilities",
           rating: 4
+        },
+        {
+          name: "Boston Duck Tours",
+          url: "https://www.bostonducktours.com/accessibility/",
+          description: "Unique amphibious vehicle tours of Boston with wheelchair accessible duck boats and comprehensive accessibility services",
+          rating: 5,
+          bookingUrl: "https://www.bostonducktours.com/tickets"
+        },
+        {
+          name: "Super Duck Tours Boston",
+          url: "https://www.superducktours.com/accessibility",
+          description: "Alternative duck tour experience with fully accessible vehicles and audio descriptions for visually impaired visitors",
+          rating: 4,
+          bookingUrl: "https://www.superducktours.com/book-now"
         }
       ],
       wheelchairServices: [
@@ -407,11 +420,15 @@ export const unitedStates: Country = {
         {
           text: "Boston Common and Public Garden have accessible paths and the Swan Boats offer wheelchair boarding",
           link: "https://www.boston.gov/parks/boston-common"
+        },
+        {
+          text: "Duck Tours offer wheelchair accessible vehicles - book in advance to ensure availability",
+          link: "https://www.bostonducktours.com/accessibility/"
         }
       ],
       detailedInfo: {
         accommodation: "Boston offers accessible hotels ranging from historic properties with modern accessibility retrofits to contemporary hotels with full ADA compliance.",
-        attractions: "Historic sites and modern attractions with creative accessibility solutions, including alternative routes for cobblestone areas and accessible museum programs.",
+        attractions: "Historic sites and modern attractions with creative accessibility solutions, including alternative routes for cobblestone areas, accessible museum programs, and wheelchair-accessible duck tours.",
         dining: "Diverse culinary scene featuring accessible restaurants from traditional New England seafood to innovative cuisine, all meeting ADA standards.",
         transport: "Comprehensive accessible public transportation including subway, buses, accessible taxis, and specialized services for historic site navigation."
       }
