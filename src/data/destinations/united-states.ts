@@ -339,55 +339,63 @@ export const unitedStates: Country = {
           name: "Freedom Trail",
           url: "https://www.thefreedomtrail.org/accessibility",
           description: "Historic walking trail with accessible routes and transportation options to key sites",
-          rating: 4
+          rating: 4,
+          tip: "Download the Freedom Trail app for accessible route maps that avoid cobblestone sections"
         },
         {
           name: "Museum of Fine Arts Boston",
           url: "https://www.mfa.org/visit/accessibility",
           description: "World-class art museum with comprehensive accessibility services and programs",
           rating: 5,
-          bookingUrl: "https://www.mfa.org/tickets"
+          bookingUrl: "https://www.mfa.org/tickets",
+          tip: "Free wheelchair loans available at the information desk - no reservation needed"
         },
         {
           name: "Boston Tea Party Ships & Museum",
           url: "https://www.bostonteapartyship.com/accessibility",
           description: "Interactive historical experience with accessible ships and exhibits",
           rating: 4,
-          bookingUrl: "https://www.bostonteapartyship.com/tickets"
+          bookingUrl: "https://www.bostonteapartyship.com/tickets",
+          tip: "Call ahead to arrange boarding assistance for the replica ships via accessible gangway"
         },
         {
           name: "Fenway Park",
           url: "https://www.mlb.com/redsox/ballpark/accessibility",
           description: "Historic baseball stadium with accessible seating and tours",
           rating: 4,
-          bookingUrl: "https://www.mlb.com/redsox/tickets"
+          bookingUrl: "https://www.mlb.com/redsox/tickets",
+          tip: "Accessible seating offers great views from multiple price levels - book early for best selection"
         },
         {
           name: "Boston Harbor Islands",
           url: "https://www.bostonharborislands.org/accessibility",
           description: "Scenic islands accessible via ferry with accessible trails and facilities",
           rating: 4,
-          bookingUrl: "https://www.bostonharborislands.org/ferry-schedule"
+          bookingUrl: "https://www.bostonharborislands.org/ferry-schedule",
+          tip: "Spectacle Island has the most accessible trails and facilities including accessible restrooms"
         },
         {
           name: "Harvard University & MIT",
           url: "https://www.harvard.edu/accessibility",
           description: "Prestigious universities offering accessible campus tours and facilities",
-          rating: 4
+          rating: 4,
+          tip: "Request accessible campus tours 48 hours in advance for the best guided experience"
         },
         {
           name: "Boston Duck Tours",
           url: "https://www.bostonducktours.com/accessibility/",
           description: "Unique amphibious vehicle tours of Boston with wheelchair accessible duck boats and comprehensive accessibility services",
           rating: 5,
-          bookingUrl: "https://www.bostonducktours.com/tickets"
+          bookingUrl: "https://www.bostonducktours.com/tickets",
+          tip: "Board at Prudential Center location for easiest wheelchair access and covered waiting area"
         },
         {
           name: "Super Duck Tours Boston",
           url: "https://www.superducktours.com/accessibility",
           description: "Alternative duck tour experience with fully accessible vehicles and audio descriptions for visually impaired visitors",
           rating: 4,
-          bookingUrl: "https://www.superducktours.com/book-now"
+          bookingUrl: "https://www.superducktours.com/book-now",
+          tip: "Offers dedicated audio description headsets for visually impaired guests at no extra charge"
         }
       ],
       wheelchairServices: [
