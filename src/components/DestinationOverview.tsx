@@ -4,19 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Info } from 'lucide-react';
 import { Country } from '@/data/types';
+import ReadAloudButton from './ReadAloudButton';
 
 interface DestinationOverviewProps {
   destination: Country;
 }
 
 const DestinationOverview = ({ destination }: DestinationOverviewProps) => {
+  const overviewText = `Destination overview for ${destination.city}, ${destination.name}. ${destination.description} Key accessibility features include: ${destination.highlights?.join(', ') || 'Various accessibility features available'}. Accessibility rating: ${destination.rating} out of 5 stars.`;
+
   return (
     <Card className="shadow-lg">
       <CardHeader>
-        <CardTitle className="text-2xl flex items-center gap-2">
-          <Info className="w-6 h-6 text-blue-600" />
-          Destination Overview
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-2xl flex items-center gap-2">
+            <Info className="w-6 h-6 text-blue-600" />
+            Destination Overview
+          </CardTitle>
+          <ReadAloudButton 
+            text={overviewText}
+            label="Read overview"
+          />
+        </div>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

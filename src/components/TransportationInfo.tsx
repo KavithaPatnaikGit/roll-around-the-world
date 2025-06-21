@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Train } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ReadAloudButton from './ReadAloudButton';
 
 interface TransportationInfoProps {
   transportInfo: string;
@@ -13,16 +14,26 @@ interface TransportationInfoProps {
 const TransportationInfo = ({ transportInfo, cityName }: TransportationInfoProps) => {
   const navigate = useNavigate();
 
+  const transportText = `Transportation information for ${cityName}. ${transportInfo}`;
+
   return (
     <Card className="mb-8">
       <CardHeader>
-        <CardTitle className="text-2xl flex items-center gap-2">
-          <Train className="w-6 h-6" />
-          Transportation
-        </CardTitle>
-        <CardDescription>
-          Detailed information about wheelchair accessible transportation options in {cityName}
-        </CardDescription>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-2xl flex items-center gap-2">
+              <Train className="w-6 h-6" />
+              Transportation
+            </CardTitle>
+            <CardDescription>
+              Detailed information about wheelchair accessible transportation options in {cityName}
+            </CardDescription>
+          </div>
+          <ReadAloudButton 
+            text={transportText}
+            label="Read transport info"
+          />
+        </div>
       </CardHeader>
       <CardContent>
         <p className="text-gray-700 mb-4">{transportInfo}</p>

@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Accessibility, Star, ArrowLeft, Share2, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Country } from '@/data/types';
+import ReadAloudButton from './ReadAloudButton';
 
 interface DestinationHeroProps {
   destination: Country;
@@ -21,6 +22,8 @@ const DestinationHero = ({ destination }: DestinationHeroProps) => {
       />
     ));
   };
+
+  const heroText = `${destination.name}, ${destination.city}. ${destination.description} Accessibility rating: ${destination.rating} out of 5 stars. Fully accessible destination.`;
 
   return (
     <div className="relative h-[60vh] min-h-[500px]">
@@ -75,9 +78,16 @@ const DestinationHero = ({ destination }: DestinationHeroProps) => {
               </div>
             </div>
 
-            <p className="text-lg text-white/90 max-w-2xl leading-relaxed">
+            <p className="text-lg text-white/90 max-w-2xl leading-relaxed mb-4">
               {destination.description}
             </p>
+
+            <ReadAloudButton 
+              text={heroText}
+              label="Read destination info"
+              variant="secondary"
+              className="bg-white/90 text-gray-800 hover:bg-white"
+            />
           </div>
         </div>
       </div>

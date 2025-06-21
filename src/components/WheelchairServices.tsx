@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Wrench, ShoppingCart, MapPin, Phone, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ReadAloudButton from './ReadAloudButton';
 
 interface WheelchairService {
   name: string;
@@ -53,16 +55,26 @@ const WheelchairServices = ({ services, cityName }: WheelchairServicesProps) => 
     }
   };
 
+  const servicesText = `Wheelchair services in ${cityName}. Available services include: ${services.map(service => `${service.name}, ${service.description}, located at ${service.address}`).join('. ')}`;
+
   return (
     <Card className="mb-8">
       <CardHeader>
-        <CardTitle className="text-2xl flex items-center gap-2">
-          <Wrench className="w-6 h-6" />
-          Wheelchair Services in {cityName}
-        </CardTitle>
-        <CardDescription>
-          Local wheelchair repair and purchase locations for travelers
-        </CardDescription>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-2xl flex items-center gap-2">
+              <Wrench className="w-6 h-6" />
+              Wheelchair Services in {cityName}
+            </CardTitle>
+            <CardDescription>
+              Local wheelchair repair and purchase locations for travelers
+            </CardDescription>
+          </div>
+          <ReadAloudButton 
+            text={servicesText}
+            label="Read services info"
+          />
+        </div>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
