@@ -60,40 +60,46 @@ export const unitedStates: Country = {
           url: "https://www.nps.gov/stli/planyourvisit/accessibility.htm",
           description: "Iconic landmarks with accessible ferry service and comprehensive accessibility features",
           rating: 5,
-          bookingUrl: "https://www.statueofliberty.org/"
+          bookingUrl: "https://www.statueofliberty.org/",
+          tip: "Reserve accessible ferry tickets in advance and arrive 30 minutes early for priority boarding assistance"
         },
         {
           name: "Empire State Building",
           url: "https://www.esbnyc.com/visit/accessibility",
           description: "Art Deco skyscraper with full accessibility to observation decks",
           rating: 5,
-          bookingUrl: "https://www.esbnyc.com/buy-tickets"
+          bookingUrl: "https://www.esbnyc.com/buy-tickets",
+          tip: "Express elevators to the 86th floor are fully accessible, and staff can assist with transferring to observation deck areas"
         },
         {
           name: "Metropolitan Museum of Art",
           url: "https://www.metmuseum.org/visit/accessibility",
           description: "World-renowned museum with comprehensive accessibility services and programs",
           rating: 5,
-          bookingUrl: "https://www.metmuseum.org/visit"
+          bookingUrl: "https://www.metmuseum.org/visit",
+          tip: "Audio description tours and tactile experiences are available by appointment, plus all galleries have accessible entrances"
         },
         {
           name: "Central Park",
           url: "https://www.centralparknyc.org/visit/accessibility",
           description: "Iconic urban park with accessible paths, restrooms, and attractions",
-          rating: 5
+          rating: 5,
+          tip: "The Central Park Conservancy provides detailed accessibility maps showing paved paths and accessible restroom locations"
         },
         {
           name: "High Line",
           url: "https://www.thehighline.org/visit/accessibility/",
           description: "Elevated park with elevator access and accessible walkways throughout",
-          rating: 5
+          rating: 5,
+          tip: "All elevator access points have staff assistance available, and the entire 1.45-mile walkway is fully accessible"
         },
         {
           name: "9/11 Memorial & Museum",
           url: "https://www.911memorial.org/visit/accessibility",
           description: "Moving memorial and museum with full accessibility features",
           rating: 5,
-          bookingUrl: "https://www.911memorial.org/visit"
+          bookingUrl: "https://www.911memorial.org/visit",
+          tip: "Timed-entry tickets include extended time for visitors with disabilities, and audio guides have visual descriptions"
         }
       ],
       wheelchairServices: [
@@ -159,33 +165,38 @@ export const unitedStates: Country = {
           name: "Golden Gate Bridge",
           url: "https://www.goldengate.org/visit/accessibility/",
           description: "Iconic bridge with accessible sidewalks and viewing areas",
-          rating: 5
+          rating: 5,
+          tip: "The east sidewalk is fully accessible with multiple viewing areas, and accessible parking is available at the Welcome Center"
         },
         {
           name: "Alcatraz Island",
           url: "https://www.nps.gov/alca/planyourvisit/accessibility.htm",
           description: "Historic prison island with accessible ferry and audio tour",
           rating: 4,
-          bookingUrl: "https://www.alcatrazcruises.com/"
+          bookingUrl: "https://www.alcatrazcruises.com/",
+          tip: "The cellhouse audio tour includes tactile exhibits, and accessible trams transport visitors up the island's steep terrain"
         },
         {
           name: "Fisherman's Wharf & Pier 39",
           url: "https://www.pier39.com/visit/accessibility/",
           description: "Popular waterfront destination with accessible shops and attractions",
-          rating: 5
+          rating: 5,
+          tip: "All levels are accessible via elevator, and sea lion viewing areas have lowered barriers for wheelchair users"
         },
         {
           name: "San Francisco Museum of Modern Art",
           url: "https://www.sfmoma.org/visit/accessibility/",
           description: "World-class modern art museum with comprehensive accessibility features",
           rating: 5,
-          bookingUrl: "https://www.sfmoma.org/visit/"
+          bookingUrl: "https://www.sfmoma.org/visit/",
+          tip: "Free wheelchairs available at coat check, and all floors accessible via spacious elevators with audio announcements"
         },
         {
           name: "Lombard Street",
           url: "https://www.sftravel.com/article/accessibility-san-francisco",
           description: "Famous winding street with accessible viewing areas at top and bottom",
-          rating: 3
+          rating: 3,
+          tip: "Access viewing areas via Russian Hill summit or Hyde Street bottom - avoid the steep curves themselves"
         }
       ],
       wheelchairServices: [
@@ -252,28 +263,32 @@ export const unitedStates: Country = {
           url: "https://disneyworld.disney.go.com/guest-services/disability-access-service/",
           description: "Four theme parks with industry-leading accessibility services and accommodations",
           rating: 5,
-          bookingUrl: "https://disneyworld.disney.go.com/tickets/"
+          bookingUrl: "https://disneyworld.disney.go.com/tickets/",
+          tip: "Pre-register for Disability Access Service (DAS) online 30 days before your visit to skip the lines at Guest Relations"
         },
         {
           name: "Universal Orlando Resort",
           url: "https://www.universalorlando.com/web/en/us/plan-your-visit/accessibility",
           description: "Two theme parks with comprehensive accessibility services and adaptive attractions",
           rating: 5,
-          bookingUrl: "https://www.universalorlando.com/web/en/us/tickets"
+          bookingUrl: "https://www.universalorlando.com/web/en/us/tickets",
+          tip: "Attraction Assistance Pass (AAP) available at Guest Services provides equivalent access to Express Passes for qualifying guests"
         },
         {
           name: "SeaWorld Orlando",
           url: "https://seaworld.com/orlando/plan-your-visit/accessibility/",
           description: "Marine life theme park with accessible shows and attractions",
           rating: 4,
-          bookingUrl: "https://seaworld.com/orlando/tickets/"
+          bookingUrl: "https://seaworld.com/orlando/tickets/",
+          tip: "Wheelchair accessible seating at all shows with companion seating, and animal encounter experiences adapted for all abilities"
         },
         {
           name: "ICON Park",
           url: "https://iconparkorlando.com/accessibility/",
           description: "Entertainment complex with accessible attractions including The Wheel",
           rating: 4,
-          bookingUrl: "https://iconparkorlando.com/"
+          bookingUrl: "https://iconparkorlando.com/",
+          tip: "The Wheel observation cabins are fully accessible with ramped boarding, and Madame Tussauds has tactile experiences"
         }
       ],
       wheelchairServices: [
