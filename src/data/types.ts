@@ -1,4 +1,3 @@
-
 export interface AccessibleAttraction {
   name: string;
   url: string;
@@ -6,6 +5,7 @@ export interface AccessibleAttraction {
   rating?: number;
   bookingUrl?: string;
   discounts?: DiscountOffer[];
+  tip?: string;
 }
 
 export interface AccessibleHotel {

@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { MapPin, ExternalLink, Star, Gift, CreditCard, Tag, Clock, Users, Coffee } from 'lucide-react';
-import { AccessibleAttraction, DiscountOffer } from '@/data/countryData';
+import { MapPin, ExternalLink, Star, Gift, CreditCard, Tag, Clock, Users, Coffee, Lightbulb } from 'lucide-react';
+import { AccessibleAttraction, DiscountOffer } from '@/data/types';
 
 interface AttractionsListingProps {
   attractions: AccessibleAttraction[];
@@ -153,6 +152,19 @@ const AttractionsListing = ({ attractions, cityName }: AttractionsListingProps) 
           </div>
           {attraction.description && (
             <p className="text-sm text-gray-600 mb-3">{attraction.description}</p>
+          )}
+          
+          {/* Display accessibility tip if available */}
+          {attraction.tip && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
+              <div className="flex items-start gap-2">
+                <Lightbulb className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-medium text-blue-800 mb-1">Accessibility Tip</p>
+                  <p className="text-sm text-blue-700">{attraction.tip}</p>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </div>
