@@ -14,6 +14,7 @@ import MultiDestinationPlanning from "./pages/MultiDestinationPlanning";
 import DestinationPlanner from "./pages/DestinationPlanner";
 import AITravelAssistant from "./pages/AITravelAssistant";
 import GoogleForm from "./pages/GoogleForm";
+import SkipLink from "./components/SkipLink";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <SkipLink />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/destinations" element={<DestinationsGrid />} />
