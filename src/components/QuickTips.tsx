@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Lightbulb, User, ExternalLink } from 'lucide-react';
+import { Lightbulb, User, ExternalLink, Globe } from 'lucide-react';
 import { QuickTip } from '@/data/countryData';
 import AddQuickTipForm from './AddQuickTipForm';
 
@@ -17,8 +17,16 @@ interface UserTip extends QuickTip {
   isUserGenerated: boolean;
 }
 
+interface ScrapedFeedback {
+  city: string;
+  attraction: string;
+  tip: string;
+  confidence: number;
+}
+
 const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
   const [userTips, setUserTips] = useState<UserTip[]>([]);
+  const [scrapedTips, setScrapedTips] = useState<ScrapedFeedback[]>([]);
 
   // Load user tips from localStorage on component mount
   useEffect(() => {
@@ -26,7 +34,17 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
     if (storedTips) {
       setUserTips(JSON.parse(storedTips));
     }
-  }, [countryId]);
+
+    // Load scraped feedback tips
+    const storedFeedback = localStorage.getItem('scrapedFeedback');
+    if (storedFeedback) {
+      const allScrapedTips = JSON.parse(storedFeedback) as ScrapedFeedback[];
+      const cityScrapedTips = allScrapedTips.filter(tip => 
+        tip.city.toLowerCase() === cityName.toLowerCase()
+      );
+      setScrapedTips(cityScrapedTips);
+    }
+  }, [countryId, cityName]);
 
   const handleAddTip = (newTip: QuickTip) => {
     const userTip: UserTip = {
@@ -86,6 +104,40 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Scraped feedback tips */}
+          {scrapedTips.length > 0 && (
+            <div className="border-t pt-4">
+              <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
+                <Globe className="w-4 h-4 text-purple-500" />
+                Scraped Feedback Tips
+              </h4>
+              <ul className="space-y-3">
+                {scrapedTips.map((tip, index) => (
+                  <li key={`scraped-${index}`} className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-purple-600">
+                          {tip.attraction}
+                        </span>
+                        <span className={`px-2 py-0.5 rounded text-xs ${
+                          tip.confidence > 0.8 
+                            ? 'bg-green-100 text-green-700'
+                            : tip.confidence > 0.6
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : 'bg-gray-100 text-gray-700'
+                        }`}>
+                          {Math.round(tip.confidence * 100)}% match
+                        </span>
+                      </div>
+                      <span className="text-gray-700 text-sm">{tip.tip}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
