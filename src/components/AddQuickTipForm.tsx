@@ -5,18 +5,28 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus, AlertCircle } from 'lucide-react';
 import { QuickTip } from '@/data/countryData';
 
 interface AddQuickTipFormProps {
   existingTips: QuickTip[];
-  onAddTip: (tip: QuickTip) => void;
+  onAddTip: (tip: QuickTip & { category?: string }) => void;
   cityName: string;
 }
+
+const CATEGORIES = [
+  { value: 'accommodations', label: 'Accommodations' },
+  { value: 'attractions', label: 'Attractions' },
+  { value: 'transportation', label: 'Transportation' },
+  { value: 'city', label: 'City' },
+  { value: 'other', label: 'Other' }
+];
 
 const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormProps) => {
   const [text, setText] = useState('');
   const [link, setLink] = useState('');
+  const [category, setCategory] = useState('');
   const [isDuplicate, setIsDuplicate] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
@@ -40,20 +50,22 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!text.trim() || !link.trim()) return;
+    if (!text.trim() || !link.trim() || !category) return;
     
     if (checkForDuplicate(text)) {
       return;
     }
 
-    const newTip: QuickTip = {
+    const newTip = {
       text: text.trim(),
-      link: link.trim()
+      link: link.trim(),
+      category
     };
 
     onAddTip(newTip);
     setText('');
     setLink('');
+    setCategory('');
     setShowForm(false);
     setIsDuplicate(false);
   };
@@ -100,6 +112,22 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
               </div>
             )}
           </div>
+
+          <div>
+            <Label htmlFor="tip-category">Category</Label>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger className="mt-1">
+                <SelectValue placeholder="Select a category for your tip" />
+              </SelectTrigger>
+              <SelectContent>
+                {CATEGORIES.map((cat) => (
+                  <SelectItem key={cat.value} value={cat.value}>
+                    {cat.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           
           <div>
             <Label htmlFor="tip-link">Reference Link (optional)</Label>
@@ -116,7 +144,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
           <div className="flex gap-2 pt-2">
             <Button 
               type="submit" 
-              disabled={!text.trim() || !link.trim() || isDuplicate}
+              disabled={!text.trim() || !link.trim() || !category || isDuplicate}
               className="flex-1"
             >
               Add Tip
@@ -128,6 +156,7 @@ const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormPr
                 setShowForm(false);
                 setText('');
                 setLink('');
+                setCategory('');
                 setIsDuplicate(false);
               }}
             >

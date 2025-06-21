@@ -1,6 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 import { Lightbulb, User, ExternalLink, Globe } from 'lucide-react';
 import { QuickTip } from '@/data/countryData';
 import AddQuickTipForm from './AddQuickTipForm';
@@ -15,6 +16,7 @@ interface UserTip extends QuickTip {
   id: string;
   addedAt: string;
   isUserGenerated: boolean;
+  category?: string;
 }
 
 interface ScrapedFeedback {
@@ -22,11 +24,22 @@ interface ScrapedFeedback {
   attraction: string;
   tip: string;
   confidence: number;
+  category?: string;
 }
+
+const CATEGORIES = [
+  { value: 'all', label: 'All Tips' },
+  { value: 'accommodations', label: 'Accommodations' },
+  { value: 'attractions', label: 'Attractions' },
+  { value: 'transportation', label: 'Transportation' },
+  { value: 'city', label: 'City' },
+  { value: 'other', label: 'Other' }
+];
 
 const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
   const [userTips, setUserTips] = useState<UserTip[]>([]);
   const [scrapedTips, setScrapedTips] = useState<ScrapedFeedback[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   // Load user tips from localStorage on component mount
   useEffect(() => {
@@ -46,7 +59,7 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
     }
   }, [countryId, cityName]);
 
-  const handleAddTip = (newTip: QuickTip) => {
+  const handleAddTip = (newTip: QuickTip & { category?: string }) => {
     const userTip: UserTip = {
       ...newTip,
       id: `user_${Date.now()}`,
@@ -58,6 +71,16 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
     setUserTips(updatedUserTips);
     localStorage.setItem(`userQuickTips_${countryId}`, JSON.stringify(updatedUserTips));
   };
+
+  // Filter tips based on selected category
+  const filterTipsByCategory = (tips: any[], category: string) => {
+    if (category === 'all') return tips;
+    return tips.filter(tip => tip.category === category);
+  };
+
+  const filteredUserTips = filterTipsByCategory(userTips, selectedCategory);
+  const filteredScrapedTips = filterTipsByCategory(scrapedTips, selectedCategory);
+  const filteredQuickTips = selectedCategory === 'all' ? quickTips : quickTips.filter(tip => (tip as any).category === selectedCategory);
 
   // Combine original tips with user tips for duplicate checking
   const allTips = [...quickTips, ...userTips];
@@ -79,17 +102,37 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
           onAddTip={handleAddTip}
           cityName={cityName}
         />
+
+        {/* Category Selection */}
+        <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+          <h4 className="font-medium text-gray-800 mb-3">Filter tips by category:</h4>
+          <RadioGroup value={selectedCategory} onValueChange={setSelectedCategory} className="flex flex-wrap gap-4">
+            {CATEGORIES.map((category) => (
+              <div key={category.value} className="flex items-center space-x-2">
+                <RadioGroupItem value={category.value} id={category.value} />
+                <Label htmlFor={category.value} className="text-sm font-medium cursor-pointer">
+                  {category.label}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
         
         <div className="space-y-4">
           {/* Original curated tips */}
-          {quickTips.length > 0 && (
+          {filteredQuickTips.length > 0 && (
             <div>
               <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
                 <Lightbulb className="w-4 h-4 text-amber-500" />
                 Curated Tips
+                {selectedCategory !== 'all' && (
+                  <span className="text-sm font-normal text-gray-600">
+                    ({CATEGORIES.find(c => c.value === selectedCategory)?.label})
+                  </span>
+                )}
               </h4>
               <ul className="space-y-3">
-                {quickTips.map((tip, index) => (
+                {filteredQuickTips.map((tip, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
                     <span className="text-gray-700">
@@ -111,14 +154,19 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
           )}
 
           {/* Scraped feedback tips */}
-          {scrapedTips.length > 0 && (
+          {filteredScrapedTips.length > 0 && (
             <div className="border-t pt-4">
               <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
                 <Globe className="w-4 h-4 text-purple-500" />
                 Scraped Feedback Tips
+                {selectedCategory !== 'all' && (
+                  <span className="text-sm font-normal text-gray-600">
+                    ({CATEGORIES.find(c => c.value === selectedCategory)?.label})
+                  </span>
+                )}
               </h4>
               <ul className="space-y-3">
-                {scrapedTips.map((tip, index) => (
+                {filteredScrapedTips.map((tip, index) => (
                   <li key={`scraped-${index}`} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
                     <div className="flex-1">
@@ -135,6 +183,11 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                         }`}>
                           {Math.round(tip.confidence * 100)}% match
                         </span>
+                        {tip.category && (
+                          <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700">
+                            {CATEGORIES.find(c => c.value === tip.category)?.label}
+                          </span>
+                        )}
                       </div>
                       <span className="text-gray-700 text-sm">{tip.tip}</span>
                     </div>
@@ -145,17 +198,29 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
           )}
 
           {/* User-generated tips */}
-          {userTips.length > 0 && (
+          {filteredUserTips.length > 0 && (
             <div className="border-t pt-4">
               <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
                 <User className="w-4 h-4 text-blue-500" />
                 Community Tips
+                {selectedCategory !== 'all' && (
+                  <span className="text-sm font-normal text-gray-600">
+                    ({CATEGORIES.find(c => c.value === selectedCategory)?.label})
+                  </span>
+                )}
               </h4>
               <ul className="space-y-3">
-                {userTips.map((tip) => (
+                {filteredUserTips.map((tip) => (
                   <li key={tip.id} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
                     <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        {tip.category && (
+                          <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700">
+                            {CATEGORIES.find(c => c.value === tip.category)?.label}
+                          </span>
+                        )}
+                      </div>
                       <span className="text-gray-700">
                         {tip.text}{' '}
                         <a 
@@ -175,6 +240,18 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {/* Show message when no tips match the filter */}
+          {selectedCategory !== 'all' && 
+           filteredQuickTips.length === 0 && 
+           filteredScrapedTips.length === 0 && 
+           filteredUserTips.length === 0 && (
+            <div className="text-center py-8 text-gray-500">
+              <Lightbulb className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+              <p>No tips found for the "{CATEGORIES.find(c => c.value === selectedCategory)?.label}" category.</p>
+              <p className="text-sm mt-2">Try selecting a different category or add your own tip!</p>
             </div>
           )}
         </div>
