@@ -71,13 +71,3 @@ const GoogleForm = () => {
 };
 
 export default GoogleForm;
-
-fetch("https://script.google.com/macros/s/your-deployment-id/exec?location=tokyo&tip_type=entrance")
-  .then(res => res.json())
-  .then(data => {
-    data.forEach(tip => {
-      // Render tip.cleaned_tip, tip.Location, tip["Disability Tags"] etc.
-      console.log(tip);
-    });
-  });
-
