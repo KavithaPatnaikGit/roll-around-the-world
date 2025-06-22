@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Lightbulb, User, ExternalLink, Globe } from 'lucide-react';
+import { Lightbulb, User, ExternalLink, Globe, Bot } from 'lucide-react';
 import { QuickTip } from '@/data/countryData';
 import AddQuickTipForm from './AddQuickTipForm';
+import { fetchGoogleScriptTips, categorizeGoogleScriptTip, GoogleScriptTip } from '@/utils/googleScriptApi';
 
 interface QuickTipsProps {
   quickTips: QuickTip[];
@@ -29,6 +30,11 @@ interface ScrapedFeedback {
   category?: string;
 }
 
+interface CategorizedGoogleScriptTip extends GoogleScriptTip {
+  category: string;
+  id: string;
+}
+
 const CATEGORIES = [
   { value: 'all', label: 'All Tips' },
   { value: 'accommodations', label: 'Accommodations' },
@@ -41,7 +47,9 @@ const CATEGORIES = [
 const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
   const [userTips, setUserTips] = useState<UserTip[]>([]);
   const [scrapedTips, setScrapedTips] = useState<ScrapedFeedback[]>([]);
+  const [googleScriptTips, setGoogleScriptTips] = useState<CategorizedGoogleScriptTip[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isLoadingGoogleScript, setIsLoadingGoogleScript] = useState(true);
 
   // Load user tips from localStorage on component mount
   useEffect(() => {
@@ -60,6 +68,40 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
       setScrapedTips(cityScrapedTips);
     }
   }, [countryId, cityName]);
+
+  // Load Google Script tips
+  useEffect(() => {
+    const loadGoogleScriptTips = async () => {
+      setIsLoadingGoogleScript(true);
+      try {
+        const scriptTips = await fetchGoogleScriptTips(cityName);
+        
+        // Filter for unique tips and categorize them
+        const existingTipTexts = [
+          ...quickTips.map(tip => tip.text.toLowerCase().trim()),
+          ...userTips.map(tip => tip.text.toLowerCase().trim()),
+          ...scrapedTips.map(tip => tip.tip.toLowerCase().trim())
+        ];
+
+        const uniqueScriptTips = scriptTips
+          .filter(tip => tip.cleaned_tip && tip.cleaned_tip.trim())
+          .filter(tip => !existingTipTexts.includes(tip.cleaned_tip.toLowerCase().trim()))
+          .map((tip, index) => ({
+            ...tip,
+            category: categorizeGoogleScriptTip(tip),
+            id: `google_script_${index}_${Date.now()}`
+          }));
+
+        setGoogleScriptTips(uniqueScriptTips);
+      } catch (error) {
+        console.error('Failed to load Google Script tips:', error);
+      } finally {
+        setIsLoadingGoogleScript(false);
+      }
+    };
+
+    loadGoogleScriptTips();
+  }, [cityName, quickTips, userTips, scrapedTips]);
 
   const handleAddTip = (newTip: QuickTip & { category?: string; placeName?: string }) => {
     const userTip: UserTip = {
@@ -82,6 +124,7 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
 
   const filteredUserTips = filterTipsByCategory(userTips, selectedCategory);
   const filteredScrapedTips = filterTipsByCategory(scrapedTips, selectedCategory);
+  const filteredGoogleScriptTips = filterTipsByCategory(googleScriptTips, selectedCategory);
   const filteredQuickTips = selectedCategory === 'all' ? quickTips : quickTips.filter(tip => (tip as any).category === selectedCategory);
 
   // Combine original tips with user tips for duplicate checking
@@ -149,6 +192,46 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Google Apps Script tips */}
+          {filteredGoogleScriptTips.length > 0 && (
+            <div className="border-t pt-4">
+              <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
+                <Bot className="w-4 h-4 text-green-500" />
+                AI-Generated Tips
+                {selectedCategory !== 'all' && (
+                  <span className="text-sm font-normal text-gray-600">
+                    ({CATEGORIES.find(c => c.value === selectedCategory)?.label})
+                  </span>
+                )}
+              </h4>
+              <ul className="space-y-3">
+                {filteredGoogleScriptTips.map((tip) => (
+                  <li key={tip.id} className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-green-600">
+                          {tip.Location}
+                        </span>
+                        {tip.category && (
+                          <span className="px-2 py-0.5 rounded text-xs bg-green-100 text-green-700">
+                            {CATEGORIES.find(c => c.value === tip.category)?.label}
+                          </span>
+                        )}
+                        {tip["Disability Tags"] && (
+                          <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700">
+                            {tip["Disability Tags"]}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-gray-700 text-sm">{tip.cleaned_tip}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -250,11 +333,27 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
             </div>
           )}
 
+          {/* Loading state for Google Script tips */}
+          {isLoadingGoogleScript && (
+            <div className="border-t pt-4">
+              <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
+                <Bot className="w-4 h-4 text-green-500" />
+                Loading AI-Generated Tips...
+              </h4>
+              <div className="animate-pulse space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              </div>
+            </div>
+          )}
+
           {/* Show message when no tips match the filter */}
           {selectedCategory !== 'all' && 
            filteredQuickTips.length === 0 && 
            filteredScrapedTips.length === 0 && 
-           filteredUserTips.length === 0 && (
+           filteredUserTips.length === 0 && 
+           filteredGoogleScriptTips.length === 0 && 
+           !isLoadingGoogleScript && (
             <div className="text-center py-8 text-gray-500">
               <Lightbulb className="w-12 h-12 mx-auto mb-4 text-gray-300" />
               <p>No tips found for the "{CATEGORIES.find(c => c.value === selectedCategory)?.label}" category.</p>
