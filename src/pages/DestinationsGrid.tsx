@@ -21,6 +21,9 @@ const DestinationsGrid = () => {
     ));
   };
 
+  // Sort destinations by country name in ascending order
+  const sortedDestinations = [...destinations].sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navigation />
@@ -45,7 +48,7 @@ const DestinationsGrid = () => {
       {/* Destinations Grid */}
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {destinations.map((destination) => (
+          {sortedDestinations.map((destination) => (
             <Card key={destination.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
               <div className="relative h-48 overflow-hidden">
                 <img
