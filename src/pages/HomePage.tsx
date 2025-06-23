@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Accessibility, MapPin, Star, Users, Award, Globe, CheckCircle, Shield, Heart, Zap, Target } from 'lucide-react';
+import { ArrowRight, Accessibility, MapPin, Star, Users, Award, Globe, Heart, Zap, Target } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -60,16 +59,13 @@ const HomePage = () => {
             {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-white/80">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-green-400" />
-                <span>Expert Verified</span>
+                
               </div>
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-blue-300" />
-                <span>Community Driven</span>
+                
               </div>
               <div className="flex items-center gap-2">
-                <Award className="w-4 h-4 text-purple-300" />
-                <span>Award Winning</span>
+                
               </div>
             </div>
           </div>
