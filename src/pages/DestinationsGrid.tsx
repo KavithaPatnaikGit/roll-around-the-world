@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,8 +20,16 @@ const DestinationsGrid = () => {
     ));
   };
 
-  // Sort destinations by country name in ascending order
-  const sortedDestinations = [...destinations].sort((a, b) => a.name.localeCompare(b.name));
+  // Sort destinations by country name in ascending order and sort cities within each country
+  const sortedDestinations = [...destinations].sort((a, b) => a.name.localeCompare(b.name)).map(destination => {
+    if (destination.cities) {
+      return {
+        ...destination,
+        cities: [...destination.cities].sort((a, b) => a.city.localeCompare(b.city))
+      };
+    }
+    return destination;
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
