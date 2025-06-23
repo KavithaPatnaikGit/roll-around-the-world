@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -18,9 +17,9 @@ interface AddQuickTipFormProps {
 const CATEGORIES = [
   { value: 'accommodations', label: 'Accommodations' },
   { value: 'attractions', label: 'Attractions' },
-  { value: 'transportation', label: 'Transportation' },
   { value: 'city', label: 'City' },
-  { value: 'other', label: 'Other' }
+  { value: 'other', label: 'Other' },
+  { value: 'transportation', label: 'Transportation' }
 ];
 
 const AddQuickTipForm = ({ existingTips, onAddTip, cityName }: AddQuickTipFormProps) => {

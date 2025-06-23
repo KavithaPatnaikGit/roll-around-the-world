@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -39,9 +38,9 @@ const CATEGORIES = [
   { value: 'all', label: 'All Tips' },
   { value: 'accommodations', label: 'Accommodations' },
   { value: 'attractions', label: 'Attractions' },
-  { value: 'transportation', label: 'Transportation' },
   { value: 'city', label: 'City' },
-  { value: 'other', label: 'Other' }
+  { value: 'other', label: 'Other' },
+  { value: 'transportation', label: 'Transportation' }
 ];
 
 const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
@@ -211,7 +210,9 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                 )}
               </h4>
               <ul className="space-y-3">
-                {filteredGoogleScriptTips.map((tip) => (
+                {filteredGoogleScriptTips
+                  .sort((a, b) => a.Location.localeCompare(b.Location))
+                  .map((tip) => (
                   <li key={tip.id} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
                     <div className="flex-1">
@@ -238,51 +239,7 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
             </div>
           )}
 
-          {/* Scraped feedback tips */}
-          {filteredScrapedTips.length > 0 && (
-            <div className="border-t pt-4">
-              <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
-                <Globe className="w-4 h-4 text-purple-500" />
-                Scraped Feedback Tips
-                {selectedCategory !== 'all' && (
-                  <span className="text-sm font-normal text-gray-600">
-                    ({CATEGORIES.find(c => c.value === selectedCategory)?.label})
-                  </span>
-                )}
-              </h4>
-              <ul className="space-y-3">
-                {filteredScrapedTips.map((tip, index) => (
-                  <li key={`scraped-${index}`} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-medium text-purple-600">
-                          {tip.attraction}
-                        </span>
-                        <span className={`px-2 py-0.5 rounded text-xs ${
-                          tip.confidence > 0.8 
-                            ? 'bg-green-100 text-green-700'
-                            : tip.confidence > 0.6
-                            ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-gray-100 text-gray-700'
-                        }`}>
-                          {Math.round(tip.confidence * 100)}% match
-                        </span>
-                        {tip.category && (
-                          <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700">
-                            {CATEGORIES.find(c => c.value === tip.category)?.label}
-                          </span>
-                        )}
-                      </div>
-                      <span className="text-gray-700 text-sm">{tip.tip}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* User-generated tips */}
+          {/* Community tips */}
           {filteredUserTips.length > 0 && (
             <div className="border-t pt-4">
               <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
@@ -295,7 +252,9 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                 )}
               </h4>
               <ul className="space-y-3">
-                {filteredUserTips.map((tip) => (
+                {filteredUserTips
+                  .sort((a, b) => (a.placeName || '').localeCompare(b.placeName || ''))
+                  .map((tip) => (
                   <li key={tip.id} className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
                     <div className="flex-1">
@@ -326,6 +285,52 @@ const QuickTips = ({ quickTips, cityName, countryId }: QuickTipsProps) => {
                       <div className="text-xs text-gray-500 mt-1">
                         Added {new Date(tip.addedAt).toLocaleDateString()}
                       </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Scraped feedback tips */}
+          {filteredScrapedTips.length > 0 && (
+            <div className="border-t pt-4">
+              <h4 className="font-medium text-gray-800 mb-3 flex items-center gap-2">
+                <Globe className="w-4 h-4 text-purple-500" />
+                Scraped Feedback Tips
+                {selectedCategory !== 'all' && (
+                  <span className="text-sm font-normal text-gray-600">
+                    ({CATEGORIES.find(c => c.value === selectedCategory)?.label})
+                  </span>
+                )}
+              </h4>
+              <ul className="space-y-3">
+                {filteredScrapedTips
+                  .sort((a, b) => a.attraction.localeCompare(b.attraction))
+                  .map((tip, index) => (
+                  <li key={`scraped-${index}`} className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0" />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-medium text-purple-600">
+                          {tip.attraction}
+                        </span>
+                        <span className={`px-2 py-0.5 rounded text-xs ${
+                          tip.confidence > 0.8 
+                            ? 'bg-green-100 text-green-700'
+                            : tip.confidence > 0.6
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : 'bg-gray-100 text-gray-700'
+                        }`}>
+                          {Math.round(tip.confidence * 100)}% match
+                        </span>
+                        {tip.category && (
+                          <span className="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-700">
+                            {CATEGORIES.find(c => c.value === tip.category)?.label}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-gray-700 text-sm">{tip.tip}</span>
                     </div>
                   </li>
                 ))}
