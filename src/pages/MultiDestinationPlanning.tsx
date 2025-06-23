@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Calendar, Users, Plus, X } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, Users, Plus, X, Volume2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import InterDestinationTransport from '@/components/InterDestinationTransport';
+import VoiceInput from '@/components/VoiceInput';
 import { destinations } from '@/data/destinationData';
 import { Country } from '@/data/types';
 
@@ -153,6 +154,33 @@ const MultiDestinationPlanning = () => {
     ));
   };
 
+  const handleVoiceSearch = (transcription: string) => {
+    console.log('Voice search transcription:', transcription);
+    setSearchQuery(transcription);
+    
+    // Try to find matching cities and auto-add them
+    const words = transcription.toLowerCase().split(/\s+/);
+    const matchingCities = allCities.filter(city => 
+      words.some(word => 
+        city.name.toLowerCase().includes(word) || 
+        city.country.name.toLowerCase().includes(word)
+      )
+    );
+
+    if (matchingCities.length > 0) {
+      const cityToAdd = matchingCities[0];
+      const isAlreadySelected = selectedDestinations.some(dest => dest.cityData.name === cityToAdd.name);
+      
+      if (!isAlreadySelected) {
+        addDestination(cityToAdd);
+        toast({
+          title: "Destination added",
+          description: `${cityToAdd.name}, ${cityToAdd.country.name} has been added to your trip`,
+        });
+      }
+    }
+  };
+
   const handlePlanTrip = () => {
     const invalidDestinations = selectedDestinations.filter(dest => !dest.startDate || !dest.endDate);
     
@@ -234,7 +262,7 @@ const MultiDestinationPlanning = () => {
           </Button>
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Plan Multi-Destination Trip</h1>
-            <p className="text-gray-600 mt-2">Select cities and plan your travel dates</p>
+            <p className="text-gray-600 mt-2">Select cities and plan your travel dates - now with voice assistance!</p>
           </div>
         </div>
 
@@ -248,15 +276,23 @@ const MultiDestinationPlanning = () => {
                   Add Destinations
                 </CardTitle>
                 <CardDescription>
-                  Choose from our accessible destinations
+                  Choose from our accessible destinations using voice or text search
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Input
-                  placeholder="Search cities..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Search cities..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flex-1"
+                  />
+                  <VoiceInput
+                    onTranscription={handleVoiceSearch}
+                    placeholder="Say destination names"
+                    prompt="The user is searching for travel destinations. Please transcribe city and country names clearly."
+                  />
+                </div>
                 
                 <div className="max-h-96 overflow-y-auto space-y-2">
                   {filteredCities.map((city, index) => {
@@ -308,8 +344,9 @@ const MultiDestinationPlanning = () => {
               <CardContent>
                 {selectedDestinations.length === 0 ? (
                   <div className="text-center text-gray-500 py-8">
-                    <MapPin className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <Volume2 className="w-12 h-12 mx-auto mb-4 opacity-50" />
                     <p>Add destinations to start planning your trip</p>
+                    <p className="text-sm mt-2">Use voice search to quickly find destinations</p>
                   </div>
                 ) : (
                   <div className="space-y-6">
