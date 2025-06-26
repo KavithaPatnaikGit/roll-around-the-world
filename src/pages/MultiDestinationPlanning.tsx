@@ -202,7 +202,7 @@ const MultiDestinationPlanning = () => {
       return;
     }
 
-    // Check for date conflicts
+    // Check for date conflicts - now allowing adjacent dates
     const sortedDestinations = selectedDestinations
       .filter(dest => dest.startDate && dest.endDate)
       .sort((a, b) => a.startDate!.getTime() - b.startDate!.getTime());
@@ -211,7 +211,8 @@ const MultiDestinationPlanning = () => {
       const current = sortedDestinations[i];
       const next = sortedDestinations[i + 1];
       
-      if (current.endDate! >= next.startDate!) {
+      // Allow end date to equal start date of next destination (adjacent dates)
+      if (current.endDate! > next.startDate!) {
         toast({
           title: "Date conflict detected",
           description: `Your stay in ${current.cityData.name} overlaps with your trip to ${next.cityData.name}. Please adjust the dates.`,
