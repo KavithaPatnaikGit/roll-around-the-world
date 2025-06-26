@@ -116,19 +116,19 @@ const AboutUs = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">50,000+</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">TBD</div>
               <div className="text-gray-600">Travelers Helped</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-green-600 mb-2">100+</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">TBD</div>
               <div className="text-gray-600">Destinations Verified</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-purple-600 mb-2">25</div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">TBD</div>
               <div className="text-gray-600">Countries Covered</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-orange-600 mb-2">98%</div>
+              <div className="text-3xl font-bold text-orange-600 mb-2">TBD</div>
               <div className="text-gray-600">User Satisfaction</div>
             </div>
           </div>
