@@ -7,7 +7,7 @@ import WordDownloadButton from '@/components/WordDownloadButton';
 
 const AITravelAssistant = () => {
   useEffect(() => {
-    document.title = 'AI Travel Assistant - AccessiTravel';
+    document.title = 'AI Travel Assistant - RollAroundWorld';
   }, []);
 
   return (
@@ -64,10 +64,10 @@ const AITravelAssistant = () => {
                     Our AI assistant is designed to be screen reader compatible. If you experience any 
                     accessibility issues while using the chat interface, please contact our support team 
                     at <a 
-                      href="mailto:support@accessitravel.com" 
+                      href="mailto:support@rollaroundworld.com" 
                       className="underline hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
                     >
-                      support@accessitravel.com
+                      support@rollaroundworld.com
                     </a>
                   </p>
                 </div>

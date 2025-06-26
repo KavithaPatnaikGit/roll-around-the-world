@@ -16,7 +16,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <Accessibility className="w-5 h-5 text-white" />
               </div>
-              <span className="text-lg font-bold">AccessiTravel</span>
+              <span className="text-lg font-bold">RollAroundWorld</span>
             </div>
             <p className="text-gray-400 text-sm">
               Making travel accessible for everyone, everywhere. Discover the world without barriers.
@@ -79,7 +79,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Mail className="w-4 h-4" />
-                support@accessitravel.com
+                support@rollaroundworld.com
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Phone className="w-4 h-4" />
@@ -95,7 +95,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 AccessiTravel. All rights reserved. Making the world accessible, one destination at a time.
+            © 2024 RollAroundWorld. All rights reserved. Making the world accessible, one destination at a time.
           </p>
         </div>
       </div>

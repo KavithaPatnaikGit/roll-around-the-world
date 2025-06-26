@@ -60,12 +60,12 @@ const Navigation = () => {
             onKeyDown={(e) => handleKeyDown(e, '/')}
             tabIndex={0}
             role="button"
-            aria-label="AccessiTravel home"
+            aria-label="RollAroundWorld home"
           >
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
               <Accessibility className="w-6 h-6 text-blue-600" aria-hidden="true" />
             </div>
-            <span className="text-xl font-bold text-gray-900">AccessiTravel</span>
+            <span className="text-xl font-bold text-gray-900">RollAroundWorld</span>
           </div>
 
           {/* Desktop Navigation */}

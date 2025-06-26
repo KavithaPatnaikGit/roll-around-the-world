@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 
 const GoogleForm = () => {
   useEffect(() => {
-    document.title = 'Feedback Form - AccessiTravel';
+    document.title = 'Feedback Form - RollAroundWorld';
   }, []);
 
   return (
@@ -38,13 +38,13 @@ const GoogleForm = () => {
                 frameBorder={0}
                 marginHeight={0}
                 marginWidth={0}
-                title="AccessiTravel Feedback Form - External Google Form"
+                title="RollAroundWorld Feedback Form - External Google Form"
                 className="w-full h-full"
                 aria-describedby="iframe-description"
               >
                 <p id="iframe-description">
                   This form is hosted by Google Forms. If you're having trouble accessing the form, 
-                  please contact us directly at feedback@accessitravel.com
+                  please contact us directly at feedback@rollaroundworld.com
                 </p>
               </iframe>
             </div>
@@ -53,7 +53,7 @@ const GoogleForm = () => {
               <p className="text-sm text-gray-500">
                 Having trouble with the form? 
                 <a 
-                  href="mailto:feedback@accessitravel.com" 
+                  href="mailto:feedback@rollaroundworld.com" 
                   className="text-blue-600 hover:text-blue-800 underline ml-1 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
                   aria-label="Send feedback via email"
                 >
