@@ -9,6 +9,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import InterDestinationTransport from '@/components/InterDestinationTransport';
 import QuickTips from '@/components/QuickTips';
+import FlightBookingSection from '@/components/FlightBookingSection';
 
 interface TripDestination {
   city: string;
@@ -283,6 +284,24 @@ const DestinationPlanner = () => {
               </div>
             </div>
 
+            {/* Flight Booking Sections */}
+            {tripPlan.destinations.length >= 2 && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-gray-900">Flight Booking Options</h2>
+                {tripPlan.destinations.slice(0, -1).map((destination, index) => {
+                  const nextDestination = tripPlan.destinations[index + 1];
+                  return (
+                    <FlightBookingSection
+                      key={`flight-${index}`}
+                      fromCity={destination.city}
+                      toCity={nextDestination.city}
+                      departureDate={format(new Date(destination.endDate), 'yyyy-MM-dd')}
+                    />
+                  );
+                })}
+              </div>
+            )}
+
             {/* Transportation Routes */}
             <InterDestinationTransport routes={transportationRoutes} />
 
@@ -290,7 +309,7 @@ const DestinationPlanner = () => {
             <QuickTips 
               quickTips={generalTravelTips}
               cityName="Multi-Destination Travel"
-              countryId={999} // Use a special ID for general travel tips
+              countryId={999}
             />
           </div>
         )}
