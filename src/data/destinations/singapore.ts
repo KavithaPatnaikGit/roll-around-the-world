@@ -184,6 +184,18 @@ export const singapore: Country = {
     {
       text: 'Singapore offers discounted attraction passes for seniors and persons with disabilities.',
       link: 'https://www.visitsingapore.com/travel-guide-tips/accessible-singapore/'
+    },
+    {
+      text: 'Changi Airport is fully accessible with free wheelchair assistance and accessible facilities throughout all terminals.',
+      link: 'https://www.changiairport.com/en/airport-guide/facilities-and-services/accessibility.html'
+    },
+    {
+      text: 'Most shopping malls have wheelchair loans available at customer service counters.',
+      link: 'https://www.visitsingapore.com/travel-guide-tips/accessible-singapore/'
+    },
+    {
+      text: 'Singapore\'s public toilets are generally accessible with many featuring adult changing tables.',
+      link: 'https://www.toilet.org.sg/accessible-toilet-locator'
     }
   ],
   detailedInfo: {
@@ -196,20 +208,74 @@ export const singapore: Country = {
     {
       name: 'Marina Bay Sands',
       rating: 5,
-      features: ['Accessible rooms with roll-in showers', 'Pool hoists available', 'Accessible casino and shopping'],
+      features: ['Accessible rooms with roll-in showers', 'Pool hoists available', 'Accessible casino and shopping', 'Braille elevator buttons', 'Audio announcements in lifts'],
       reservationUrl: 'https://www.marinabaysands.com/'
     },
     {
       name: 'Shangri-La Hotel Singapore',
       rating: 5,
-      features: ['Multiple accessible rooms', 'Accessible spa facilities', 'Garden-level accessible dining'],
+      features: ['Multiple accessible rooms', 'Accessible spa facilities', 'Garden-level accessible dining', 'Roll-in showers', 'Accessible meeting rooms'],
       reservationUrl: 'https://www.shangri-la.com/singapore/shangrila/'
     },
     {
       name: 'Grand Hyatt Singapore',
       rating: 5,
-      features: ['Accessible rooms on multiple floors', 'Accessible fitness center', 'Step-free restaurant access'],
+      features: ['Accessible rooms on multiple floors', 'Accessible fitness center', 'Step-free restaurant access', 'Pool access equipment', 'Accessible business center'],
       reservationUrl: 'https://www.hyatt.com/en-US/hotel/singapore/grand-hyatt-singapore/'
+    },
+    {
+      name: 'The Ritz-Carlton, Singapore',
+      rating: 5,
+      features: ['Luxury accessible suites', 'Accessible club lounge', 'Roll-in showers with seats', 'Accessible spa treatments', 'Priority check-in for PWDs'],
+      reservationUrl: 'https://www.ritzcarlton.com/singapore'
+    },
+    {
+      name: 'Raffles Hotel Singapore',
+      rating: 5,
+      features: ['Historic hotel with modern accessibility', 'Accessible suites available', 'Ramped entrances', 'Accessible dining venues', 'Concierge accessibility assistance'],
+      reservationUrl: 'https://www.raffles.com/singapore/'
+    },
+    {
+      name: 'Conrad Singapore',
+      rating: 5,
+      features: ['Executive accessible rooms', 'Accessible pool area', 'Step-free meeting spaces', 'Accessible parking spaces', 'TTY phones available'],
+      reservationUrl: 'https://www.hilton.com/en/hotels/sinchci-conrad-singapore/'
+    },
+    {
+      name: 'Pan Pacific Singapore',
+      rating: 5,
+      features: ['Marina view accessible rooms', 'Accessible fitness facilities', 'Roll-in showers', 'Accessible restaurants', 'Mobility equipment rental'],
+      reservationUrl: 'https://www.panpacific.com/singapore'
+    },
+    {
+      name: 'Swissotel The Stamford',
+      rating: 4,
+      features: ['High-floor accessible rooms', 'Accessible revolving restaurant', 'Step-free conference facilities', 'Accessible health club', 'City view accessible balconies'],
+      reservationUrl: 'https://www.swissotel.com/hotels/singapore-stamford/'
+    },
+    {
+      name: 'Holiday Inn Singapore Atrium',
+      rating: 4,
+      features: ['Mid-range accessible accommodation', 'Accessible pool and gym', 'Step-free lobby and restaurants', 'Accessible meeting rooms', 'Wheelchair-friendly location'],
+      reservationUrl: 'https://www.ihg.com/holidayinn/hotels/singapore/atrium'
+    },
+    {
+      name: 'Hotel Boss (Budget Option)',
+      rating: 4,
+      features: ['Budget-friendly accessible rooms', 'Near accessible MRT station', 'Basic accessibility features', 'Accessible common areas', 'Value accommodation with access'],
+      reservationUrl: 'https://www.hotelboss.com.sg/'
+    },
+    {
+      name: 'YMCA Singapore (Budget Option)',
+      rating: 3,
+      features: ['Affordable accessible accommodation', 'Accessible swimming pool', 'Central location', 'Basic accessible facilities', 'Community-focused environment'],
+      reservationUrl: 'https://www.ymca.org.sg/accommodation/'
+    },
+    {
+      name: 'Capsule Pod Boutique Hostel (Budget Option)',
+      rating: 3,
+      features: ['Modern accessible capsule rooms', 'Accessible common areas', 'Budget-friendly option', 'Accessible bathrooms', 'Tech-savvy accessibility features'],
+      reservationUrl: 'https://www.capsulepod.com/'
     }
   ],
   topDining: [
