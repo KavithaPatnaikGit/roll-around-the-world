@@ -89,7 +89,7 @@ const Navigation = () => {
                 </li>
               ))}
               
-              {/* Need Help? Dropdown */}
+              {/* Need Help Dropdown */}
               <li role="none">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -102,7 +102,7 @@ const Navigation = () => {
                       role="menuitem"
                       aria-haspopup="true"
                     >
-                      Need Help?
+                      Need Help
                       <ChevronDown className="w-3 h-3" />
                     </button>
                   </DropdownMenuTrigger>
@@ -180,7 +180,7 @@ const Navigation = () => {
                     
                     {/* Mobile Help Section */}
                     <li role="none" className="border-t border-gray-200 pt-4">
-                      <div className="text-sm font-semibold text-gray-900 mb-3 px-2">Need Help?</div>
+                      <div className="text-sm font-semibold text-gray-900 mb-3 px-2">Need Help</div>
                       {helpItems.map((item) => (
                         <button
                           key={item.path}
