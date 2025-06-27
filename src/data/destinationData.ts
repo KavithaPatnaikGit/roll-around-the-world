@@ -6,6 +6,7 @@ import { australia } from './destinations/australia';
 import { unitedKingdom } from './destinations/united-kingdom';
 import { germany } from './destinations/germany';
 import { unitedStates } from './destinations/united-states';
+import { singapore } from './destinations/singapore';
 
 export const destinations: Country[] = [
   netherlands,
@@ -13,7 +14,8 @@ export const destinations: Country[] = [
   australia,
   unitedKingdom,
   germany,
-  unitedStates
+  unitedStates,
+  singapore
 ];
 
 export { destinations as countries };
