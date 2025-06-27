@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -19,36 +20,97 @@ interface CombinedHotel {
   reservationUrl: string;
   isOriginal: boolean;
   scrapedTips?: string[];
+  city?: string;
+}
+
+interface CityAccommodation {
+  cityName: string;
+  hotels: CombinedHotel[];
+  scrapedCount: number;
+  lastScrapedAt?: string;
 }
 
 const DetailedInfo = ({ country }: DetailedInfoProps) => {
-  const [showAllHotels, setShowAllHotels] = useState(false);
-  const [scrapedHotels, setScrapedHotels] = useState<ScrapedHotel[]>([]);
-  const [isLoadingHotels, setIsLoadingHotels] = useState(false);
-  const [lastScrapedAt, setLastScrapedAt] = useState<string | null>(null);
+  const [showAllHotels, setShowAllHotels] = useState<{[key: string]: boolean}>({});
+  const [cityAccommodations, setCityAccommodations] = useState<CityAccommodation[]>([]);
+  const [isLoadingHotels, setIsLoadingHotels] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();
   
   useEffect(() => {
-    // Load cached hotels on component mount
-    const cached = HotelScrapingService.getCachedHotels(country.city);
-    if (cached) {
-      setScrapedHotels(cached.hotels);
-      setLastScrapedAt(cached.scrapedAt);
-    }
-  }, [country.city]);
+    // Initialize city accommodations
+    const cities = country.cities || [country];
+    const accommodations: CityAccommodation[] = cities.map(city => {
+      const cityName = city.city || city.name;
+      
+      // Load cached hotels for this city
+      const cached = HotelScrapingService.getCachedHotels(cityName);
+      const scrapedHotels = cached ? cached.hotels : [];
+      
+      // Combine original hotels with scraped hotels
+      const allHotels: CombinedHotel[] = [
+        ...(city.accessibleHotels || []).map(hotel => ({
+          ...hotel,
+          isOriginal: true,
+          city: cityName
+        })),
+        ...scrapedHotels.map(hotel => ({
+          name: hotel.name,
+          rating: hotel.rating,
+          features: hotel.accessibilityFeatures,
+          reservationUrl: hotel.bookingUrl,
+          isOriginal: false,
+          scrapedTips: hotel.tips,
+          city: cityName
+        }))
+      ];
 
-  const handleScrapeHotels = async () => {
-    setIsLoadingHotels(true);
+      return {
+        cityName,
+        hotels: allHotels,
+        scrapedCount: scrapedHotels.length,
+        lastScrapedAt: cached?.scrapedAt
+      };
+    });
+    
+    setCityAccommodations(accommodations);
+  }, [country]);
+
+  const handleScrapeHotels = async (cityName: string) => {
+    setIsLoadingHotels(prev => ({ ...prev, [cityName]: true }));
     
     try {
-      const result = await HotelScrapingService.scrapeHotelsForCity(country.city);
+      const result = await HotelScrapingService.scrapeHotelsForCity(cityName);
       
       if (result) {
-        setScrapedHotels(result.hotels);
-        setLastScrapedAt(result.scrapedAt);
+        // Update the specific city's accommodation data
+        setCityAccommodations(prev => 
+          prev.map(cityAccom => {
+            if (cityAccom.cityName === cityName) {
+              const originalHotels = cityAccom.hotels.filter(h => h.isOriginal);
+              const newScrapedHotels = result.hotels.map(hotel => ({
+                name: hotel.name,
+                rating: hotel.rating,
+                features: hotel.accessibilityFeatures,
+                reservationUrl: hotel.bookingUrl,
+                isOriginal: false,
+                scrapedTips: hotel.tips,
+                city: cityName
+              }));
+              
+              return {
+                ...cityAccom,
+                hotels: [...originalHotels, ...newScrapedHotels],
+                scrapedCount: result.hotels.length,
+                lastScrapedAt: result.scrapedAt
+              };
+            }
+            return cityAccom;
+          })
+        );
+        
         toast({
           title: "Hotels Updated",
-          description: `Found ${result.hotels.length} accessible hotels in ${country.city}`,
+          description: `Found ${result.hotels.length} accessible hotels in ${cityName}`,
         });
       } else {
         toast({
@@ -65,7 +127,7 @@ const DetailedInfo = ({ country }: DetailedInfoProps) => {
         variant: "destructive"
       });
     } finally {
-      setIsLoadingHotels(false);
+      setIsLoadingHotels(prev => ({ ...prev, [cityName]: false }));
     }
   };
 
@@ -88,23 +150,9 @@ const DetailedInfo = ({ country }: DetailedInfoProps) => {
     return <Building className="w-4 h-4 text-blue-600" />;
   };
 
-  // Combine original hotels with scraped hotels
-  const allHotels: CombinedHotel[] = [
-    ...(country.accessibleHotels || []).map(hotel => ({
-      ...hotel,
-      isOriginal: true
-    })),
-    ...scrapedHotels.map(hotel => ({
-      name: hotel.name,
-      rating: hotel.rating,
-      features: hotel.accessibilityFeatures,
-      reservationUrl: hotel.bookingUrl,
-      isOriginal: false,
-      scrapedTips: hotel.tips
-    }))
-  ];
-
-  const displayedHotels = showAllHotels ? allHotels : allHotels.slice(0, 6);
+  const toggleShowAllHotels = (cityName: string) => {
+    setShowAllHotels(prev => ({ ...prev, [cityName]: !prev[cityName] }));
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -112,127 +160,140 @@ const DetailedInfo = ({ country }: DetailedInfoProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building className="w-5 h-5" />
-            Accessible Accommodations in {country.city}
+            Accessible Accommodations by City
           </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-gray-700 mb-6">{country.detailedInfo.accommodation}</p>
           
-          {/* Hotel Scraping Controls */}
-          <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border">
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <h4 className="font-medium text-gray-800">Live Hotel Data</h4>
-                <p className="text-sm text-gray-600">
-                  {lastScrapedAt 
-                    ? `Last updated: ${new Date(lastScrapedAt).toLocaleDateString()}`
-                    : 'Fetch latest accessible hotels from booking sites'
-                  }
-                </p>
-              </div>
-              <Button 
-                onClick={handleScrapeHotels}
-                disabled={isLoadingHotels}
-                size="sm"
-                className="flex items-center gap-2"
-              >
-                <RefreshCw className={`w-4 h-4 ${isLoadingHotels ? 'animate-spin' : ''}`} />
-                {isLoadingHotels ? 'Scraping...' : 'Update Hotels'}
-              </Button>
-            </div>
-            {scrapedHotels.length > 0 && (
-              <Badge variant="outline" className="text-sm">
-                {scrapedHotels.length} hotels found via web scraping
-              </Badge>
-            )}
-          </div>
-          
-          {allHotels.length > 0 && (
-            <div className="mt-4">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-semibold text-gray-800 text-lg">Wheelchair Accessible Hotels</h4>
-                <Badge variant="outline" className="text-sm">
-                  {allHotels.length} options available
-                </Badge>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                {displayedHotels?.map((hotel, index) => (
-                  <div key={index} className={`border rounded-lg p-4 hover:shadow-lg transition-all duration-300 ${
-                    hotel.isOriginal ? 'bg-gradient-to-br from-white to-gray-50' : 'bg-gradient-to-br from-green-50 to-blue-50'
-                  }`}>
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        {getHotelTypeIcon(hotel.name)}
-                        <a
-                          href={hotel.reservationUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-semibold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1 text-sm"
-                        >
-                          {hotel.name}
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-1">
-                          {renderStars(hotel.rating)}
-                        </div>
-                        {!hotel.isOriginal && (
-                          <Badge variant="secondary" className="text-xs">
-                            Live Data
-                          </Badge>
-                        )}
-                      </div>
+          {/* City-by-City Accommodations */}
+          <div className="space-y-8">
+            {cityAccommodations.map((cityAccom) => {
+              const displayedHotels = showAllHotels[cityAccom.cityName] ? cityAccom.hotels : cityAccom.hotels.slice(0, 6);
+              
+              return (
+                <div key={cityAccom.cityName} className="border rounded-lg p-6 bg-gradient-to-br from-white to-gray-50">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <MapPin className="w-5 h-5 text-blue-600" />
+                      <h3 className="text-xl font-semibold text-gray-800">{cityAccom.cityName}</h3>
+                      <Badge variant="outline" className="text-sm">
+                        {cityAccom.hotels.length} hotels available
+                      </Badge>
                     </div>
                     
-                    <div className="grid grid-cols-1 gap-2 mb-3">
-                      {hotel.features.slice(0, 3).map((feature, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0" />
-                          <span className="text-xs text-gray-700">{feature}</span>
-                        </div>
-                      ))}
-                      {hotel.features.length > 3 && (
-                        <Badge variant="secondary" className="text-xs self-start mt-1">
-                          +{hotel.features.length - 3} more features
-                        </Badge>
+                    {/* Hotel Scraping Controls for each city */}
+                    <div className="flex items-center gap-3">
+                      {cityAccom.lastScrapedAt && (
+                        <span className="text-xs text-gray-500">
+                          Updated: {new Date(cityAccom.lastScrapedAt).toLocaleDateString()}
+                        </span>
                       )}
+                      <Button 
+                        onClick={() => handleScrapeHotels(cityAccom.cityName)}
+                        disabled={isLoadingHotels[cityAccom.cityName]}
+                        size="sm"
+                        variant="outline"
+                        className="flex items-center gap-2"
+                      >
+                        <RefreshCw className={`w-4 h-4 ${isLoadingHotels[cityAccom.cityName] ? 'animate-spin' : ''}`} />
+                        {isLoadingHotels[cityAccom.cityName] ? 'Scraping...' : 'Update Hotels'}
+                      </Button>
                     </div>
+                  </div>
 
-                    {/* Hotel Tips for scraped hotels */}
-                    {hotel.scrapedTips && hotel.scrapedTips.length > 0 && (
-                      <div className="mt-3 p-2 bg-blue-50 rounded border-l-4 border-l-blue-400">
-                        <p className="text-xs font-medium text-blue-800 mb-1">💡 Travel Tips:</p>
-                        {hotel.scrapedTips.slice(0, 2).map((tip, i) => (
-                          <p key={i} className="text-xs text-blue-700">• {tip}</p>
+                  {cityAccom.scrapedCount > 0 && (
+                    <div className="mb-4">
+                      <Badge variant="secondary" className="text-sm">
+                        {cityAccom.scrapedCount} hotels found via web scraping
+                      </Badge>
+                    </div>
+                  )}
+                  
+                  {cityAccom.hotels.length > 0 && (
+                    <div className="mt-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        {displayedHotels.map((hotel, index) => (
+                          <div key={index} className={`border rounded-lg p-4 hover:shadow-lg transition-all duration-300 ${
+                            hotel.isOriginal ? 'bg-gradient-to-br from-white to-gray-50' : 'bg-gradient-to-br from-green-50 to-blue-50'
+                          }`}>
+                            <div className="flex items-start justify-between mb-3">
+                              <div className="flex items-center gap-2">
+                                {getHotelTypeIcon(hotel.name)}
+                                <a
+                                  href={hotel.reservationUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-semibold text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1 text-sm"
+                                >
+                                  {hotel.name}
+                                  <ExternalLink className="w-3 h-3" />
+                                </a>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-1">
+                                  {renderStars(hotel.rating)}
+                                </div>
+                                {!hotel.isOriginal && (
+                                  <Badge variant="secondary" className="text-xs">
+                                    Live Data
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 gap-2 mb-3">
+                              {hotel.features.slice(0, 3).map((feature, i) => (
+                                <div key={i} className="flex items-center gap-2">
+                                  <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0" />
+                                  <span className="text-xs text-gray-700">{feature}</span>
+                                </div>
+                              ))}
+                              {hotel.features.length > 3 && (
+                                <Badge variant="secondary" className="text-xs self-start mt-1">
+                                  +{hotel.features.length - 3} more features
+                                </Badge>
+                              )}
+                            </div>
+
+                            {/* Hotel Tips for scraped hotels */}
+                            {hotel.scrapedTips && hotel.scrapedTips.length > 0 && (
+                              <div className="mt-3 p-2 bg-blue-50 rounded border-l-4 border-l-blue-400">
+                                <p className="text-xs font-medium text-blue-800 mb-1">💡 Travel Tips:</p>
+                                {hotel.scrapedTips.slice(0, 2).map((tip, i) => (
+                                  <p key={i} className="text-xs text-blue-700">• {tip}</p>
+                                ))}
+                              </div>
+                            )}
+                          </div>
                         ))}
                       </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              
-              {allHotels.length > 6 && (
-                <div className="text-center">
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setShowAllHotels(!showAllHotels)}
-                    className="flex items-center gap-2"
-                  >
-                    {showAllHotels ? (
-                      <>
-                        Show Less <ChevronUp className="w-4 h-4" />
-                      </>
-                    ) : (
-                      <>
-                        Show All {allHotels.length} Hotels <ChevronDown className="w-4 h-4" />
-                      </>
-                    )}
-                  </Button>
+                      
+                      {cityAccom.hotels.length > 6 && (
+                        <div className="text-center">
+                          <Button 
+                            variant="outline" 
+                            onClick={() => toggleShowAllHotels(cityAccom.cityName)}
+                            className="flex items-center gap-2"
+                          >
+                            {showAllHotels[cityAccom.cityName] ? (
+                              <>
+                                Show Less <ChevronUp className="w-4 h-4" />
+                              </>
+                            ) : (
+                              <>
+                                Show All {cityAccom.hotels.length} Hotels <ChevronDown className="w-4 h-4" />
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          )}
+              );
+            })}
+          </div>
         </CardContent>
       </Card>
 
@@ -264,3 +325,4 @@ const DetailedInfo = ({ country }: DetailedInfoProps) => {
 };
 
 export default DetailedInfo;
+
