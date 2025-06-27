@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -9,6 +10,15 @@ import { useToast } from '@/components/ui/use-toast';
 
 interface DetailedInfoProps {
   country: Country;
+}
+
+interface CombinedHotel {
+  name: string;
+  rating: number;
+  features: string[];
+  reservationUrl: string;
+  isOriginal: boolean;
+  scrapedTips?: string[];
 }
 
 const DetailedInfo = ({ country }: DetailedInfoProps) => {
@@ -79,7 +89,7 @@ const DetailedInfo = ({ country }: DetailedInfoProps) => {
   };
 
   // Combine original hotels with scraped hotels
-  const allHotels = [
+  const allHotels: CombinedHotel[] = [
     ...(country.accessibleHotels || []).map(hotel => ({
       ...hotel,
       isOriginal: true
